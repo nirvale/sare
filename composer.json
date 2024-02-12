@@ -7,11 +7,18 @@
     "require": {
         "php": "^8.1",
         "guzzlehttp/guzzle": "^7.2",
+        "jeroennoten/laravel-adminlte": "^3.9",
         "laravel/framework": "^10.10",
         "laravel/jetstream": "^4.2",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
+        "laravelcollective/html": "^6.4",
+        "laraveles/spanish": "^1.5",
         "livewire/livewire": "^3.0",
+        "spatie/laravel-permission": "^6.3",
+        "symfony/yaml": "^6.4",
+        "yajra/laravel-datatables": "^10.0",
+        "yajra/laravel-datatables-oracle": "^10.11",
         "yajra/laravel-oci8": "^10.4"
     },
     "require-dev": {

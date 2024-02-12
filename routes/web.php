@@ -30,3 +30,10 @@ Route::middleware([
 Livewire::setScriptRoute(function ($handle) {
     return Route::get('/sare/livewire/livewire.js', $handle);
 });
+
+// Route::get('/home', function () {
+//     return view('home');
+// });
+//
+// Route::get('/cerrars', [PrivateController::class, 'cerrars'])->name('cerrars');
+// Route::post('/cerrarsp', [PrivateController::class, 'cerrarsp'])->name('cerrarsp');

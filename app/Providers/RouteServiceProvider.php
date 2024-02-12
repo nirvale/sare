@@ -28,13 +28,37 @@ class RouteServiceProvider extends ServiceProvider
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
         });
 
+        // $this->routes(function () {
+        //     Route::middleware('api')
+        //         ->prefix('api')
+        //         ->group(base_path('routes/api.php'));
+        //
+        //     Route::middleware('web')
+        //         ->group(base_path('routes/web.php'));
+        // });
         $this->routes(function () {
-            Route::middleware('api')
-                ->prefix('api')
+            Route::prefix('api')
+                ->middleware('api', 'auth:sanctum')
+                ->namespace($this->namespace)
                 ->group(base_path('routes/api.php'));
 
-            Route::middleware('web')
+            Route::middleware('web', 'auth:sanctum')
+                ->namespace($this->namespace)
                 ->group(base_path('routes/web.php'));
+
+            Route::middleware('web')
+                //->namespace($this->namespace)
+                ->group(base_path('routes/public.php'));
+
+            Route::prefix('admin')
+                ->middleware('web', 'auth:sanctum')
+                ->namespace($this->namespace)
+                ->group(base_path('routes/admin.php'));
+
+            // Route::prefix('dbam')
+            //     ->middleware('web', 'auth:sanctum')
+            //     ->namespace($this->namespace)
+            //     ->group(base_path('routes/dbam.php'));
         });
     }
 }

@@ -18,5 +18,38 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+        $this->call([
+            RoleSeeder::class,
+            UserSeeder::class,
+            // DependenciaSeeder::class,
+            // DominioSeeder::class,
+            // TnicSeeder::class,
+            // ProgramaSeeder::class,
+            // OficinaSeeder::class,
+            // EstadoSeeder::class,
+            // AdscripcionSeeder::class,
+            // BackupSeeder::class,
+            // EstadoesquemaSeeder::class,
+            // TipodcSeeder::class,
+            // TipoSeeder::class,
+            // RdbmsSeeder::class,
+            // OsSeeder::class,
+            // DatacenterSeeder::class,
+            // BaseSeeder::class,
+            // EstadobackupSeeder::class,
+            // EstatusRecoverTestSeeder::class,
+            // TecremotadiscoSeeder::class,
+            // TdiscoSeeder::class,
+            // AmbienteSeeder::class,
+            // DistribucionSeeder::class,
+            // AprocesadorSeeder::class,
+            // MhardwareSeeder::class,
+            // VirtualizadorSeeder::class,
+            // MprocesadorSeeder::class,
+            // OsVersionSeeder::class,
+            // RdbmsVersionSeeder::class,
+
+
+        ]);
     }
 }
