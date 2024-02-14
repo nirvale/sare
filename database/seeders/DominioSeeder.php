@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Admin\Dominio;
 
 class DominioSeeder extends Seeder
 {
@@ -12,6 +13,6 @@ class DominioSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+      $dominio = Dominio::create(['dominio' => 'cggedomex.gob.mx']);
     }
 }

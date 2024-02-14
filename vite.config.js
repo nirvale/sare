@@ -8,8 +8,10 @@ export default defineConfig({
                 'resources/css/app.css',
                 'resources/js/app.js',
                 'resources/sass/app.scss',
+                'resources/css/admin_custom.css',
             ],
             refresh: true,
+
         }),
     ],
 });

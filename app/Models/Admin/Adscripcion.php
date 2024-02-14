@@ -7,5 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Adscripcion extends Model
 {
-    use HasFactory;
+  use HasFactory;
+  protected $table = 'adscripciones';
+  protected $fillable = [
+      'cve_usuario',
+      'cve_oficina',
+      'cve_estado',
+  ];
 }

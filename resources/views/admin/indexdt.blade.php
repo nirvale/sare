@@ -14,33 +14,35 @@
 @push('scripts')
     {{ $dataTable->scripts() }}
 @endpush --}}
+
 @extends('adminlte::page')
 
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Dashboard</h1>
+  <div class="card">
+    <div class="card-header">
+        <h1 class="card-title"><i class="fas fa-hat-wizard"></i> Sistema de Administración para Recursos Estratégicos - DGTG</h1>
+    </div>
+    <div class="card-body">
+      <h4 class="card-subtitle"> <i class="fas fa-users-cog"></i> Módulo de Usuarios Auto </h4>
+    </div>
+  </div>
 @stop
 
 @section('content')
-  <div class="container">
+
       <div class="card">
-          <div class="card-header">Manage Users</div>
+          {{-- <div class="card-header">Manage Users</div> --}}
           <div class="card-body">
               {{ $dataTable->table() }}
           </div>
       </div>
-  </div>
 @stop
 
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-@stop
+@vite(['resources/css/app.css', 'resources/js/app.js','resources/sass/app.scss','resources/css/admin_custom.css'])
+
 
 @section('js')
-    <script> console.log('Hi!'); </script>
-@stop
- @stack('scripts')
-@push('scripts')
-    {{ $dataTable->scripts() }}
-@endpush
+    {{  $dataTable->scripts() }}
+@endsection

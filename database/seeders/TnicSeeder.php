@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Admin\Tnic;
 
 class TnicSeeder extends Seeder
 {
@@ -12,6 +13,7 @@ class TnicSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+      $tnic = Tnic::create(['tnic' => 'FÍSICA']);
+      $tnic = Tnic::create(['tnic' => 'VIRTUAL']);
     }
 }

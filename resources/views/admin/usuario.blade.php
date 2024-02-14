@@ -1,7 +1,6 @@
 @extends('adminlte::page')
-
 @section('title', 'Usuarios')
-
+@vite(['resources/css/app.css', 'resources/js/app.js','resources/sass/app.scss','resources/css/admin_custom.css'])
 @section('content_header')
 <div class="card">
   <div class="card-header">
@@ -104,7 +103,7 @@
         tablaUsuarios.destroy();
         $('#tablaUsuarios').DataTable({
               "language": {
-                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+                    "url": "/sare/vendor/DataTables/lang/Spanish.json"
               },
               "responsive": true,
               "processing": true,
@@ -544,4 +543,5 @@
 
   </script>
     <script> console.log('Hi!'); </script>
+
 @stop

@@ -12,8 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('estados', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+          $table->Integer('cve_estado')->primary();
+          $table->string('estado');
+          $table->timestamps();
         });
     }
 

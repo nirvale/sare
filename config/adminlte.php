@@ -532,17 +532,17 @@ return [
                 [
                     'type' => 'js',
                     'asset' => true,
-                    'location' => 'vendor/datatables/js/jquery.dataTables.min.js',
+                    'location' => 'vendor/DataTables/DataTables-1.13.10/js/jquery.dataTables.min.js',
                 ],
                 [
                     'type' => 'js',
                     'asset' => true,
-                    'location' => 'vendor/datatables/js/dataTables.bootstrap5.min.js',
+                    'location' => 'vendor/DataTables/DataTables-1.13.10/js/dataTables.bootstrap5.min.js',
                 ],
                 [
                     'type' => 'css',
                     'asset' => true,
-                    'location' => 'vendor/datatables/css/dataTables.bootstrap5.min.css',
+                    'location' => 'vendor/DataTables/DataTables-1.13.10/css/dataTables.bootstrap5.min.css',
                 ],
             ],
         ],
@@ -552,55 +552,80 @@ return [
                 [
                     'type' => 'js',
                     'asset' => true,
-                    'location' => 'vendor/datatables/plugins/Responsive-2.3.0/js/dataTables.responsive.min.js',
+                    'location' => 'vendor/DataTables/DataTables-1.13.10/plugins/Responsive-2.5.0/js/dataTables.responsive.min.js',
                 ],
                 [
                     'type' => 'js',
                     'asset' => true,
-                    'location' => 'vendor/datatables/plugins/Responsive-2.3.0/js/responsive.bootstrap5.min.js',
+                    'location' => 'vendor/DataTables/DataTables-1.13.10/plugins/Responsive-2.5.0/js/responsive.bootstrap5.min.js',
                 ],
                 [
                     'type' => 'css',
                     'asset' => true,
-                    'location' => 'vendor/datatables/plugins/Responsive-2.3.0/css/responsive.bootstrap5.min.css',
+                    'location' => 'vendor/DataTables/DataTables-1.13.10/plugins/Responsive-2.5.0/css/responsive.bootstrap5.min.css',
                 ],
             ],
         ],
-        'Select2' => [
-            'active' => false,
-            'files' => [
-                [
-                    'type' => 'js',
-                    'asset' => false,
-                    'location' => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js',
-                ],
-                [
-                    'type' => 'css',
-                    'asset' => false,
-                    'location' => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.css',
-                ],
-            ],
-        ],
-        'AlertifyJS' => [
+        'DatatablesButtons' => [
             'active' => true,
             'files' => [
                 [
                     'type' => 'js',
                     'asset' => true,
-                    'location' => 'vendor/alertify/alertifyjs/alertify.min.js',
+                    'location' => 'vendor/DataTables/DataTables-1.13.10/plugins/Buttons-2.4.2/js/dataTables.buttons.min.js',
                 ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/DataTables/DataTables-1.13.10/plugins/Buttons-2.4.2/js/buttons.bootstrap5.min.js',
+                ],
+                // [
+                //     'type' => 'js',
+                //     'asset' => true,
+                //     'location' => 'vendor/datatables/buttons.server-side.js',
+                // ],
                 [
                     'type' => 'css',
                     'asset' => true,
-                    'location' => 'vendor/alertify/alertifyjs/css/alertify.min.css',
-                ],
-                [
-                    'type' => 'css',
-                    'asset' => true,
-                    'location' => 'vendor/alertify/alertifyjs/css/themes/default.min.css',
+                    'location' => 'vendor/DataTables/DataTables-1.13.10/plugins/Buttons-2.4.2/css/buttons.bootstrap5.min.css',
                 ],
             ],
         ],
+        // 'Select2' => [
+        //     'active' => false,
+        //     'files' => [
+        //         [
+        //             'type' => 'js',
+        //             'asset' => false,
+        //             'location' => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js',
+        //         ],
+        //         [
+        //             'type' => 'css',
+        //             'asset' => false,
+        //             'location' => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.css',
+        //         ],
+        //     ],
+        // ],
+        // 'AlertifyJS' => [
+        //     'active' => true,
+        //     'files' => [
+        //         [
+        //             'type' => 'js',
+        //             'asset' => true,
+        //             'location' => 'vendor/alertify/alertifyjs/alertify.min.js',
+        //         ],
+        //         [
+        //             'type' => 'css',
+        //             'asset' => true,
+        //             'location' => 'vendor/alertify/alertifyjs/css/alertify.min.css',
+        //         ],
+        //         [
+        //             'type' => 'css',
+        //             'asset' => true,
+        //             'location' => 'vendor/alertify/alertifyjs/css/themes/default.min.css',
+        //         ],
+        //     ],
+        // ],
         'Chartjs' => [
             'active' => false,
             'files' => [

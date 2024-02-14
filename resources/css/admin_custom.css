@@ -1,0 +1,47 @@
+.page-link {
+ position: relative;
+ display: block;
+ padding: .5rem .75rem;
+ margin-left: -1px;
+ line-height: 1.25;
+ color: #6A747D !important;
+ background-color: #F2F2F2 !important;
+ border: 1px solid #6A747D !important;
+}
+.page-link:hover {
+     z-index: 2;
+     color: #fff !important;
+     text-decoration: none;
+     background-color: #a4a4a4 !important;
+     border-color: #dee2e6;
+}
+.page-item.active .page-link {
+ z-index: 3;
+ color: #fff !important;
+ background-color: #00BB4A !important;
+ border-color: #353535;
+}
+
+div.dataTables_processing>div:last-child>div {
+    background: #00BB4A !important;
+}
+
+
+
+
+.navbar-nav > .user-menu .user-image {
+	float: left !important;
+
+}
+
+
+/* a {
+  color: $link-color;
+  text-decoration: $link-decoration;
+  background-color: transparent; // Remove the gray background on active links in IE 10.
+
+  @include hover() {
+    color: $link-hover-color;
+    text-decoration: $link-hover-decoration;
+  }
+} */

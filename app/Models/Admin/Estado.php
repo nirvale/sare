@@ -7,5 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Estado extends Model
 {
-    use HasFactory;
+  use HasFactory;
+  protected $primaryKey='cve_estado';
+  protected $fillable = [
+      'cve_estado',
+      'estado',
+  ];
 }
