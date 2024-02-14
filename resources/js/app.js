@@ -14,3 +14,4 @@
 
 //import 'laravel-datatables-vite';
 import '../../vendor/yajra/laravel-datatables-buttons/src/resources/assets/buttons.server-side.js';
+import Editor from 'datatables.net-editor-bs5';
