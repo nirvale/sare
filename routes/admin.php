@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\ProgramaController;
 use App\Http\Controllers\Admin\DependenciaController;
+use App\Http\Controllers\Admin\DominioController;
 
 //Route::get('/', [HomeController::class, 'index']);
 //manejo de usuarios
@@ -16,6 +17,8 @@ Route::resource('programashome', ProgramaController::class)->only(['index']);
 Route::resource('dependenciashome', DependenciaController::class)->only(['index']);
 //ruta para datatables usuario
 Route::get('usersdt', [UserController::class, 'indexdt'])->name('users.indexdt');
+//ruta para datatables dominios
+Route::get('domininosdt', [DominioController::class, 'indexdt'])->name('dominios.indexdt');
 
 //livewire assets
 Livewire::setScriptRoute(function ($handle) {

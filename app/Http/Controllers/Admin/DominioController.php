@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreDominioRequest;
 use App\Http\Requests\UpdateDominioRequest;
 use App\Models\Admin\Dominio;
+use App\DataTables\Admin\DominiosDataTable;
 
 class DominioController extends Controller
 {
@@ -63,5 +64,10 @@ class DominioController extends Controller
     public function destroy(Dominio $dominio)
     {
         //
+    }
+
+    public function indexdt(DominiosDataTable $dataTable)
+    {
+          return $dataTable->render('admin.dominiosdt');
     }
 }
