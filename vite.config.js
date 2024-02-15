@@ -9,9 +9,10 @@ export default defineConfig({
                 'resources/js/app.js',
                 'resources/sass/app.scss',
                 'resources/css/admin_custom.css',
+                'resources/js/usuario.js',
+
             ],
             refresh: true,
-
         }),
     ],
 });

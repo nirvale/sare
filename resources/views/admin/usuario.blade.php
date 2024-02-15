@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 @section('title', 'Usuarios')
-@vite(['resources/css/app.css', 'resources/js/app.js','resources/sass/app.scss','resources/css/admin_custom.css'])
+@vite(['resources/css/app.css', 'resources/js/app.js','resources/sass/app.scss','resources/css/admin_custom.css','resources/js/usuario.js'])
 @section('content_header')
 <div class="card">
   <div class="card-header">
@@ -89,7 +89,7 @@
 
 @stop
 
-@section('css')
+{{-- @section('css')
     <link rel="stylesheet" href="/dba/css/admin_custom.css">
 @stop
 
@@ -544,4 +544,4 @@
   </script>
     <script> console.log('Hi!'); </script>
 
-@stop
+@stop --}}

@@ -606,26 +606,26 @@ return [
         //         ],
         //     ],
         // ],
-        // 'AlertifyJS' => [
-        //     'active' => true,
-        //     'files' => [
-        //         [
-        //             'type' => 'js',
-        //             'asset' => true,
-        //             'location' => 'vendor/alertify/alertifyjs/alertify.min.js',
-        //         ],
-        //         [
-        //             'type' => 'css',
-        //             'asset' => true,
-        //             'location' => 'vendor/alertify/alertifyjs/css/alertify.min.css',
-        //         ],
-        //         [
-        //             'type' => 'css',
-        //             'asset' => true,
-        //             'location' => 'vendor/alertify/alertifyjs/css/themes/default.min.css',
-        //         ],
-        //     ],
-        // ],
+        'AlertifyJS' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/alertify/alertifyjs/alertify.min.js',
+                ],
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => 'vendor/alertify/alertifyjs/css/alertify.min.css',
+                ],
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => 'vendor/alertify/alertifyjs/css/themes/default.min.css',
+                ],
+            ],
+        ],
         'Chartjs' => [
             'active' => false,
             'files' => [
