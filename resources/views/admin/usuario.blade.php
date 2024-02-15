@@ -1,51 +1,43 @@
 @extends('adminlte::page')
 @section('title', 'Usuarios')
+@section('meta_tags')
 @vite(['resources/css/app.css', 'resources/js/app.js','resources/sass/app.scss','resources/css/admin_custom.css','resources/js/usuario.js'])
+@endsection
 @section('content_header')
-<div class="card">
-  <div class="card-header">
-      <h1 class="card-title"><i class="fas fa-hat-wizard"></i> Sistema de Administración para Recursos Estratégicos - DGTG</h1>
-  </div>
-  <div class="card-body">
-    <h4 class="card-subtitle"> <i class="fas fa-users-cog"></i> Módulo de Usuarios </h4>
-  </div>
-</div>
+  <x-admin.main-card
+
+      iconoTituloTarjeta="fas fa-hat-wizard"
+      tituloTarjeta="Sistema de Administración para Recursos Estratégicos - DGTG"
+      iconoNombreMoudulo="fas fa-users-cog"
+      nombreModulo="Módulo de Usuarios"
+  >
+</x-admin.main-card>
 
 @stop
 
 @section('content')
 
-
-  <div class="card" id="content">
-    <div class="card-body">
-        <p>
-             <a href="" type="button" id="consultaUsuarios" class="btn btn-secondary" >CONSULTAR USUARIOS <i class="fas fa-user-check"></i></a>
-             <a href="" type="button" id="agregarUsuario" class="btn btn-success" >AGREGAR USUARIO <i class="fas fa-user-plus"></i></a>
-        </p>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-body">
-      <table id="tablaUsuarios" class="table table-striped table-bordered" style="width:100%">
-        <thead>
-            <tr>
-                {{-- <th data-name='matricula'>Nombre</th> --}}
-                <th>ID</th>
-                {{-- <th>RFC</th> --}}
-                <th>NOMBRE</th>
-                <th>OFICINA</th>
-                <th>PERFIL</th>
-                <th>ESTADO</th>
-                <th>ACCIÓN</th>
-                {{-- <th>Acción</th> --}}
-            </tr>
-          </thead>
-        </table>
-    </div>
-  </div>
-
+<x-admin.card-general cardID="cardBotones">
+  <p>
+       <a href="" type="button" id="consultaUsuarios" class="btn btn-secondary" >CONSULTAR USUARIOS <i class="fas fa-user-check"></i></a>
+       <a href="" type="button" id="agregarUsuario" class="btn btn-success" >AGREGAR USUARIO <i class="fas fa-user-plus"></i></a>
+  </p>
+</x-admin.card-general>
+<x-admin.card-general cardID="cardDatatables"  >
+  <x-admin.head-datatables  nombreDataTable="Usuarios"  >
+        {{-- <th data-name='matricula'>Nombre</th> --}}
+        <th>ID</th>
+        {{-- <th>RFC</th> --}}
+        <th>NOMBRE</th>
+        <th>OFICINA</th>
+        <th>PERFIL</th>
+        <th>ESTADO</th>
+        <th>ACCIÓN</th>
+        {{-- <th>Acción</th> --}}
+  </x-admin.head-datatables>
+</x-admin.card-general>
   {{-- editar usuario  --}}
+
 <div class="modal fade" id="modalusuario" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
   aria-hidden="true" >
   <div class="modal-dialog modal-lg" style="min-width:70%" role="document" >
