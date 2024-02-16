@@ -78,7 +78,8 @@ $(document).on("click", "#editarusuario", function(){
         var perfil =  ("<div class='form-group col-md-12 ml-auto'><label data-error='error' data-success='ok' for='sel'>perfil</label> <select class='form-control select2' id='selPerfil' name='id_perfil'><option value='' disabled selected>Seleciona un perfil...</option>");
         var estado =  ("<div class='form-group col-md-12 ml-auto'><label data-error='error' data-success='ok' for='sel'>estado</label> <select class='form-control select2' id='selEstado' name='cve_estado'><option value='' disabled selected>Seleciona un estado de usuario...</option>");
         var pwd =  "<div class='form-group col-md-12 ml-auto'><label data-error='error' data-success='ok' for='cmb_nombre'>password</label> <input value='' name='pwd' type='text' id='pwd' class='form-control validate' placeholder='Contraseña...'></div> ";
-        var footermodal = "<button class='btn btn-success' id='updateUsuario' >Guardar</button><button class='btn btn-warning' id='printEvaluacion' onclick='PrintContent()' >Imprimir</button><button class='btn btn-secondary' data-dismiss='modal'>Cancelar</button>";
+        var footermodal = "<button class='btn btn-success' id='updateUsuario' >Guardar</button><button class='btn btn-secondary' data-dismiss='modal'>Cancelar</button>";
+        // var footermodal = "<button class='btn btn-success' id='updateUsuario' >Guardar</button><button class='btn btn-warning' id='printEvaluacion' onclick='PrintContent()' >Imprimir</button><button class='btn btn-secondary' data-dismiss='modal'>Cancelar</button>";
 
         $('#tituloModal').html("<i class='fas fa-user-edit'></i> - Editar Usuario ");
         $("#modalc1").append(nombre);
