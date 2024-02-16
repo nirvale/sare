@@ -41,7 +41,7 @@ class DatabaseSeeder extends Seeder
             TecremotadiscoSeeder::class,
             TdiscoSeeder::class,
             AmbienteSeeder::class,
-            // DistribucionSeeder::class,
+            DistribucionSeeder::class,
             // AprocesadorSeeder::class,
             // MhardwareSeeder::class,
             // VirtualizadorSeeder::class,
