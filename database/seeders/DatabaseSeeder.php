@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
             EstadoSeeder::class,
             AdscripcionSeeder::class,
             BackupSeeder::class,
-            // EstadoesquemaSeeder::class,
+            EstadoesquemaSeeder::class,
             TipodcSeeder::class,
             TipoSeeder::class,
             RdbmsSeeder::class,
