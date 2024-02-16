@@ -37,7 +37,8 @@
       <div class="card">
           {{-- <div class="card-header">Manage Users</div> --}}
           <div class="card-body">
-              {{ $dataTable->table() }}
+             {{-- {{ $dataTable->table() }} --}}
+              {{ $dataTable->table(['class' => 'table table-bordered table-striped no-footer' ]) }}
           </div>
       </div>
 @stop
