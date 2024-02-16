@@ -24,7 +24,7 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/dba/css/admin_custom.css">
+    <link rel="stylesheet" href="/sare/css/admin_custom.css">
 @stop
 
 @section('js')
