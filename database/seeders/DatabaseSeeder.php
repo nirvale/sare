@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
             OficinaSeeder::class,
             EstadoSeeder::class,
             AdscripcionSeeder::class,
-            // BackupSeeder::class,
+            BackupSeeder::class,
             // EstadoesquemaSeeder::class,
             TipodcSeeder::class,
             TipoSeeder::class,
