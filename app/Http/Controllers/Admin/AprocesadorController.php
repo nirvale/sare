@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\StoreAprocesadorRequest;
 use App\Http\Requests\UpdateAprocesadorRequest;
 use App\Models\Admin\Aprocesador;
+use App\Http\Controllers\Controller;
 
 class AprocesadorController extends Controller
 {
