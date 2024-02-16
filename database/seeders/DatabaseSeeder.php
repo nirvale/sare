@@ -46,7 +46,7 @@ class DatabaseSeeder extends Seeder
             MhardwareSeeder::class,
             VirtualizadorSeeder::class,
             MprocesadorSeeder::class,
-            // OsVersionSeeder::class,
+            OsVersionSeeder::class,
             // RdbmsVersionSeeder::class,
 
 
