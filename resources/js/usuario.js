@@ -328,10 +328,42 @@ $(document).on("click", "#createUsuario", function(){
         {
           $('#modalusuario').modal('hide');
           alertify.success ("Se creo con éxito: <br>"+data.get('nombre'));
-          if ($('.sorting_1').length)
-          {
-            $('#tablaUsuarios').DataTable().ajax.reload();
-          }
+
+            $('#tablaUsuarios').DataTable({
+                  "language": {
+                        "url": "/sare/vendor/DataTables/lang/Spanish.json"
+                  },
+                  "responsive": true,
+                  "processing": true,
+                //"serverSide": true,
+                  "ajax":{
+                     "url": "usuario",
+                     "type": 'GET',
+                     //"dataType": 'json',
+                     "data":{
+                       // al_id:{{ Auth::user()->id }},
+                     }
+                  },
+                  "columns":[
+                     {"data": "id" },
+                     {"data": "name" },
+                     // {"data": "empr_rfc" },
+                     {"data": "oficina" },
+                     {"data": "perfil" },
+                     {"data": "estado" },
+                     {"data": "action", className: 'dt-center', },
+                     //{"data": "empeval_cantidad_espacios" },
+                    //{"defaultContent":   "accion",
+                      // render: function ( data, type, row ) {
+                      //     if ( type === 'display' ) {
+                      //         return '<input type="checkbox" id="'+row.empr_id+'" class="editor-active">';
+                      //     }
+                      //     return data;
+                      // }
+                     //}
+                  ],
+              });
+
           console.log(response);
         }
 
