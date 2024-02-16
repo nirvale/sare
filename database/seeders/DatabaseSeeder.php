@@ -40,7 +40,7 @@ class DatabaseSeeder extends Seeder
             EstatusRecoverTestSeeder::class,
             TecremotadiscoSeeder::class,
             TdiscoSeeder::class,
-            // AmbienteSeeder::class,
+            AmbienteSeeder::class,
             // DistribucionSeeder::class,
             // AprocesadorSeeder::class,
             // MhardwareSeeder::class,
