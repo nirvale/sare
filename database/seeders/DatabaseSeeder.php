@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
             RdbmsSeeder::class,
             OsSeeder::class,
             DatacenterSeeder::class,
-            // BaseSeeder::class,
+            BaseSeeder::class,
             // EstadobackupSeeder::class,
             EstatusRecoverTestSeeder::class,
             TecremotadiscoSeeder::class,
