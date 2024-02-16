@@ -16,7 +16,9 @@
 @endpush --}}
 
 @extends('adminlte::page')
-
+@section('meta_tags')
+@vite([ 'resources/js/admin_custom.js','resources/js/app.js','resources/sass/app.scss','resources/css/admin_custom.css','resources/js/usuario.js'])
+@endsection
 @section('title', 'Dashboard')
 
 @section('content_header')
@@ -39,8 +41,6 @@
           </div>
       </div>
 @stop
-
-@vite(['resources/css/app.css', 'resources/js/app.js','resources/sass/app.scss','resources/css/admin_custom.css'])
 
 
 @section('js')

@@ -13,7 +13,7 @@
 //
 
 //import 'laravel-datatables-vite';
-import '../../vendor/yajra/laravel-datatables-buttons/src/resources/assets/buttons.server-side.js';
+//import '../../vendor/yajra/laravel-datatables-buttons/src/resources/assets/buttons.server-side.js';
 // import "datatables.net-editor";
 // import Editor from "datatables.net-editor-bs5";
 // Editor(window, $);

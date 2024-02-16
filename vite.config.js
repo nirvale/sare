@@ -10,6 +10,7 @@ export default defineConfig({
                 'resources/sass/app.scss',
                 'resources/css/admin_custom.css',
                 'resources/js/usuario.js',
+                'resources/js/admin_custom.js',
 
             ],
             refresh: true,

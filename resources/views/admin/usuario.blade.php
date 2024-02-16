@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 @section('title', 'Usuarios')
 @section('meta_tags')
-@vite([ 'resources/js/app.js','resources/sass/app.scss','resources/css/admin_custom.css','resources/js/usuario.js'])
+@vite([ 'resources/js/admin_custom.js','resources/js/app.js','resources/sass/app.scss','resources/css/admin_custom.css','resources/js/usuario.js'])
 @endsection
 @section('content_header')
   <x-admin.main-card
