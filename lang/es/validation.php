@@ -193,6 +193,7 @@ return [
         'cve_programa' => 'CLAVE DE PROGRAMA',
         'programa' => 'NOMBRE DEL PROGRAMA',
         'dependencia' => 'NOMBRE DE LA DEPENDENCIA',
+        'ndominio' => 'DOMINIO (RENOMBRADO)',
     ],
 
 ];

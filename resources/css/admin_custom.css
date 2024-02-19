@@ -34,6 +34,11 @@ div.dataTables_processing>div:last-child>div {
 
 }
 
+/* .tabEditando{
+
+  shadow-lg p-3 mb-5 bg-white rounded
+} */
+
 
 /* a {
   color: $link-color;

@@ -3,14 +3,21 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreDominioRequest;
-use App\Http\Requests\UpdateDominioRequest;
+// use App\Http\Requests\StoreDominioRequest;
+// use App\Http\Requests\UpdateDominioRequest;
 use App\Models\Admin\Dominio;
 use App\DataTables\Admin\DominiosDataTable;
+use Illuminate\Http\Request;
+use DB;
 
 class DominioController extends Controller
 {
-    /**
+    public function __construct(Request $request)
+      {
+          $this->middleware(['permission:admin|admin']);
+      }
+
+      /**
      * Display a listing of the resource.
      */
     public function index()
@@ -29,7 +36,7 @@ class DominioController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreDominioRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -53,9 +60,39 @@ class DominioController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateDominioRequest $request, Dominio $dominio)
+    public function update(Request $request, Dominio $dominio)
     {
-        //
+
+      $validated=\Validator::make($request->all(), [
+           //'empr_nombre' => 'bail|required|',
+           'catOriginal' => 'bail|required|max:50',
+           'catActual' => 'bail|required|max:50',
+           //'empeval_fotos.*.file' => 'required|mimes:jpeg,jpg,png|max: 20000',
+           // 'cve_oficina' => 'bail|required|max:1',
+           // 'id_perfil' => 'bail|required|max:2',
+           // 'cve_estado' => 'bail|required|max:1',
+           // 'email' => 'bail|required|email:rfc,dns',
+           // 'pwd' => 'bail|required|max:10',
+       ]);
+       if ($validated->fails())
+       {
+         return response()->json(['errors'=>$validated->errors()->all()]);
+       }
+       if ($validated) {
+         DB::beginTransaction();
+         try {
+        //  $Dominio = Dominio::find($request->id);
+          $dominio->dominio = $request->catActual;
+
+          $dominio->push();
+          DB::commit();
+         } catch (\Exception $e) {
+           DB::rollBack();
+           return $e;
+         }
+
+       }
+       return $dominio;
     }
 
     /**

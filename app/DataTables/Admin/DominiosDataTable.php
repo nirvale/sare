@@ -41,26 +41,19 @@ class DominiosDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('dominios-table')
+                    ->setTableId('catDominios')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
-                    ->orderBy(1)
+                    ->orderBy(0)
                     ->selectStyleSingle()
                     ->parameters([
                         'dom'  => 'Bfrtip',
-                        'buttons'   => ['excel', 'csv','print','reload','colvis'],
+                        //'buttons'   => ['excel', 'csv','print','reload','colvis'],
                         'responsive' => true,
                         'language' => [ 'url' => '/sare/vendor/DataTables/lang/Spanish.json' ],
-                        'ajax'  => ['type' => 'gets'],
                      ])
-                    // ->editors([
-                    //     Editor::make()
-                    //           ->fields([
-                    //               Fields\Text::make('id'),
-                    //               Fields\Text::make('dominio'),
-                    //           ]),
-                    // ]);
+
                     ->buttons([
                         Button::make('excel'),
                         Button::make('csv'),
@@ -77,16 +70,20 @@ class DominiosDataTable extends DataTable
     public function getColumns(): array
     {
         return [
+
+            Column::make('id')->width(30)->title('ID'),
+            // Column::make('add your columns'),
+            Column::make('dominio')
+                  ->addClass('catEditable')
+                  ->title('DOMINIO'),
+            // Column::make('created_at'),
+            // Column::make('updated_at'),
             Column::computed('action')
-                  ->exportable(false)
+                  ->exportable(true)
                   ->printable(false)
                   ->width(60)
-                  ->addClass('text-center'),
-            Column::make('id'),
-            // Column::make('add your columns'),
-            Column::make('dominio'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+                  ->addClass('text-center')
+                  ->title('ACCIÓN'),
         ];
     }
 

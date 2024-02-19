@@ -34,7 +34,8 @@ class UsersDataTable extends DataTable
                         'dom'  => 'Bfrtip',
                         'buttons'   => ['excel', 'csv','print','reload','colvis'],
                         'responsive' => true,
-                        'language' => [ 'url' => '/sare/vendor/DataTables/lang/Spanish.json' ]
+                        'language' => [ 'url' => '/sare/vendor/DataTables/lang/Spanish.json' ].
+                        'responsive'=> true,
                      ]);
 
     }

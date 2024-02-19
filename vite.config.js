@@ -11,6 +11,7 @@ export default defineConfig({
                 'resources/css/admin_custom.css',
                 'resources/js/usuario.js',
                 'resources/js/admin_custom.js',
+                'resources/js/dominio.js',
 
             ],
             refresh: true,
