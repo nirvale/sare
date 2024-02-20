@@ -49,7 +49,7 @@ class DominiosDataTable extends DataTable
                     ->selectStyleSingle()
                     ->parameters([
                         'dom'  => 'Bfrtip',
-                        'buttons'   => ['excel', 'csv','print','reload','myCustomAction'],
+                        'buttons'   => ['excel', 'csv','print','reload','nuevoDominio'],
                         'responsive' => true,
                         'language' => [ 'url' => '/sare/vendor/DataTables/lang/Spanish.json', ],
                      ]);

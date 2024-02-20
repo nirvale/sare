@@ -37,7 +37,7 @@ class DominioController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    { 
+    {
       $validated=\Validator::make($request->all(), [
            //'empr_nombre' => 'bail|required|',
            'dominio' => 'bail|required|unique:dominios|max:50',
@@ -52,7 +52,7 @@ class DominioController extends Controller
         //  $Dominio = Dominio::find($request->id);
           $dominio=Dominio::create([
 
-            'dominio' => $request->dominio,
+            'dominio' => strtolower($request->dominio),
 
           ]);
 
@@ -107,7 +107,7 @@ class DominioController extends Controller
          DB::beginTransaction();
          try {
         //  $Dominio = Dominio::find($request->id);
-          $dominio->dominio = $request->catActual;
+          $dominio->dominio = strtolower($request->catActual);
 
           $dominio->push();
           DB::commit();
