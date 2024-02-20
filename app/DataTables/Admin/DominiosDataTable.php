@@ -23,8 +23,17 @@ class DominiosDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'dominios.action')
-            ->setRowId('id');
+            ->addColumn('action',function(Dominio $dominio){
+                $actionBtn = '
+                              <a href="'.route('dominio.destroy', $dominio).'" id="eliminardominio" class="text-danger"><i class="fas fa-times-circle"></i></a> '
+                ;
+              return $actionBtn;
+              })
+            ->setRowId('id')
+            // ->editColumn('action', function (Dominio $dominio) {
+            //     return '<a href="'.route('usuario.show', $dominio).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
+            // })
+            ;
     }
 
     /**
@@ -49,9 +58,18 @@ class DominiosDataTable extends DataTable
                     ->selectStyleSingle()
                     ->parameters([
                         'dom'  => 'Bfrtip',
-                        'buttons'   => ['excel', 'csv','print','reload','nuevoDominio'],
+                        //'buttons'   => ['nuevoDominio'],
                         'responsive' => true,
                         'language' => [ 'url' => '/sare/vendor/DataTables/lang/Spanish.json', ],
+                     ])
+                     ->buttons([
+                         Button::make('excel'),
+                         Button::make('csv'),
+                         Button::make('pdf'),
+                         Button::make('print'),
+                         Button::make('reset'),
+                         Button::make('reload'),
+                         Button::make('nuevoDominio')
                      ]);
     }
 

@@ -49,7 +49,7 @@
 
           <x-admin.modal70
             idModal=dominios
-            iconoNombreModal="fas fa-sitemap"
+            iconoNombreModal="fas fa-puzzle-piece"
             nombreModal="Agregar Dominio"
           >
             <div class="from-group row col-md-12" id="modalc1">

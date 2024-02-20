@@ -20,7 +20,7 @@ Route::get('usersdt', [UserController::class, 'indexdt'])->name('users.indexdt')
 //ruta para datatables dominios
 Route::get('dominio', [DominioController::class, 'indexdt'])->name('dominios.indexdt');
 //RUTAS CRUD Dominios
-Route::resource('dominio', DominioController::class)->only(['update','store']);
+Route::resource('dominio', DominioController::class)->only(['update','store','destroy']);
 
 //livewire assets
 Livewire::setScriptRoute(function ($handle) {

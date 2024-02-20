@@ -125,7 +125,20 @@ class DominioController extends Controller
      */
     public function destroy(Dominio $dominio)
     {
-        //
+      //$dominio = Dominio::findOrFail($dominio->id);
+      if (isset($dominio)) {
+         DB::beginTransaction();
+         try {
+           $dominio->delete();
+           // $adscripcion->delete();
+           DB::commit();
+         } catch (\Exception $e) {
+           return $e;
+         }
+
+      }
+
+      return $dominio->id;
     }
 
     public function indexdt(DominiosDataTable $dataTable)

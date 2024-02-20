@@ -8,7 +8,7 @@ var estaCeldaTexto;
 var row;
 var catActual; // valor nuevo default indefinido o nullo
 var data;
-var idt; //index de la tabla DENTRO DE MODULO EDICIÓN
+var thead;
 var clicken; //bandera de cambio en input [0=fuera, 1=dentro]
 var mainid; //clave del registro a actualizar
 var workid; // clave de registro donde se hace click
@@ -24,18 +24,21 @@ const modelo = modelos.slice(0,-1);
     row = undefined;
     catActual = undefined; // valor nuevo default indefinido o nullo
     data = undefined;
-    idt = undefined; //index de la tabla
+    thead = undefined;
     clicken = undefined; //bandera de cambio en input [0=fuera, 1=dentro]
     mainid = undefined;
   console.log('variables limpiadas');
   };
   $(IDT).on('click','td', function(){
-  //var fila = $(this).closest('tr');
-  workid = $(this).closest('tr').find('td:eq(0)').text();
-  // closest(selector) busca el elemento con el selector indicado más cercano a $(this)
-  // Luego te traes el dato 'id' del tr con la función attr(dato)
-console.log(workid+'dfsdfsdfasdfasdfads');
-});
+    //var fila = $(this).closest('tr');
+    workid = $(this).closest('tr').find('td:eq(0)').text().trim();
+    var ncol = $(this).index();
+    //thead = $("thead th:eq(" + $(this).index() + ")").text().trim();
+    // closest(selector) busca el elemento con el selector indicado más cercano a $(this)
+    // Luego te traes el dato 'id' del tr con la función attr(dato)
+    // console.log('este es numero de la columna'+val);
+    // console.log($("thead th:eq(" + $(this).index() + ")").text().trim());
+  });
 
   $('html').click(function (clickp){
     clickp.preventDefault();
@@ -45,11 +48,11 @@ console.log(workid+'dfsdfsdfasdfasdfads');
     if (claseclick == 'catEditable' || claseclick == 'catEditable sorting_1') {
       console.log('sí es la clase que busco - catEditable');
       if (clickp.target.offsetParent.id != null && clickp.target.offsetParent.id == IDT.slice(1)) {
-            idt = IDT;
+
             //idt ="#"+clickp.target.offsetParent.id;
             //idt ="#"+clickp.target.offsetParent.id+"_wrapper";
             console.log('el id del elemenoto padre de la seleccion es IGUAL, IDT: '+ IDT.slice(1)+ '= idt: '+clickp.target.offsetParent.id);
-            console.log('esta es id de la tabla despues del click: '+idt);
+            console.log('esta es id de la tabla despues del click: '+clickp.target.offsetParent.id);
             //console.log(clickp.target.parentElement.firstChild.outerText);
             console.log(mainid+'--1--'+workid);
                 if (!mainid) {
@@ -59,8 +62,8 @@ console.log(workid+'dfsdfsdfasdfasdfads');
                           estaCelda = $(clickp.target);
                           estaCeldaTexto = clickp.target.outerText;
                           mainid = clickp.target.parentElement.firstChild.innerText;
-
-                          //console.log(estaCelda);
+                          thead = $("thead th:eq(" + $(clickp.target).index() + ")").text().trim();                       ;
+                          //console.log(clickp.target);
                         //se obtuvieron las variables de renglon
                         // se agrega la clase disparadora
                           switche = 1;
@@ -138,10 +141,11 @@ console.log(workid+'dfsdfsdfasdfasdfads');
     // console.log($(IDT));
       clicken=1;
       catActual = document.getElementById('nobjeto');
-      alertify.confirm('ACTUALIZAR NOMBRE DE '+modelo+' ','Actuaizar: '+estaCeldaTexto+' <br>Al nuevo valor: '+catActual.value+'', function(){
+      alertify.confirm('ACTUALIZAR NOMBRE DE '+thead+' ','Actuaizar: '+estaCeldaTexto+' <br>Al nuevo valor: '+catActual.value+'', function(){
         $(IDT).removeClass("tabEditando");
       data.append('catActual',catActual.value); //agregamos al request el nuevo valor des js
       data.append('_method', 'PUT')//inyectamos el metodo  en request para serializar
+      data.append('thead', thead.toLowerCase)//inyectamos el metodo  en request para serializar
         //data['_method'] = 'PUT';
         //console.log(modelo.toLowerCase());
         $.ajax({
@@ -319,12 +323,92 @@ console.log(workid+'dfsdfsdfasdfasdfads');
 
   });
 
+  $(document).on("click", "#eliminar"+modelo+"", function(){
+    event.preventDefault();
+    var destroyid = $(this).closest('tr').find('td:eq(0)').text().trim();
+    var destroyobject = $(this).closest('tr').find('td:eq(1)').text().trim();
+    alertify.confirm('ELIMINAR NOMBRE DE '+modelo.toUpperCase()+' ','Eliminar: '+destroyobject, function(){
+  //  data.append('_method', 'PUT')//inyectamos el metodo  en request para serializar NO SE NECESITA EN ESTE MODULO
+      //data['_method'] = 'PUT';
+      //console.log(modelo.toLowerCase());
+      $.ajax({
+        url: modelo+'/'+destroyid,
+        method: 'DELETE',
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+        },
+        processData: false,
+        contentType: false,
+        dataType: 'json',
+        cache:false,
+        data:{
+          'id':destroyid,
+        },
+
+        success: function(response) {
+          //validando formulario
+          if(response.errors)
+          {
+
+
+            $.each(response.errors, function(key, value){
+              var msg = alertify.error(value+"<br><button class='btn btn-danger'>Cerrar</button>",10000);
+              msg.callback = function (isClicked) {
+                      if(isClicked)
+                          console.log('notification dismissed by user');
+                      else
+                          console.log('notification auto-dismissed');
+              };
+            });
+            $(response.errors).empty();
+          }
+          else
+          {
+
+            $("#modal"+modelos).modal('hide');
+            alertify.success ("Eliminado con éxito: <br>"+destroyobject);
+            //apagamos edicion
+            $(IDT).DataTable().ajax.reload();
+            cleanvars();
+            //console.log(response);
+
+            if ($('.sorting_1').length)
+            {
+              $(IDT).DataTable().ajax.reload();
+              cleanvars();
+            }
+          }
+        },
+        error: function(response) {
+          alertify.error("Error eliminando "+modelo+": <br>"+destroyobject);
+            // for (var value of data.values()) {
+            //   console.log(value);
+            //   }
+          $("#modal"+modelos).modal('hide');
+          $(IDT).DataTable().ajax.reload();
+          cleanvars();
+        },
+      });
+
+    },function(){
+      console.log('click act cancelada con cambios pendientes');
+      //$(IDT).DataTable().ajax.reload();
+      $("#modal"+modelos).modal('hide');
+      alertify.error('Eliminación Cancelada');
+      cleanvars()
+    }).set('labels', {ok:'ELIMINAR', cancel:'CANCELAR'});
+
+
+      });
+
+
+
   // $.fn.dataTable.ext.buttons.reload = {
   //   name: 'reload',
   //   // className: 'buttons-add btn-success',
   //   text: '<i class="fa fa-undo"></i> Recargar',
   //   action: function (e, dt, button, config) {
-  //       alert('table',idt);
+  //       alert('table',IDT);
   //       $("table", "#cat"+modelo[0]+modelo.toLowerCase().slice(1)+"").DataTable().ajax.reload();
   //   }
   // };
