@@ -37,8 +37,33 @@ class DominioController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        //
+    { 
+      $validated=\Validator::make($request->all(), [
+           //'empr_nombre' => 'bail|required|',
+           'dominio' => 'bail|required|unique:dominios|max:50',
+       ]);
+       if ($validated->fails())
+       {
+         return response()->json(['errors'=>$validated->errors()->all()]);
+       }
+       if ($validated) {
+         DB::beginTransaction();
+         try {
+        //  $Dominio = Dominio::find($request->id);
+          $dominio=Dominio::create([
+
+            'dominio' => $request->dominio,
+
+          ]);
+
+          DB::commit();
+         } catch (\Exception $e) {
+           DB::rollBack();
+           return $e;
+         }
+
+       }
+       return $dominio;
     }
 
     /**

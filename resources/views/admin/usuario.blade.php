@@ -40,16 +40,20 @@
 </x-admin.card-general>
 {{-- Fin Creando la tabla --}}
   {{-- editar/Crear usuario  --}}
-<x-admin.modal70 idModal=usuario >
-  <div class="from-group row col-md-12" id="modalc1">
-  </div>
-  <div id="printThis"> {{-- zona imprimible--}}
+<x-admin.modal70
+  idModal=usuario
+  iconoNombreModal="fas fa-user-plus"
+  nombreModal="Agregar Usuario"
+>
+    <div class="from-group row col-md-12" id="modalc1">
+    </div>
+    <div id="printThis"> {{-- zona imprimible--}}
 
 
-     <div class="from-group row col-md-12" id="modalc2">
-     </div>
+       <div class="from-group row col-md-12" id="modalc2">
+       </div>
 
-  </div>{{-- fin zona imprimible--}}
+    </div>{{-- fin zona imprimible--}}
 </x-admin.modal70>
 
 {{-- fin editar/crear usuario --}}

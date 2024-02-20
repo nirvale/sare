@@ -49,19 +49,10 @@ class DominiosDataTable extends DataTable
                     ->selectStyleSingle()
                     ->parameters([
                         'dom'  => 'Bfrtip',
-                        //'buttons'   => ['excel', 'csv','print','reload','colvis'],
+                        'buttons'   => ['excel', 'csv','print','reload','myCustomAction'],
                         'responsive' => true,
-                        'language' => [ 'url' => '/sare/vendor/DataTables/lang/Spanish.json' ],
-                     ])
-
-                    ->buttons([
-                        Button::make('excel'),
-                        Button::make('csv'),
-                        Button::make('pdf'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
-                    ]);
+                        'language' => [ 'url' => '/sare/vendor/DataTables/lang/Spanish.json', ],
+                     ]);
     }
 
     /**
@@ -94,4 +85,5 @@ class DominiosDataTable extends DataTable
     {
         return 'Dominios_' . date('YmdHis');
     }
+
 }

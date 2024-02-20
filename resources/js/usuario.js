@@ -243,7 +243,7 @@ $(document).on("click", "#agregarUsuario", function(){
         var pwd =  "<div class='form-group col-md-12 ml-auto'><label data-error='error' data-success='ok' for='cmb_nombre'>password</label> <input value='' name='pwd' type='text' id='pwd' class='form-control validate' placeholder='Contraseña...'></div> ";
         var footermodal = "<button class='btn btn-success' id='createUsuario' >Crear</button><button class='btn btn-secondary' data-dismiss='modal'>Cancelar</button>";
 
-        $('#tituloModal').html("<i class='fas fa-user-plus'></i> - Agregar Usuario ");
+        ///$('#tituloModal').html("<i class='fas fa-user-plus'></i> - Agregar Usuario ");//se agregó al componente
         $("#modalc1").append(nombre);
         $("#modalc1").append(oficina);
         for (var j = 0; j < response[1].length; j++) {
