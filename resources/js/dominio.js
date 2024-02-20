@@ -1,8 +1,6 @@
 
 $( document ).ready(function() {
 
-
-
 /* sCRIPT PARA CATALOGO */
 var switche; //switch a edición
 var estaCelda;
@@ -46,75 +44,77 @@ console.log(workid+'dfsdfsdfasdfasdfads');
     //console.log('esta es '+claseclick);
     if (claseclick == 'catEditable' || claseclick == 'catEditable sorting_1') {
       console.log('sí es la clase que busco - catEditable');
-      if (clickp.target.offsetParent.id != null && clickp.target.offsetParent.id == IDT) {
-        idt = IDT;
-        //idt ="#"+clickp.target.offsetParent.id;
-        //idt ="#"+clickp.target.offsetParent.id+"_wrapper";
-        console.log('el id del elemenoto padre de la seleccion es IGUAL A IDT: '+clickp.target.offsetParent.id);
-        console.log('esta es id de la tabla despues del click: '+idt);
-      }
-      //console.log(clickp.target.parentElement.firstChild.outerText);
-        console.log(mainid+'--1--'+workid);
-      if (!mainid) {
+      if (clickp.target.offsetParent.id != null && clickp.target.offsetParent.id == IDT.slice(1)) {
+            idt = IDT;
+            //idt ="#"+clickp.target.offsetParent.id;
+            //idt ="#"+clickp.target.offsetParent.id+"_wrapper";
+            console.log('el id del elemenoto padre de la seleccion es IGUAL, IDT: '+ IDT.slice(1)+ '= idt: '+clickp.target.offsetParent.id);
+            console.log('esta es id de la tabla despues del click: '+idt);
+            //console.log(clickp.target.parentElement.firstChild.outerText);
+            console.log(mainid+'--1--'+workid);
+                if (!mainid) {
 
-                row = $(clickp.target.parentElement);
-                // estaCelda = row.find("td:nth-child(2)");  //original
-                estaCelda = $(clickp.target);
-                estaCeldaTexto = clickp.target.outerText;
-                mainid = clickp.target.parentElement.firstChild.innerText;
+                          row = $(clickp.target.parentElement);
+                          // estaCelda = row.find("td:nth-child(2)");  //original
+                          estaCelda = $(clickp.target);
+                          estaCeldaTexto = clickp.target.outerText;
+                          mainid = clickp.target.parentElement.firstChild.innerText;
 
-                //console.log(estaCelda);
-              //se obtuvieron las variables de renglon
-              // se agrega la clase disparadora
-                switche = 1;
-                $(IDT).addClass("tabEditando");
-                estaCelda.removeClass('catEditable');
-                estaCelda.addClass('catEditando');
-                console.log('se agrego clase disparadora, fin stage 1');
-                //se crea la forma para actualizar el indiceRenglon
-                data= new FormData(); //creamos la forma
-                data.append('id',mainid);
-                data.append('catOriginal',estaCeldaTexto);
-                //inyectamos forma
-                estaCelda.empty().append(
-                  "<input value='"+estaCeldaTexto+"'  name='nobjeto' type='text' id='nobjeto' class='form-control validate cambiarCatEditable' placeholder='Nombre del nuevo objeto'>"
-                );
-                console.log('se inyecto el campo editabla en la tabla');
-
-
-    }else if (clickp.target.id != 'nobjeto' && $(IDT).hasClass("tabEditando") && switche == 1 && mainid != workid) {
-            console.log(mainid+'---2-'+workid);
-            clicken=0;
-            console.log('averiguar si hay cambios pendientes, confirmarlos o dejar la data original al cancelar, si no hay cambios solo dejar la data original' + data.get('catOriginal') +' y la nueva '+catActual);
-            if ( catActual==null && clicken == 0) {
-              console.log('click act cancelada SIN cambios pendientes reaturando a estado original');
-              estaCelda.removeClass('catEditando');
-              estaCelda.addClass('catEditable');
-              $(IDT).removeClass("tabEditando");
-               estaCelda.empty().append(estaCeldaTexto);
-              // $(IDT).DataTable().ajax.reload ();
-              alertify.error('Actualización Cancelada');
-              cleanvars()
-              console.log('Programa cerrado, fin del modulo de edición');
-            }
+                          //console.log(estaCelda);
+                        //se obtuvieron las variables de renglon
+                        // se agrega la clase disparadora
+                          switche = 1;
+                          $(IDT).addClass("tabEditando");
+                          estaCelda.removeClass('catEditable');
+                          estaCelda.addClass('catEditando');
+                          console.log('se agrego clase disparadora, fin stage 1');
+                          //se crea la forma para actualizar el indiceRenglon
+                          data= new FormData(); //creamos la forma
+                          data.append('id',mainid);
+                          data.append('catOriginal',estaCeldaTexto);
+                          //inyectamos forma
+                          estaCelda.empty().append(
+                            "<input value='"+estaCeldaTexto+"'  name='nobjeto' type='text' id='nobjeto' class='form-control validate cambiarCatEditable' placeholder='Nombre del nuevo objeto'>"
+                          );
+                          console.log('se inyecto el campo editabla en la tabla');
 
 
-        }
+              }else if (clickp.target.id != 'nobjeto' && $(IDT).hasClass("tabEditando") && switche == 1 && mainid != workid) {
+                      console.log(mainid+'---2-'+workid);
+                      clicken=0;
+                      console.log('averiguar si hay cambios pendientes, confirmarlos o dejar la data original al cancelar, si no hay cambios solo dejar la data original' + data.get('catOriginal') +' y la nueva '+catActual);
+                      if ( catActual==null && clicken == 0) {
+                        console.log('click fuera de la celda editable SIN cambios pendientes... restaurando estado original');
+                        estaCelda.removeClass('catEditando');
+                        estaCelda.addClass('catEditable');
+                        $(IDT).removeClass("tabEditando");
+                         estaCelda.empty().append(estaCeldaTexto);
+                        // $(IDT).DataTable().ajax.reload ();
+                        alertify.error('Actualización Cancelada');
+                        cleanvars()
+                        console.log('Programa cerrado, se cambio de celda');
+                      }
+              }
 
-    } else if(clickp.target.id == 'nobjeto' && $(IDT).hasClass("tabEditando") && switche == 1 && mainid==workid){
+          }
+
+
+    }else if(clickp.target.id == 'nobjeto' && $(IDT).hasClass("tabEditando") && switche == 1 && mainid==workid){
           clicken=1;
+          console.log('no es la clase que busco para iniciar edición');
         //  var workid=clickp.target.parentElement.firstChild.outerText;
-          console.log(mainid+'--3--'+workid);
-          console.log('click DENTRP de la zona de edicion, NO HACER NADA');
-    } else {
+          console.log(mainid+'--2--'+workid);
+          console.log('click DENTRO de la zona de edición, NO HACER NADA');
+    }else {
+      clicken=0;
       console.log('no es la clase que busco');
       console.log('si hay edicion activa la cierro y restauro a su estado original');
       if (mainid) {
-        console.log('existe una sesion de edicion, cierrala puto');
-        console.log(mainid+'---2-'+workid);
-        clicken=0;
+        console.log('Existe una sesion de edición, ciérrala puto');
+        console.log(mainid+'---3-'+workid);
+
         if ( !catActual && clicken == 0) {
-          console.log('click act cancelada SIN cambios pendientes reaturando a estado original');
+          console.log('click fuera de la celda editable SIN cambios pendientes... restaurando estado original');
           estaCelda.removeClass('catEditando');
           estaCelda.addClass('catEditable');
           $(IDT).removeClass("tabEditando");
@@ -122,10 +122,10 @@ console.log(workid+'dfsdfsdfasdfasdfads');
           // $(IDT).DataTable().ajax.reload ();
           alertify.error('Actualización Cancelada');
           cleanvars()
-          console.log('Programa cerrado, fin del modulo de edición');
+          console.log('Programa cerrado, no hubo cambios en la celda');
         }
       }
-      console.log('Programa cerrado, fin del modulo de edición');
+      console.log('No hay sesiones de edición, nada  por hacer, fin del modulo de edición');
     }
 
   });
