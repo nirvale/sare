@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('tdiscos', function (Blueprint $table) {
             $table->id();
+            $table->string('tdisco')->unique();
             $table->timestamps();
         });
     }

@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Os;
+use App\Models\Admin\Os;
 
 class OsSeeder extends Seeder
 {

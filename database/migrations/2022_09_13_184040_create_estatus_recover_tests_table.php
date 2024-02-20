@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('estatus_recover_tests', function (Blueprint $table) {
             $table->id();
+            $table->string('estatusrecovert');
             $table->timestamps();
         });
     }

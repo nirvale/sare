@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Estadoesquema;
+use App\Models\Dbam\Estadoesquema;
 
 class EstadoesquemaSeeder extends Seeder
 {
@@ -20,7 +20,5 @@ class EstadoesquemaSeeder extends Seeder
         $estadoesquema = Estadoesquema::create(['estadoesquema' => 'BORRADO']);
         $estadoesquema = Estadoesquema::create(['estadoesquema' => 'BLOQUEADO']);
     }
-
-}
 
 }

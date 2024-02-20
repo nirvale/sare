@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Aprocesador;
+use App\Models\Admin\Aprocesador;
 
 class AprocesadorSeeder extends Seeder
 {

@@ -3,7 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\Tipo;
+use Illuminate\Database\Seeder;
+use App\Models\Admin\Tipo;
 
 class TipoSeeder extends Seeder
 {

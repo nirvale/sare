@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Virtualizador;
+use App\Models\Admin\Virtualizador;
 
 class VirtualizadorSeeder extends Seeder
 {
