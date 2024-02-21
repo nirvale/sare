@@ -37,6 +37,7 @@ class DatacentersDataTable extends DataTable
     public function query(Datacenter $model): QueryBuilder
     {
         return $model->newQuery();
+
     }
 
     /**

@@ -54,6 +54,7 @@ class DatacenterController extends Controller
 
              'datacenter' => strToUpper($request->datacenter),
              'desc_datacenter' => strToUpper($request->descripción),
+             'cve_tipodc' => 1,
            ]);
 
            DB::commit();
@@ -85,18 +86,71 @@ class DatacenterController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateDatacenterRequest $request, Datacenter $datacenter)
-    {
-        //
-    }
+     public function update(Request $request, Datacenter $datacenter)
+     {
+       $validated=\Validator::make($request->all(), [
+            //'empr_nombre' => 'bail|required|',
+            'catOriginal' => 'bail|required|max:50',
+            'catActual' => 'bail|required|max:50',
+            //'empeval_fotos.*.file' => 'required|mimes:jpeg,jpg,png|max: 20000',
+            // 'cve_oficina' => 'bail|required|max:1',
+            // 'id_perfil' => 'bail|required|max:2',
+            // 'cve_estado' => 'bail|required|max:1',
+            // 'email' => 'bail|required|email:rfc,dns',
+            // 'pwd' => 'bail|required|max:10',
+        ]);
+        if ($validated->fails())
+        {
+          return response()->json(['errors'=>$validated->errors()->all()]);
+        }
+        if ($validated) {
+          switch ($request->thead) {
+            case 'datacenter':
+              $datacToUpdate = 'datacenter';
+            break;
+            case 'descripción':
+              $datacToUpdate = 'desc_datacenter';
+            break;
+            default:
+              // code...
+            break;
+          }
+          DB::beginTransaction();
+          try {
+         //  $Datacenter = Datacenter::find($request->id);
+           $datacenter->$datacToUpdate = strToUpper($request->catActual);
+
+           $datacenter->push();
+           DB::commit();
+          } catch (\Exception $e) {
+            DB::rollBack();
+            return $e;
+          }
+
+        }
+        return $datacenter;
+     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Datacenter $datacenter)
-    {
-        //
-    }
+     public function destroy(Datacenter $datacenter)
+     {
+       //$datacenter = Datacenter::findOrFail($datacenter->id);
+       if (isset($datacenter)) {
+          DB::beginTransaction();
+          try {
+            $datacenter->delete();
+            // $adscripcion->delete();
+            DB::commit();
+          } catch (\Exception $e) {
+            return $e;
+          }
+
+       }
+
+       return $datacenter->id;
+     }
     public function indexdt(DatacentersDataTable $dataTable)
     {
           return $dataTable->render('admin.datacentersdt');

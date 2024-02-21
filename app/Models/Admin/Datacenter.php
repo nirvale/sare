@@ -10,7 +10,8 @@ class Datacenter extends Model
     use HasFactory;
     protected $fillable = [
         'datacenter',
-        'tipo',
+        'cve_tipodc',
         'desc_datacenter',
+
     ];
 }

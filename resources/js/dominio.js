@@ -15,6 +15,7 @@ var workid; // clave de registro donde se hace click
 const IDT='#'+$('table.dataTable').attr('id'); // ID DE LA TABLA GENERAL
 const modelos= IDT.toLowerCase().slice(4);
 const modelo = modelos.slice(0,-1);
+const theads = document.getElementById(IDT.slice(1)).getElementsByTagName("th");
 
 ////console.log('este es el modelo : '+modelo);
   function cleanvars(){
@@ -144,8 +145,8 @@ const modelo = modelos.slice(0,-1);
       alertify.confirm('ACTUALIZAR NOMBRE DE '+thead+' ','Actuaizar: '+estaCeldaTexto+' <br>Al nuevo valor: '+catActual.value+'', function(){
         $(IDT).removeClass("tabEditando");
       data.append('catActual',catActual.value); //agregamos al request el nuevo valor des js
-      data.append('_method', 'PUT')//inyectamos el metodo  en request para serializar
-      data.append('thead', thead.toLowerCase)//inyectamos el metodo  en request para serializar
+      data.append('_method', 'PUT');//inyectamos el metodo  en request para serializar
+      data.append('thead', thead.toLowerCase());//inyectamos el nombre de la columna  en request para serializar
         //data['_method'] = 'PUT';
         ////console.log(modelo.toLowerCase());
         $.ajax({
@@ -238,12 +239,19 @@ const modelo = modelos.slice(0,-1);
     action: function (e, dt, button, config) {
         event.preventDefault();
         $('#modalc1').empty();
+        $('#modalc2').empty();
         $('#footermodal').empty();
 
-        var catNuevo =  "<div class='form-group col-md-12 ml-auto'><label data-error='error' data-success='ok' for='cmb_nombre'>NUEVO(A) "+modelo.toUpperCase() +":</label> <input value='' name='"+modelo.toLowerCase()+"' type='text' id='"+modelo+"' class='form-control validate' placeholder='Nombre del nuevo objeto...'></div> ";
+        for (let i = 1; i < theads.length-1; i++) {
+          //console.log('index :'+i+', nombre del head:'+theads[i].innerText);
+          var catNuevo =  "<div class='form-group col-md-12 ml-auto'><label data-error='error' data-success='ok' for='cmb_nombre'>NUEVO(A) "+theads[i].innerText+":</label> <input value='' name='"+theads[i].innerText.toLowerCase()+"' type='text' id='"+modelo+"' class='form-control validate' placeholder='Nombre del nuevo objeto...'></div> ";
+          $("#modalc1").append(catNuevo);
+        }
+
+      //  var catNuevo =  "<div class='form-group col-md-12 ml-auto'><label data-error='error' data-success='ok' for='cmb_nombre'>NUEVO(A) "+modelo.toUpperCase() +":</label> <input value='' name='"+modelo.toLowerCase()+"' type='text' id='"+modelo+"' class='form-control validate' placeholder='Nombre del nuevo objeto...'></div> "; //PARA UN SOLO CAMPO
         var footermodal = "<button class='btn btn-success' id='crear"+modelo+"' >Crear</button><button class='btn btn-secondary' data-dismiss='modal'>Cancelar</button>";
 
-        $("#modalc1").append(catNuevo);
+        //$("#modalc1").append(catNuevo); //para 1 solo campo variable
         $("#footermodal").append(footermodal);
         $("#modal"+modelos).modal('show');
 

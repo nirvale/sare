@@ -104,10 +104,18 @@ class DominioController extends Controller
          return response()->json(['errors'=>$validated->errors()->all()]);
        }
        if ($validated) {
+         switch ($request->thead) {
+           case 'dominio':
+             $datacToUpdate = 'dominio';
+           break;
+           default:
+             // code...
+           break;
+         }
          DB::beginTransaction();
          try {
         //  $Dominio = Dominio::find($request->id);
-          $dominio->dominio = strtolower($request->catActual);
+          $dominio->$datacToUpdate = strtolower($request->catActual);
 
           $dominio->push();
           DB::commit();

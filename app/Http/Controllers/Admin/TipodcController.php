@@ -103,10 +103,18 @@ class TipodcController extends Controller
           return response()->json(['errors'=>$validated->errors()->all()]);
         }
         if ($validated) {
+          switch ($request->thead) {
+            case 'tipodc':
+              $datacToUpdate = 'tipodc';
+            break;
+            default:
+              // code...
+            break;
+          }
           DB::beginTransaction();
           try {
          //  $Tipodc = Tipodc::find($request->id);
-           $tipodc->tipodc = strToUpper($request->catActual);
+           $tipodc->$datacToUpdate = strToUpper($request->catActual);
 
            $tipodc->push();
            DB::commit();
