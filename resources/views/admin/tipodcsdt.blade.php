@@ -20,7 +20,7 @@
   {{  $dataTable->scripts() }}
 @vite([ 'resources/js/admin_custom.js','resources/js/app.js','resources/sass/app.scss','resources/css/admin_custom.css','resources/js/dominio.js'])
 @endsection
-@section('title', 'DOMINIOS')
+@section('title', 'TIPOS DE CENTRO DE DATOS')
 
 @section('content_header')
   <div class="card">
@@ -28,7 +28,7 @@
         <h1 class="card-title"><i class="fas fa-hat-wizard"></i> Sistema de Administración para Recursos Estratégicos - DGTG</h1>
     </div>
     <div class="card-body">
-      <h4 class="card-subtitle"> <i class="fas fa-puzzle-piece"></i> Módulo de Catálogos - Dominios </h4>
+      <h4 class="card-subtitle"> <i class="fas fa-puzzle-piece"></i> Módulo de Catálogos - TIPOS DE CENTRO DE DATOS </h4>
     </div>
   </div>
 @stop
@@ -48,9 +48,9 @@
         <div class="modalesCrear">
 
           <x-admin.modal70
-            idModal=dominios
+            idModal=tipodcs
             iconoNombreModal="fas fa-puzzle-piece"
-            nombreModal="Agregar Dominio"
+            nombreModal="Agregar Tipo de Centro de Datos"
           >
             <div class="from-group row col-md-12" id="modalc1">
             </div>

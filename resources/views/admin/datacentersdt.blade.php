@@ -28,7 +28,7 @@
         <h1 class="card-title"><i class="fas fa-hat-wizard"></i> Sistema de Administración para Recursos Estratégicos - DGTG</h1>
     </div>
     <div class="card-body">
-      <h4 class="card-subtitle"> <i class="fas fa-puzzle-piece"></i> Módulo de Catálogos - Dominios </h4>
+      <h4 class="card-subtitle"> <i class="fas fa-building"></i> Módulo de Catálogos - Centros de Datos </h4>
     </div>
   </div>
 @stop
@@ -48,9 +48,9 @@
         <div class="modalesCrear">
 
           <x-admin.modal70
-            idModal=dominios
-            iconoNombreModal="fas fa-puzzle-piece"
-            nombreModal="Agregar Dominio"
+            idModal=datacenters
+            iconoNombreModal="fas fa-building"
+            nombreModal="Agregar Dentro de Datos"
           >
             <div class="from-group row col-md-12" id="modalc1">
             </div>

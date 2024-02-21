@@ -230,7 +230,8 @@ const modelo = modelos.slice(0,-1);
         //console.log('Programa cerrado, fin del modulo de edición');
       }).set('labels', {ok:'CONTINUAR', cancel:'CANCELAR'});
   });
-  $.fn.dataTable.ext.buttons.nuevoDominio = {
+  $.fn.dataTable.ext.buttons.nuevo = {
+    type: modelo,
     name: 'add',
     className: 'buttons-add btn-success',
     text: '<i class="fa fa-plus"></i> Nuevo',

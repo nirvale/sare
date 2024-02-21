@@ -2,7 +2,7 @@
 
 namespace App\DataTables\Admin;
 
-use App\Models\Admin\Dominio;
+use App\Models\Admin\Tipodc;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -11,9 +11,8 @@ use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
-//use Yajra\DataTables\DataTablesEditor;
 
-class DominiosDataTable extends DataTable
+class TipodcsDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -23,23 +22,19 @@ class DominiosDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action',function(Dominio $dominio){
+            ->addColumn('action',function(Tipodc $tipodc){
                 $actionBtn = '
-                              <a href="'.route('dominio.destroy', $dominio).'" id="eliminardominio" class="text-danger"><i class="fas fa-times-circle"></i></a> '
+                              <a href="'.route('tipodc.destroy', $tipodc).'" id="eliminartipodc" class="text-danger"><i class="fas fa-times-circle"></i></a> '
                 ;
               return $actionBtn;
               })
-            ->setRowId('id')
-            // ->editColumn('action', function (Dominio $dominio) {
-            //     return '<a href="'.route('usuario.show', $dominio).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
-            // })
-            ;
+            ->setRowId('id');
     }
 
     /**
      * Get the query source of dataTable.
      */
-    public function query(Dominio $model): QueryBuilder
+    public function query(Tipodc $model): QueryBuilder
     {
         return $model->newQuery();
     }
@@ -50,7 +45,7 @@ class DominiosDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('catDominios')
+                    ->setTableId('catTipodcs')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
@@ -62,15 +57,15 @@ class DominiosDataTable extends DataTable
                         'responsive' => true,
                         'language' => [ 'url' => '/sare/vendor/DataTables/lang/Spanish.json', ],
                      ])
-                     ->buttons([
-                         Button::make('excel'),
-                         Button::make('csv'),
-                         Button::make('pdf'),
-                         Button::make('print'),
-                         Button::make('reset'),
-                         Button::make('reload'),
-                         Button::make('nuevo')
-                     ]);
+                    ->buttons([
+                        Button::make('excel'),
+                        Button::make('csv'),
+                        Button::make('pdf'),
+                        Button::make('print'),
+                        Button::make('reset'),
+                        Button::make('reload'),
+                        Button::make('nuevo')
+                    ]);
     }
 
     /**
@@ -82,9 +77,9 @@ class DominiosDataTable extends DataTable
 
             Column::make('id')->width(30)->title('ID'),
             // Column::make('add your columns'),
-            Column::make('dominio')
+            Column::make('tipodc')
                   ->addClass('catEditable')
-                  ->title('DOMINIO'),
+                  ->title('TIPODC'),
             // Column::make('created_at'),
             // Column::make('updated_at'),
             Column::computed('action')
@@ -101,7 +96,6 @@ class DominiosDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Dominios_' . date('YmdHis');
+        return 'Tipodcs_' . date('YmdHis');
     }
-
 }
