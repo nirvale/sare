@@ -14,4 +14,6 @@ class Datacenter extends Model
         'desc_datacenter',
 
     ];
+
+
 }

@@ -49,7 +49,7 @@ class TipodcsDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
-                    ->orderBy(0)
+                    ->orderBy(0,'asc')
                     ->selectStyleSingle()
                     ->parameters([
                         'dom'  => 'Bfrtip',

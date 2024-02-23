@@ -40,7 +40,7 @@ class DatacenterController extends Controller
        $validated=\Validator::make($request->all(), [
             //'empr_nombre' => 'bail|required|',
             'datacenter' => 'bail|required|unique:datacenters|max:50',
-            //'descripción' => 'bail|required|unique:datacenters|max:50',
+            'tipodc' => 'bail|required|unique:tipodcs|max:50',
         ]);
         if ($validated->fails())
         {
@@ -51,10 +51,9 @@ class DatacenterController extends Controller
           try {
          //  $Datacenter = Datacenter::find($request->id);
            $datacenter=Datacenter::create([
-
              'datacenter' => strToUpper($request->datacenter),
              'desc_datacenter' => strToUpper($request->descripción),
-             'cve_tipodc' => 1,
+             'cve_tipodc' => strToUpper($request->tipodc),
            ]);
 
            DB::commit();
@@ -110,6 +109,9 @@ class DatacenterController extends Controller
             break;
             case 'descripción':
               $datacToUpdate = 'desc_datacenter';
+            break;
+            case 'tipodc':
+              $datacToUpdate = 'cve_tipodc';
             break;
             default:
               // code...

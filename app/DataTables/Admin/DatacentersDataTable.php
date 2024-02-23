@@ -28,7 +28,8 @@ class DatacentersDataTable extends DataTable
                 ;
               return $actionBtn;
               })
-            ->setRowId('id');
+            ->setRowId('id')
+            ->orderColumn('desc_datacenter', "DBMS_LOB.SUBSTR(desc_datacenter,20) $1"); //para habilitar ordenar en clobs de oracle
     }
 
     /**
@@ -36,7 +37,12 @@ class DatacentersDataTable extends DataTable
      */
     public function query(Datacenter $model): QueryBuilder
     {
-        return $model->newQuery();
+        // return $model->newQuery()->where('id',1);
+
+      return  $model = Datacenter::select('datacenters.id','datacenters.datacenter','datacenters.desc_datacenter','datacenters.cve_tipodc','tipodcs.tipodc')
+            ->join('tipodcs','tipodcs.id','=','datacenters.cve_tipodc');
+            // ->withCasts(['fecha' => 'date:Y-m-d'])
+            // ->get();
 
     }
 
@@ -50,13 +56,14 @@ class DatacentersDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
-                    ->orderBy(0)
+                    ->orderBy(0,'asc')
                     ->selectStyleSingle()
                     ->parameters([
                         'dom'  => 'Bfrtip',
                         //'buttons'   => ['nuevodatacenter'],
                         'responsive' => true,
                         'language' => [ 'url' => '/sare/vendor/DataTables/lang/Spanish.json', ],
+
                      ])
                     ->buttons([
                         Button::make('excel'),
@@ -83,6 +90,13 @@ class DatacentersDataTable extends DataTable
           Column::make('desc_datacenter')
                 ->addClass('catEditable')
                 ->title('DESCRIPCIÓN'),
+                // ->orderable(false),
+          Column::make('tipodc')
+                ->addClass('catEditable')
+                ->addClass('catCombox')
+                //->searchable(false)
+                ->name('tipodcs.tipodc') //para habilitar la búsqueda en los joins
+                ->title('TIPODC'),
           // Column::make('created_at'),
           // Column::make('updated_at'),
           Column::computed('action')

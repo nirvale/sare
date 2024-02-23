@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\DependenciaController;
 use App\Http\Controllers\Admin\DominioController;
 use App\Http\Controllers\Admin\DatacenterController;
 use App\Http\Controllers\Admin\TipodcController;
+use App\Http\Controllers\CatmanController;
 
 //Route::get('/', [HomeController::class, 'index']);
 //manejo de usuarios
@@ -31,6 +32,10 @@ Route::resource('tipodc', TipodcController::class)->only(['update','store','dest
 Route::get('datacenter', [DatacenterController::class, 'indexdt'])->name('datacenters.indexdt');
 //RUTAS CRUD Datacenters
 Route::resource('datacenter', DatacenterController::class)->only(['update','store','destroy']);
+//ruta para CatmanController
+Route::group(['middleware' => ['role:Administrador|God','permission:ver_catalogos']], function () {
+    Route::post('catman', [CatmanController::class, 'catman'])->name('admin.catman');
+});
 
 //livewire assets
 Livewire::setScriptRoute(function ($handle) {
