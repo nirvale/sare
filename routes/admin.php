@@ -9,6 +9,8 @@ use App\Http\Controllers\Admin\DominioController;
 use App\Http\Controllers\Admin\DatacenterController;
 use App\Http\Controllers\Admin\TipodcController;
 use App\Http\Controllers\CatmanController;
+use App\Http\Controllers\Admin\AmbienteController;
+use App\Http\Controllers\Admin\OsController;
 
 //Route::get('/', [HomeController::class, 'index']);
 //manejo de usuarios
@@ -36,6 +38,17 @@ Route::resource('datacenter', DatacenterController::class)->only(['update','stor
 Route::group(['middleware' => ['role:Administrador|God','permission:ver_catalogos']], function () {
     Route::post('catman', [CatmanController::class, 'catman'])->name('admin.catman');
 });
+//ruta para datatables Ambientes
+Route::get('ambiente', [AmbienteController::class, 'indexdt'])->name('ambientes.indexdt');
+//RUTAS CRUD Ambientes
+Route::resource('ambiente', AmbienteController::class)->only(['update','store','destroy']);
+//ruta para datatables Ambientes
+Route::get('os', [OsController::class, 'indexdt'])->name('oss.indexdt');
+//RUTAS CRUD Ambientes
+Route::resource('os', OsController::class)->only(['store']);
+Route::put('os/{os}', [OsController::class,'update'])->name('os.update');
+Route::delete('os/{os}', [OsController::class,'destroy'])->name('os.destroy');
+
 
 //livewire assets
 Livewire::setScriptRoute(function ($handle) {
