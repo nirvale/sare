@@ -102,8 +102,8 @@ const theads = document.getElementById(IDT.slice(1)).getElementsByTagName("th");
                             );
 
                             for (let i = 0; i < cat[catChild].length; i++) {
-                              console.log(cat[catChild][i][catIndex]);
-                              console.log(cat[catChild][i][catChild]);
+                              //console.log(cat[catChild][i][catIndex]);
+                              //console.log(cat[catChild][i][catChild]);
                               let setSelection='';
                               if (cat[catChild][i][catChild]==estaCeldaTexto) {
                                   setSelection='disabled selected';
@@ -201,7 +201,8 @@ const theads = document.getElementById(IDT.slice(1)).getElementsByTagName("th");
       catActual = document.getElementById('nobjeto');
       let dsplyCatActual= null;
       if($('.comboselecting').text()) {
-        dsplyCatActual = $('.comboselecting').text();
+        dsplyCatActual = $('select[name=nobjeto] option').filter(':selected').text();
+        //alert($('select[name=nobjeto] option').filter(':selected').text())
       }else {
         dsplyCatActual = catActual.value;
       }

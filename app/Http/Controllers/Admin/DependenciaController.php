@@ -13,6 +13,10 @@ use DB;
 
 class DependenciaController extends Controller
 {
+    public function __construct(Request $request)
+    {
+        $this->middleware(['permission:admin|admin']);
+    }
     /**
      * Display a listing of the resource.
      */

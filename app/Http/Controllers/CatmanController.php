@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Admin\Tipodc;
+use App\Models\Admin\Dependencia;
 
 class CatmanController extends Controller
 {
@@ -30,10 +31,25 @@ class CatmanController extends Controller
             }
 
           break;
+        case 'programa':
+        switch ($request->theadcombox[0]) {
+          case 'dependencia':
+              $theadcomboxr='dependencia';
+              $catmanr[$theadcomboxr]=Dependencia::all();
+            //break;
+        // case 'descripción':
+        //       $theadcomboxr='descripción';
+        //       $catmanr[$theadcomboxr]=Tipodc::all();
+        //   //break;
 
-         default:
+          default:
+            // code...
+            break;
+        }
+          //break;
+        default:
            // code...
-           break;
+          break;
        }
        return $catmanr;
    }
