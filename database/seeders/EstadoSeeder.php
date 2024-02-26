@@ -13,7 +13,7 @@ class EstadoSeeder extends Seeder
      */
     public function run(): void
     {
-      $estado = Estado::create (['cve_estado' => '0', 'estado'  => 'INACTIVO']);
-      $estado = Estado::create (['cve_estado' => '1', 'estado'  => 'ACTIVO']);
+      $estado = Estado::create (['id' => '0', 'estado'  => 'INACTIVO']);
+      $estado = Estado::create (['id' => '1', 'estado'  => 'ACTIVO']);
     }
 }

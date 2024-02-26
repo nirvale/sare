@@ -91,7 +91,7 @@ $(document).on("click", "#editarusuario", function(){
             }else {
               var selected= '';
             }
-            $("#selOficina").append("<option value='"+response[2][j].cve_oficina+"' "+selected+ ">"+response[2][j].oficina+"</option>");
+            $("#selOficina").append("<option value='"+response[2][j].id+"' "+selected+ ">"+response[2][j].oficina+"</option>");
           }
         $("#modalc1").append(perfil);
         for (var j = 0; j < response[3].length; j++) {
@@ -109,7 +109,7 @@ $(document).on("click", "#editarusuario", function(){
             }else {
               var selected= '';
             }
-            $("#selEstado").append("<option value='"+response[1][j].cve_estado+"' "+selected+ ">"+response[1][j].estado+"</option>");
+            $("#selEstado").append("<option value='"+response[1][j].id+"' "+selected+ ">"+response[1][j].estado+"</option>");
           }
         $("#modalc1").append(email);
         $("#modalc1").append(pwd);
@@ -248,7 +248,7 @@ $(document).on("click", "#agregarUsuario", function(){
         $("#modalc1").append(oficina);
         for (var j = 0; j < response[1].length; j++) {
 
-            $("#selOficina").append("<option value='"+response[1][j].cve_oficina+"' "+">"+response[1][j].oficina+"</option>");
+            $("#selOficina").append("<option value='"+response[1][j].id+"' "+">"+response[1][j].oficina+"</option>");
           }
         $("#modalc1").append(perfil);
         for (var j = 0; j < response[2].length; j++) {
@@ -258,7 +258,7 @@ $(document).on("click", "#agregarUsuario", function(){
           $("#modalc1").append(estado);
           for (var j = 0; j < response[0].length; j++) {
 
-              $("#selEstado").append("<option value='"+response[0][j].cve_estado+"' "+">"+response[0][j].estado+"</option>");
+              $("#selEstado").append("<option value='"+response[0][j].id+"' "+">"+response[0][j].estado+"</option>");
             }
         $("#modalc1").append(email);
         $("#modalc1").append(pwd);

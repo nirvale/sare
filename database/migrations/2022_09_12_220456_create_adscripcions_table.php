@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('adscripciones', function (Blueprint $table) {
           $table->id();
           $table->integer('cve_usuario')->index()->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-          $table->String('cve_oficina')->references('cve_oficina')->on('oficinas')->onDelete('restrict')->onUpdate('cascade');
-          $table->integer('cve_estado')->references('cve_estado')->on('estados')->onDelete('restrict')->onUpdate('cascade');
+          $table->integer('cve_oficina')->references('id')->on('oficinas')->onDelete('restrict')->onUpdate('cascade');
+          $table->integer('cve_estado')->references('id')->on('estados')->onDelete('restrict')->onUpdate('cascade');
           $table->timestamps();
           $table->foreign('cve_usuario')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-          $table->foreign('cve_oficina')->references('cve_oficina')->on('oficinas')->onUpdate('cascade');
-          $table->foreign('cve_estado')->references('cve_estado')->on('estados')->onUpdate('cascade');
+          $table->foreign('cve_oficina')->references('id')->on('oficinas')->onUpdate('cascade');
+          $table->foreign('cve_estado')->references('id')->on('estados')->onUpdate('cascade');
 
         });
     }

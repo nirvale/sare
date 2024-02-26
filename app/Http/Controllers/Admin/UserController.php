@@ -30,8 +30,8 @@ class UserController extends Controller
     {
       // $listadoUsuarios = DB::table('users')
       //   ->join('adscripciones','adscripciones.cve_usuario','=','users.id')
-      //   ->join('oficinas','oficinas.cve_oficina','=','adscripciones.cve_oficina')
-      //   ->join('estados','estados.cve_estado','=','adscripciones.cve_estado')
+      //   ->join('oficinas','oficinas.id','=','adscripciones.cve_oficina')
+      //   ->join('estados','estados.id','=','adscripciones.cve_estado')
       //   ->join('model_has_roles','model_has_roles.model_id','=','users.id')
       //   ->join('roles','roles.id','=','model_has_roles.role_id')
       // //  ->where('empresas_evaluaciones.empeval_cantidad_espacios','<',-10000)
@@ -40,8 +40,8 @@ class UserController extends Controller
 
       $listadoUsuarios = User::select('users.id','users.name','users.email','estados.estado','oficinas.oficina','roles.name as perfil')
       ->join('adscripciones','adscripciones.cve_usuario','=','users.id')
-      ->join('oficinas','oficinas.cve_oficina','=','adscripciones.cve_oficina')
-      ->join('estados','estados.cve_estado','=','adscripciones.cve_estado')
+      ->join('oficinas','oficinas.id','=','adscripciones.cve_oficina')
+      ->join('estados','estados.id','=','adscripciones.cve_estado')
       ->join('model_has_roles','model_has_roles.model_id','=','users.id')
       ->join('roles','roles.id','=','model_has_roles.role_id')
       ->get();
@@ -93,7 +93,7 @@ class UserController extends Controller
            //'empr_nombre' => 'bail|required|',
            'nombre' => 'bail|required|max:50',
            //'empeval_fotos.*.file' => 'required|mimes:jpeg,jpg,png|max: 20000',
-           'cve_oficina' => 'bail|required|max:1',
+           'cve_oficina' => 'bail|required|max:2',
            'id_perfil' => 'bail|required|max:2',
            'cve_estado' => 'bail|required|max:1',
            'email' => 'bail|required|email:rfc,dns',
@@ -141,16 +141,16 @@ class UserController extends Controller
     {
       $usuario = DB::table('users')
         ->join('adscripciones','adscripciones.cve_usuario','=','users.id')
-        ->join('oficinas','oficinas.cve_oficina','=','adscripciones.cve_oficina')
-        ->join('estados','estados.cve_estado','=','adscripciones.cve_estado')
+        ->join('oficinas','oficinas.id','=','adscripciones.cve_oficina')
+        ->join('estados','estados.id','=','adscripciones.cve_estado')
         ->join('model_has_roles','model_has_roles.model_id','=','users.id')
         ->join('roles','roles.id','=','model_has_roles.role_id')
         ->where('users.id','=',$id)
         ->select('users.id','users.name','users.email','estados.estado','oficinas.oficina','roles.name as perfil')
         ->get();
 
-      $estados = DB::table('estados')->get(['cve_estado','estado']);
-      $oficinas = Db::table('oficinas')->get(['cve_oficina','oficina']);
+      $estados = DB::table('estados')->get(['id','estado']);
+      $oficinas = Db::table('oficinas')->get(['id','oficina']);
       $roles = DB::table('roles')
         ->get(['id','name']);
 

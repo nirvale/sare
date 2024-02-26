@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Estado extends Model
 {
   use HasFactory;
-  protected $primaryKey='cve_estado';
+  protected $primaryKey='id';
   protected $fillable = [
-      'cve_estado',
+      'id',
       'estado',
   ];
 }

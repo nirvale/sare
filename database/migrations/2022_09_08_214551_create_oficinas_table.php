@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('oficinas', function (Blueprint $table) {
-          //$table->id();
-          $table->String('cve_oficina')->primary();
+          $table->id();
+          //$table->String('id')->primary();
           $table->String('oficina');
           $table->timestamps();
         });
