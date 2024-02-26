@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('datacenter');
             $table->integer('cve_tipodc')->references('id')->on('tipodcs')->onDelete('restrict')->onUpdate('cascade');
-            $table->text('desc_datacenter')->nullable();
+            // $table->text('desc_datacenter')->nullable();
+            $table->text('descripcion')->nullable();
             $table->timestamps();
             $table->foreign('cve_tipodc')->references('id')->on('tipodcs')->onUpdate('cascade');
         });

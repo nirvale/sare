@@ -12,9 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('dependencias', function (Blueprint $table) {
-          //$table->id();
-          $table->String('cve_dependencia')->primary();
-          $table->String('nombre');
+          // $table->id();
+          // $table->String('cve_dependencia')->primary();
+          // $table->String('nombre');
+          $table->String('id')->primary();
+          $table->String('dependencia');
           $table->timestamps();
         });
     }

@@ -29,7 +29,7 @@ class DatacentersDataTable extends DataTable
               return $actionBtn;
               })
             ->setRowId('id')
-            ->orderColumn('desc_datacenter', "DBMS_LOB.SUBSTR(desc_datacenter,20) $1"); //para habilitar ordenar en clobs de oracle
+            ->orderColumn('descripcion', "DBMS_LOB.SUBSTR(descripcion,20) $1"); //para habilitar ordenar en clobs de oracle
     }
 
     /**
@@ -39,7 +39,7 @@ class DatacentersDataTable extends DataTable
     {
         // return $model->newQuery()->where('id',1);
 
-      return  $model = Datacenter::select('datacenters.id','datacenters.datacenter','datacenters.desc_datacenter','datacenters.cve_tipodc','tipodcs.tipodc')
+      return  $model = Datacenter::select('datacenters.id','datacenters.datacenter','datacenters.descripcion','datacenters.cve_tipodc','tipodcs.tipodc')
             ->join('tipodcs','tipodcs.id','=','datacenters.cve_tipodc');
             // ->withCasts(['fecha' => 'date:Y-m-d'])
             // ->get();
@@ -87,7 +87,7 @@ class DatacentersDataTable extends DataTable
           Column::make('datacenter')
                 ->addClass('catEditable')
                 ->title('DATACENTER'),
-          Column::make('desc_datacenter')
+          Column::make('descripcion')
                 ->addClass('catEditable')
                 ->title('DESCRIPCIÓN'),
                 // ->orderable(false),

@@ -52,7 +52,7 @@ class DatacenterController extends Controller
          //  $Datacenter = Datacenter::find($request->id);
            $datacenter=Datacenter::create([
              'datacenter' => strToUpper($request->datacenter),
-             'desc_datacenter' => strToUpper($request->descripción),
+             'descripcion' => strToUpper($request->descripción),
              'cve_tipodc' => strToUpper($request->tipodc),
            ]);
 
@@ -108,7 +108,7 @@ class DatacenterController extends Controller
               $datacToUpdate = 'datacenter';
             break;
             case 'descripción':
-              $datacToUpdate = 'desc_datacenter';
+              $datacToUpdate = 'descripcion';
             break;
             case 'tipodc':
               $datacToUpdate = 'cve_tipodc';

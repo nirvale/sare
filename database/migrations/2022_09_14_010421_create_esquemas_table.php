@@ -16,8 +16,8 @@ return new class extends Migration
           $table->string('esquema');
           $table->integer('cve_usuario')->references('id')->on('users')->onDelete('restrict')->onUpdate('cascade');
           $table->integer('cve_base')->references('id')->on('bases')->onDelete('restric')->onUpdate('cascade');
-          $table->string('cve_dependencia')->references('cve_dependencia')->on('dependencias')->onDelete('restrict')->onUpdate('cascade');
-          $table->string('cve_programa')->references('cve_programa')->on('programas')->onDelete('restrict')->onUpdate('cascade');
+          $table->string('cve_dependencia')->references('id')->on('dependencias')->onDelete('restrict')->onUpdate('cascade');
+          $table->string('cve_programa')->references('id')->on('programas')->onDelete('restrict')->onUpdate('cascade');
           $table->integer('cve_backup')->references('id')->on('backups')->onDelete('restrict')->onUpdate('cascade');
           $table->integer('cve_tipo')->references('id')->on('tipos')->onDelete('restrict')->onUpdate('cascade');
           $table->integer('cve_estadoesquema')->references('id')->on('estadoesquemas')->onDelete('restrict')->onUpdate('cascade');
@@ -26,8 +26,8 @@ return new class extends Migration
           $table->timestamps();
           $table->foreign('cve_usuario')->references('id')->on('users')->onUpdate('cascade');
           $table->foreign('cve_base')->references('id')->on('bases')->onUpdate('cascade');
-          $table->foreign('cve_dependencia')->references('cve_dependencia')->on('dependencias')->onUpdate('cascade');
-          $table->foreign('cve_programa')->references('cve_programa')->on('programas')->onUpdate('cascade');
+          $table->foreign('cve_dependencia')->references('id')->on('dependencias')->onUpdate('cascade');
+          $table->foreign('cve_programa')->references('id')->on('programas')->onUpdate('cascade');
           $table->foreign('cve_backup')->references('id')->on('backups')->onUpdate('cascade');
           $table->foreign('cve_tipo')->references('id')->on('tipos')->onUpdate('cascade');
           $table->foreign('cve_estadoesquema')->references('id')->on('estadoesquemas')->onUpdate('cascade');

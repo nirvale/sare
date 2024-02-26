@@ -4,13 +4,15 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\ProgramaController;
-use App\Http\Controllers\Admin\DependenciaController;
+//use App\Http\Controllers\Admin\DependenciaController;
 use App\Http\Controllers\Admin\DominioController;
 use App\Http\Controllers\Admin\DatacenterController;
 use App\Http\Controllers\Admin\TipodcController;
 use App\Http\Controllers\CatmanController;
 use App\Http\Controllers\Admin\AmbienteController;
 use App\Http\Controllers\Admin\OsController;
+use App\Http\Controllers\Admin\DependenciaController;
+
 
 //Route::get('/', [HomeController::class, 'index']);
 //manejo de usuarios
@@ -42,12 +44,18 @@ Route::group(['middleware' => ['role:Administrador|God','permission:ver_catalogo
 Route::get('ambiente', [AmbienteController::class, 'indexdt'])->name('ambientes.indexdt');
 //RUTAS CRUD Ambientes
 Route::resource('ambiente', AmbienteController::class)->only(['update','store','destroy']);
-//ruta para datatables Ambientes
+//ruta para datatables sistemas Operativos
 Route::get('os', [OsController::class, 'indexdt'])->name('oss.indexdt');
-//RUTAS CRUD Ambientes
+//RUTAS CRUD Sistemas Operativos
 Route::resource('os', OsController::class)->only(['store']);
 Route::put('os/{os}', [OsController::class,'update'])->name('os.update');
 Route::delete('os/{os}', [OsController::class,'destroy'])->name('os.destroy');
+//ruta para datatables Dependencias
+Route::get('dependencia', [DependenciaController::class, 'indexdt'])->name('dependencias.indexdt');
+//RUTAS CRUD Dependencias
+Route::resource('dependencia', DependenciaController::class)->only(['store']);
+Route::put('dependencia/{dependencia}', [DependenciaController::class,'update'])->name('dependencia.update');
+Route::delete('dependencia/{dependencia}', [DependenciaController::class,'destroy'])->name('dependencia.destroy');
 
 
 //livewire assets

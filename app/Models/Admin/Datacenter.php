@@ -11,7 +11,7 @@ class Datacenter extends Model
     protected $fillable = [
         'datacenter',
         'cve_tipodc',
-        'desc_datacenter',
+        'descripcion',
 
     ];
 

@@ -2,7 +2,7 @@
 
 namespace App\DataTables\Admin;
 
-use App\Models\Dependencia;
+use App\Models\Admin\Dependencia;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -21,9 +21,18 @@ class DependenciasDataTable extends DataTable
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
-        return (new EloquentDataTable($query))
-            ->addColumn('action', 'dependencias.action')
-            ->setRowId('id');
+      return (new EloquentDataTable($query))
+          ->addColumn('action',function(Dependencia $dependencia){
+              $actionBtn = '
+                            <a href="'.route('dependencia.destroy', $dependencia).'" id="eliminardependencia" class="text-danger"><i class="fas fa-times-circle"></i></a> '
+              ;
+            return $actionBtn;
+            })
+          ->setRowId('id')
+          // ->editColumn('action', function (Dependencia $dependencia) {
+          //     return '<a href="'.route('usuario.show', $dependencia).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
+          // })
+          ;
     }
 
     /**
@@ -39,21 +48,28 @@ class DependenciasDataTable extends DataTable
      */
     public function html(): HtmlBuilder
     {
-        return $this->builder()
-                    ->setTableId('dependencias-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    //->dom('Bfrtip')
-                    ->orderBy(1)
-                    ->selectStyleSingle()
-                    ->buttons([
-                        Button::make('excel'),
-                        Button::make('csv'),
-                        Button::make('pdf'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
-                    ]);
+      return $this->builder()
+                  ->setTableId('catDependencias')
+                  ->columns($this->getColumns())
+                  ->minifiedAjax()
+                  //->dom('Bfrtip')
+                  ->orderBy(0,'asc')
+                  ->selectStyleSingle()
+                  ->parameters([
+                      'dom'  => 'Bfrtip',
+                      //'buttons'   => ['nuevo'],
+                      'responsive' => true,
+                      'language' => [ 'url' => '/sare/vendor/DataTables/lang/Spanish.json', ],
+                   ])
+                   ->buttons([
+                       Button::make('excel'),
+                       Button::make('csv'),
+                       Button::make('pdf'),
+                       Button::make('print'),
+                       Button::make('reset'),
+                       Button::make('reload'),
+                       Button::make('nuevo')
+                   ]);
     }
 
     /**
@@ -61,17 +77,22 @@ class DependenciasDataTable extends DataTable
      */
     public function getColumns(): array
     {
-        return [
-            Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
-            Column::make('id'),
-            Column::make('add your columns'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
-        ];
+      return [
+
+          Column::make('id')->width(30)->title('ID')->addClass('catEditable'),
+          // Column::make('add your columns'),
+          Column::make('dependencia')
+                ->addClass('catEditable')
+                ->title('DEPENDENCIA'),
+          // Column::make('created_at'),
+          // Column::make('updated_at'),
+          Column::computed('action')
+                ->exportable(false)
+                ->printable(false)
+                ->width(60)
+                ->addClass('text-center')
+                ->title('ACCIÓN'),
+      ];
     }
 
     /**

@@ -13,6 +13,7 @@ let clicken; //bandera de cambio en input [0=fuera, 1=dentro]
 let mainid; //clave del registro a actualizar
 let workid; // clave de registro donde se hace click
 let cat; //catalogos
+let edId=1; //bandera para editar id
 const IDT='#'+$('table.dataTable').attr('id'); // ID DE LA TABLA GENERAL
 const modelos= IDT.toLowerCase().slice(4);
 const modelo = modelos.slice(0,-1);
@@ -29,11 +30,19 @@ const theads = document.getElementById(IDT.slice(1)).getElementsByTagName("th");
     thead = undefined;
     clicken = undefined; //bandera de cambio en input [0=fuera, 1=dentro]
     mainid = undefined;
+    edId = 1;
   //console.log('variables limpiadas');
   };
   $(IDT).on('click','td', function(){
     //let fila = $(this).closest('tr');
     workid = $(this).closest('tr').find('td:eq(0)').text().trim();
+        if (!workid) {
+          //alert('no existe workid');
+          //console.log($(this).closest('tr').find('td:eq(0)'));
+          //let preworkid =$(this).closest('tr').find('td:eq(0)');
+          workid=$(this).closest('tr').find('td:eq(0)')[0].firstChild.value;
+          //console.log(preworkid[0]);
+        }
     let ncol = $(this).index();
     //thead = $("thead th:eq(" + $(this).index() + ")").text().trim();
     // closest(selector) busca el elemento con el selector indicado más cercano a $(this)
@@ -297,8 +306,10 @@ const theads = document.getElementById(IDT.slice(1)).getElementsByTagName("th");
         $('#modalc1').empty();
         $('#modalc2').empty();
         $('#footermodal').empty();
-
-        for (let i = 1; i < theads.length-1; i++) {
+        if (theads[0].classList.contains('catEditable')) {
+          edId=0;
+        }
+        for (let i = edId; i < theads.length-1; i++) {
           //console.log('index :'+i+', nombre del head:'+theads[i].innerText);
           if ($('th.catCombox').length > 0) {
             let thcombox =$('th.catCombox');
