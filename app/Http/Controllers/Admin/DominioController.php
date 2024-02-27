@@ -14,7 +14,7 @@ class DominioController extends Controller
 {
     public function __construct(Request $request)
       {
-          $this->middleware(['permission:admin|admin']);
+          $this->middleware(['permission:admin|adming']);
       }
 
       /**
