@@ -24,6 +24,7 @@ use App\Http\Controllers\Admin\TecremotadiscoController;
 use App\Http\Controllers\Admin\TdiscoController;
 use App\Http\Controllers\Admin\DistribucionController;
 use App\Http\Controllers\Admin\AprocesadorController;
+use App\Http\Controllers\Admin\MhardwareController;
 
 //Route::get('/', [HomeController::class, 'index']);
 //manejo de usuarios
@@ -117,6 +118,10 @@ Route::resource('distribucion', DistribucionController::class)->only(['update','
 Route::get('aprocesador', [AprocesadorController::class, 'indexdt'])->name('aprocesadors.indexdt');
 //RUTAS CRUD Aprocesadors
 Route::resource('aprocesador', AprocesadorController::class)->only(['update','store','destroy']);
+//ruta para datatables Mhardwares
+Route::get('mhardware', [MhardwareController::class, 'indexdt'])->name('mhardwares.indexdt');
+//RUTAS CRUD Mhardwares
+Route::resource('mhardware', MhardwareController::class)->only(['update','store','destroy']);
 
 //livewire assets
 Livewire::setScriptRoute(function ($handle) {
