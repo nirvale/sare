@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\EstadoController;
 use App\Http\Controllers\Admin\BackupController;
 use App\Http\Controllers\Admin\EstadoesquemaController;
 use App\Http\Controllers\Admin\TipoController;
+use App\Http\Controllers\Admin\RdbmsController;
 
 
 //Route::get('/', [HomeController::class, 'index']);
@@ -91,6 +92,12 @@ Route::resource('estadoesquema', EstadoesquemaController::class)->only(['update'
 Route::get('tipo', [TipoController::class, 'indexdt'])->name('tipos.indexdt');
 //RUTAS CRUD Tipos
 Route::resource('tipo', TipoController::class)->only(['update','store','destroy']);
+//ruta para datatables Rdbmss
+Route::get('rdbms', [RdbmsController::class, 'indexdt'])->name('rdbmss.indexdt');
+//RUTAS CRUD Rdbmss
+Route::resource('rdbms', RdbmsController::class)->only(['store']);
+Route::put('rdbms/{rdbms}', [RdbmsController::class,'update'])->name('rdbms.update');
+Route::delete('rdbms/{rdbms}', [RdbmsController::class,'destroy'])->name('rdbms.destroy');
 
 //livewire assets
 Livewire::setScriptRoute(function ($handle) {
