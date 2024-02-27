@@ -20,7 +20,7 @@ use App\Http\Controllers\Admin\BackupController;
 use App\Http\Controllers\Admin\EstadoesquemaController;
 use App\Http\Controllers\Admin\TipoController;
 use App\Http\Controllers\Admin\RdbmsController;
-
+use App\Http\Controllers\Admin\TecremotadiscoController;
 
 //Route::get('/', [HomeController::class, 'index']);
 //manejo de usuarios
@@ -98,6 +98,10 @@ Route::get('rdbms', [RdbmsController::class, 'indexdt'])->name('rdbmss.indexdt')
 Route::resource('rdbms', RdbmsController::class)->only(['store']);
 Route::put('rdbms/{rdbms}', [RdbmsController::class,'update'])->name('rdbms.update');
 Route::delete('rdbms/{rdbms}', [RdbmsController::class,'destroy'])->name('rdbms.destroy');
+//ruta para datatables Tecremotadiscos
+Route::get('tecremotadisco', [TecremotadiscoController::class, 'indexdt'])->name('tecremotadiscos.indexdt');
+//RUTAS CRUD Tecremotadiscos
+Route::resource('tecremotadisco', TecremotadiscoController::class)->only(['update','store','destroy']);
 
 //livewire assets
 Livewire::setScriptRoute(function ($handle) {

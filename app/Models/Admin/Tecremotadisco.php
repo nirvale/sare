@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Tecremotadisco extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'tecremotadisco',
+    ];
 }
