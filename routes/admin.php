@@ -26,6 +26,7 @@ use App\Http\Controllers\Admin\DistribucionController;
 use App\Http\Controllers\Admin\AprocesadorController;
 use App\Http\Controllers\Admin\MhardwareController;
 use App\Http\Controllers\Admin\VirtualizadorController;
+use App\Http\Controllers\Admin\MprocesadorController;
 
 //Route::get('/', [HomeController::class, 'index']);
 //manejo de usuarios
@@ -127,6 +128,10 @@ Route::resource('mhardware', MhardwareController::class)->only(['update','store'
 Route::get('virtualizador', [VirtualizadorController::class, 'indexdt'])->name('virtualizadors.indexdt');
 //RUTAS CRUD Virtualizadors
 Route::resource('virtualizador', VirtualizadorController::class)->only(['update','store','destroy']);
+//ruta para datatables Mprocesadors
+Route::get('mprocesador', [MprocesadorController::class, 'indexdt'])->name('mprocesadors.indexdt');
+//RUTAS CRUD Mprocesadors
+Route::resource('mprocesador', MprocesadorController::class)->only(['update','store','destroy']);
 
 //livewire assets
 Livewire::setScriptRoute(function ($handle) {

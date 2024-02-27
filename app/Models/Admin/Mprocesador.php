@@ -9,4 +9,7 @@ class Mprocesador extends Model
 {
   use HasFactory;
   protected $table = 'mprocesadores';
+  protected $fillable = [
+      'mprocesador',
+  ];
 }
