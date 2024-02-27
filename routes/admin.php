@@ -23,6 +23,8 @@ use App\Http\Controllers\Admin\RdbmsController;
 use App\Http\Controllers\Admin\TecremotadiscoController;
 use App\Http\Controllers\Admin\TdiscoController;
 use App\Http\Controllers\Admin\DistribucionController;
+use App\Http\Controllers\Admin\AprocesadorController;
+
 //Route::get('/', [HomeController::class, 'index']);
 //manejo de usuarios
 Route::resource('usuario', UserController::class)->except(['edit']);
@@ -111,6 +113,10 @@ Route::resource('tdisco', TdiscoController::class)->only(['update','store','dest
 Route::get('distribucion', [DistribucionController::class, 'indexdt'])->name('distribucions.indexdt');
 //RUTAS CRUD Distribucions
 Route::resource('distribucion', DistribucionController::class)->only(['update','store','destroy']);
+//ruta para datatables Aprocesadors
+Route::get('aprocesador', [AprocesadorController::class, 'indexdt'])->name('aprocesadors.indexdt');
+//RUTAS CRUD Aprocesadors
+Route::resource('aprocesador', AprocesadorController::class)->only(['update','store','destroy']);
 
 //livewire assets
 Livewire::setScriptRoute(function ($handle) {

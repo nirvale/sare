@@ -9,6 +9,9 @@ class Aprocesador extends Model
 {
     use HasFactory;
     protected $table = 'aprocesadores';
+    protected $fillable = [
+        'aprocesador',
+    ];
     public function servidores(): BelongsTo
     {
         return $this->belongsToMany(Servidor::class);
