@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Admin\Tipodc;
 use App\Models\Admin\Dependencia;
+use App\Models\Admin\Os;
 
 class CatmanController extends Controller
 {
@@ -30,23 +31,39 @@ class CatmanController extends Controller
                 break;
             }
 
-          break;
+        break;
         case 'programa':
-        switch ($request->theadcombox[0]) {
-          case 'dependencia':
-              $theadcomboxr='dependencia';
-              $catmanr[$theadcomboxr]=Dependencia::all();
-            //break;
-        // case 'descripción':
-        //       $theadcomboxr='descripción';
-        //       $catmanr[$theadcomboxr]=Tipodc::all();
-        //   //break;
+          switch ($request->theadcombox[0]) {
+            case 'dependencia':
+                $theadcomboxr='dependencia';
+                $catmanr[$theadcomboxr]=Dependencia::all();
+              //break;
+          // case 'descripción':
+          //       $theadcomboxr='descripción';
+          //       $catmanr[$theadcomboxr]=Tipodc::all();
+          //   //break;
 
-          default:
-            // code...
-            break;
-        }
-          //break;
+            default:
+              // code...
+              break;
+          }
+        break;
+        case 'distribucion':
+          switch ($request->theadcombox[0]) {
+            case 'sistema operativo':
+                $theadcomboxr='sistema operativo';
+                $catmanr[$theadcomboxr]=Os::select('id','os as sistema operativo')->get();
+              //break;
+          // case 'descripción':
+          //       $theadcomboxr='descripción';
+          //       $catmanr[$theadcomboxr]=Tipodc::all();
+          //   //break;
+
+            default:
+              // code...
+              break;
+          }
+        break;
         default:
            // code...
           break;

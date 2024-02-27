@@ -14,6 +14,8 @@ let mainid; //clave del registro a actualizar
 let workid; // clave de registro donde se hace click
 let cat; //catalogos
 let edId=1; //bandera para editar id
+const removerAcentos = str =>
+  str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 const IDT='#'+$('table.dataTable').attr('id'); // ID DE LA TABLA GENERAL
 const modelos= IDT.toLowerCase().slice(4);
 const modelo = modelos.slice(0,-1);
@@ -317,14 +319,14 @@ const theads = document.getElementById(IDT.slice(1)).getElementsByTagName("th");
             for (let j = 0; j < thcombox.length; j++) {
 
               if (thcombox[j].innerText != theads[i].innerText ) {
-                let catNuevo =  "<div class='form-group col-md-12 ml-auto'><label data-error='error' data-success='ok' for='cmb_nombre'>NUEVO(A) "+theads[i].innerText+":</label> <input value='' name='"+theads[i].innerText.toLowerCase()+"' type='text' id='"+modelo+"' class='form-control validate' placeholder='Nombre del nuevo objeto...'></div> ";
+                let catNuevo =  "<div class='form-group col-md-12 ml-auto'><label data-error='error' data-success='ok' for='cmb_nombre'>NUEVO(A) "+theads[i].innerText+":</label> <input value='' name='"+removerAcentos(theads[i].innerText.toLowerCase())+"' type='text' id='"+modelo+"' class='form-control validate' placeholder='Nombre del nuevo objeto...'></div> ";
                 $("#modalc1").append(catNuevo);
               }else if (thcombox[j].innerText == theads[i].innerText) {
 
                 let catChild= thcombox[j].innerText.toLowerCase();
                 let catIndex=theads[0].title.toLowerCase();
                 $("#modalc1").append(
-                  "<div class='form-group col-md-12 ml-auto'><label data-error='error' data-success='ok' for='cmb_nombre'>NUEVO(A) "+theads[i].innerText+":</label><select class='form-control select2 cambiarCatComboEditable' id='"+theads[i].innerText.toLowerCase()+"' name='"+theads[i].innerText.toLowerCase()+"'></select></div>"
+                  "<div class='form-group col-md-12 ml-auto'><label data-error='error' data-success='ok' for='cmb_nombre'>NUEVO(A) "+theads[i].innerText+":</label><select class='form-control select2 cambiarCatComboEditable' id='"+theads[i].innerText.toLowerCase()+"' name='"+removerAcentos(theads[i].innerText.toLowerCase())+"'></select></div>"
                 );
 
                 for (let i = 0; i < cat[catChild].length; i++) {
@@ -342,7 +344,7 @@ const theads = document.getElementById(IDT.slice(1)).getElementsByTagName("th");
 
 
           }else {
-            let catNuevo =  "<div class='form-group col-md-12 ml-auto'><label data-error='error' data-success='ok' for='cmb_nombre'>NUEVO(A) "+theads[i].innerText+":</label> <input value='' name='"+theads[i].innerText.toLowerCase()+"' type='text' id='"+modelo+"' class='form-control validate' placeholder='Nombre del nuevo objeto...'></div> ";
+            let catNuevo =  "<div class='form-group col-md-12 ml-auto'><label data-error='error' data-success='ok' for='cmb_nombre'>NUEVO(A) "+theads[i].innerText+":</label> <input value='' name='"+removerAcentos(theads[i].innerText.toLowerCase())+"' type='text' id='"+modelo+"' class='form-control validate' placeholder='Nombre del nuevo objeto...'></div> ";
             $("#modalc1").append(catNuevo);
           }
 
@@ -364,6 +366,7 @@ const theads = document.getElementById(IDT.slice(1)).getElementsByTagName("th");
 
     //console.log('voy a guardar nuevo objeto');
     data = new FormData(document.getElementById("form-"+modelos));
+    //console.log(data);
     alertify.confirm('GUARDAR NOMBRE DE '+modelo.toUpperCase()+' ','Crear: '+data.get(modelo), function(){
   //  data.append('_method', 'PUT')//inyectamos el metodo  en request para serializar NO SE NECESITA EN ESTE MODULO
       //data['_method'] = 'PUT';
