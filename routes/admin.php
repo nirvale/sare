@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\OficinaController;
 use App\Http\Controllers\Admin\EstadoController;
 use App\Http\Controllers\Admin\BackupController;
 use App\Http\Controllers\Admin\EstadoesquemaController;
+use App\Http\Controllers\Admin\TipoController;
 
 
 //Route::get('/', [HomeController::class, 'index']);
@@ -86,6 +87,10 @@ Route::resource('backup', BackupController::class)->only(['update','store','dest
 Route::get('estadoesquema', [EstadoesquemaController::class, 'indexdt'])->name('estadoesquemas.indexdt');
 //RUTAS CRUD Estadoesquemas
 Route::resource('estadoesquema', EstadoesquemaController::class)->only(['update','store','destroy']);
+//ruta para datatables Tipos
+Route::get('tipo', [TipoController::class, 'indexdt'])->name('tipos.indexdt');
+//RUTAS CRUD Tipos
+Route::resource('tipo', TipoController::class)->only(['update','store','destroy']);
 
 //livewire assets
 Livewire::setScriptRoute(function ($handle) {
