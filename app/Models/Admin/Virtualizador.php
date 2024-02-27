@@ -9,4 +9,7 @@ class Virtualizador extends Model
 {
   use HasFactory;
   protected $table = 'virtualizadores';
+  protected $fillable = [
+      'virtualizador',
+  ];
 }
