@@ -11,6 +11,6 @@ class Backup extends Model
 
   protected $fillable = [
       'backup',
-      'desc_backup',
+      'descripcion',
   ];
 }
