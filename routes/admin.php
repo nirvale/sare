@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\DependenciaController;
 use App\Http\Controllers\Admin\TnicController;
 use App\Http\Controllers\Admin\ProgramaController;
 use App\Http\Controllers\Admin\OficinaController;
+use App\Http\Controllers\Admin\EstadoController;
 
 
 //Route::get('/', [HomeController::class, 'index']);
@@ -71,6 +72,10 @@ Route::resource('programa', ProgramaController::class)->only(['update','store','
 Route::get('oficina', [OficinaController::class, 'indexdt'])->name('oficinas.indexdt');
 //RUTAS CRUD Oficinas
 Route::resource('oficina', OficinaController::class)->only(['update','store','destroy']);
+//ruta para datatables Estados
+Route::get('estado', [EstadoController::class, 'indexdt'])->name('estados.indexdt');
+//RUTAS CRUD Estados
+Route::resource('estado', EstadoController::class)->only(['update','store','destroy']);
 
 
 //livewire assets

@@ -80,7 +80,7 @@ class DominiosDataTable extends DataTable
     {
         return [
 
-            Column::make('id')->width(30)->title('ID')->addClass('catEditable'),
+            Column::make('id')->width(30)->title('ID'),
             // Column::make('add your columns'),
             Column::make('dominio')
                   ->addClass('catEditable')
