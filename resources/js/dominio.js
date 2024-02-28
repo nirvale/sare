@@ -92,7 +92,7 @@ const theads = document.getElementById(IDT.slice(1)).getElementsByTagName("th");
                           if (claseclick.includes('catCombox')) {
                             //alert('debo traer un combo');
                             //catman();
-                            let catChild=thead.toLowerCase();
+                            let catChild=removerAcentos(thead.toLowerCase());
                             let catIndex=theads[0].title.toLowerCase();
                             // console.log(cat[catChild].length);
                             // console.log(cat[catChild][0][catIndex]);
@@ -319,14 +319,14 @@ const theads = document.getElementById(IDT.slice(1)).getElementsByTagName("th");
             for (let j = 0; j < thcombox.length; j++) {
 
               if (thcombox[j].innerText != theads[i].innerText ) {
-                let catNuevo =  "<div class='form-group col-md-12 ml-auto'><label data-error='error' data-success='ok' for='cmb_nombre'>NUEVO(A) "+theads[i].innerText+":</label> <input value='' name='"+removerAcentos(theads[i].innerText.toLowerCase())+"' type='text' id='"+modelo+"' class='form-control validate' placeholder='Nombre del nuevo objeto...'></div> ";
+                let catNuevo =  "<div class='form-group col-md-12 ml-auto'><label data-error='error' data-success='ok' for='cmb_nombre'>NUEVO(A) "+theads[i].innerText+":</label> <input value='' name='"+removerAcentos(theads[i].innerText.toLowerCase())+"' type='text' id='"+removerAcentos(theads[i].innerText.toLowerCase())+"' class='form-control validate' placeholder='Nombre del nuevo objeto...'></div> ";
                 $("#modalc1").append(catNuevo);
               }else if (thcombox[j].innerText == theads[i].innerText) {
 
-                let catChild= thcombox[j].innerText.toLowerCase();
+                let catChild= removerAcentos(thcombox[j].innerText.toLowerCase());
                 let catIndex=theads[0].title.toLowerCase();
                 $("#modalc1").append(
-                  "<div class='form-group col-md-12 ml-auto'><label data-error='error' data-success='ok' for='cmb_nombre'>NUEVO(A) "+theads[i].innerText+":</label><select class='form-control select2 cambiarCatComboEditable' id='"+theads[i].innerText.toLowerCase()+"' name='"+removerAcentos(theads[i].innerText.toLowerCase())+"'></select></div>"
+                  "<div class='form-group col-md-12 ml-auto'><label data-error='error' data-success='ok' for='cmb_nombre'>NUEVO(A) "+theads[i].innerText+":</label><select class='form-control select2 cambiarCatComboEditable' id='"+removerAcentos(theads[i].innerText.toLowerCase())+"' name='"+removerAcentos(theads[i].innerText.toLowerCase())+"'></select></div>"
                 );
 
                 for (let i = 0; i < cat[catChild].length; i++) {
@@ -366,7 +366,12 @@ const theads = document.getElementById(IDT.slice(1)).getElementsByTagName("th");
 
     //console.log('voy a guardar nuevo objeto');
     data = new FormData(document.getElementById("form-"+modelos));
-    //console.log(data);
+    //console.log(data)
+
+    if (data.get(modelo)==null) {
+      data.append(modelo, data.get(removerAcentos(theads[1].innerText.toLowerCase())));
+    }
+    //
     alertify.confirm('GUARDAR NOMBRE DE '+modelo.toUpperCase()+' ','Crear: '+data.get(modelo), function(){
   //  data.append('_method', 'PUT')//inyectamos el metodo  en request para serializar NO SE NECESITA EN ESTE MODULO
       //data['_method'] = 'PUT';

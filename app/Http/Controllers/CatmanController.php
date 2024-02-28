@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Admin\Tipodc;
 use App\Models\Admin\Dependencia;
 use App\Models\Admin\Os;
+use App\Models\Admin\Distribucion;
 
 class CatmanController extends Controller
 {
@@ -53,6 +54,22 @@ class CatmanController extends Controller
             case 'sistema operativo':
                 $theadcomboxr='sistema operativo';
                 $catmanr[$theadcomboxr]=Os::select('id','os as sistema operativo')->get();
+              //break;
+          // case 'descripción':
+          //       $theadcomboxr='descripción';
+          //       $catmanr[$theadcomboxr]=Tipodc::all();
+          //   //break;
+
+            default:
+              // code...
+              break;
+          }
+        break;
+        case 'osversion':
+          switch ($request->theadcombox[0]) {
+            case 'distribución':
+                $theadcomboxr='distribucion';
+                $catmanr[$theadcomboxr]=Distribucion::select('id','distribucion')->get();
               //break;
           // case 'descripción':
           //       $theadcomboxr='descripción';

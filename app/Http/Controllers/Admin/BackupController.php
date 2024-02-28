@@ -52,7 +52,7 @@ class BackupController extends Controller
          //  $Backup = Backup::find($request->id);
            $backup=Backup::create([
              'backup' => strToUpper($request->backup),
-             'descripcion' => strToUpper($request->descripción),
+             'descripcion' => strToUpper($request->descripcion),
 
            ]);
 

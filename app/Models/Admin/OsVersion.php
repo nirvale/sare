@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class OsVersion extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'osversion',
+        'cve_distribucion',
+    ];
 }
