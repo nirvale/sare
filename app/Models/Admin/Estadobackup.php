@@ -9,7 +9,7 @@ class Estadobackup extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'id',
+        //'id',
         'estadobackup',
     ];
 }

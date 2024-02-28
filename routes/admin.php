@@ -29,6 +29,7 @@ use App\Http\Controllers\Admin\VirtualizadorController;
 use App\Http\Controllers\Admin\MprocesadorController;
 use App\Http\Controllers\Admin\OsVersionController;
 use App\Http\Controllers\Admin\RdbmsVersionController;
+use App\Http\Controllers\Admin\EstadobackupController;
 
 //Route::get('/', [HomeController::class, 'index']);
 //manejo de usuarios
@@ -142,6 +143,10 @@ Route::resource('osversion', OsVersionController::class)->only(['update','store'
 Route::get('rdbmsversion', [RdbmsVersionController::class, 'indexdt'])->name('rdbmsversions.indexdt');
 //RUTAS CRUD RdbmsVersions
 Route::resource('rdbmsversion', RdbmsVersionController::class)->only(['update','store','destroy']);
+//ruta para datatables Estadobackups
+Route::get('estadobackup', [EstadobackupController::class, 'indexdt'])->name('estadobackups.indexdt');
+//RUTAS CRUD Estadobackups
+Route::resource('estadobackup', EstadobackupController::class)->only(['update','store','destroy']);
 
 
 //livewire assets

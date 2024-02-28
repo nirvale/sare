@@ -344,7 +344,7 @@ const theads = document.getElementById(IDT.slice(1)).getElementsByTagName("th");
 
 
           }else {
-            let catNuevo =  "<div class='form-group col-md-12 ml-auto'><label data-error='error' data-success='ok' for='cmb_nombre'>NUEVO(A) "+theads[i].innerText+":</label> <input value='' name='"+removerAcentos(theads[i].innerText.toLowerCase())+"' type='text' id='"+modelo+"' class='form-control validate' placeholder='Nombre del nuevo objeto...'></div> ";
+            let catNuevo =  "<div class='form-group col-md-12 ml-auto'><label data-error='error' data-success='ok' for='cmb_nombre'>NUEVO(A) "+theads[i].innerText+":</label> <input value='' name='"+removerAcentos(theads[i].innerText.toLowerCase())+"' type='text' id='"+removerAcentos(theads[i].innerText.toLowerCase())+"' class='form-control validate' placeholder='Nombre del nuevo objeto...'></div> ";
             $("#modalc1").append(catNuevo);
           }
 
