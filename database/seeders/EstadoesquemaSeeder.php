@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Dbam\Estadoesquema;
+use App\Models\Admin\Estadoesquema;
 
 class EstadoesquemaSeeder extends Seeder
 {

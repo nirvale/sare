@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Estadobackup extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'id',
+        'estadobackup',
+    ];
 }

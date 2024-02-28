@@ -13,7 +13,7 @@ return new class extends Migration
     {
       Schema::create('estadobackups', function (Blueprint $table) {
           $table->id();
-          $table->string('estado_backup');
+          $table->string('estadobackup');
           $table->timestamps();
       });
     }

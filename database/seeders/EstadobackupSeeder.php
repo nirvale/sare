@@ -15,8 +15,8 @@ class EstadobackupSeeder extends Seeder
      */
     public function run()
     {
-          $eb = Estadobackup::create(['estado_backup' => 'DISPONIBLE']);
-          $eb = Estadobackup::create(['estado_backup' => 'PENDIENTE']);
-          $eb = Estadobackup::create(['estado_backup' => 'OBSOLETO']);
+          $eb = Estadobackup::create(['estadobackup' => 'DISPONIBLE']);
+          $eb = Estadobackup::create(['estadobackup' => 'PENDIENTE']);
+          $eb = Estadobackup::create(['estadobackup' => 'OBSOLETO']);
     }
 }
