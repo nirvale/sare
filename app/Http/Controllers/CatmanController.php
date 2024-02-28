@@ -7,6 +7,7 @@ use App\Models\Admin\Tipodc;
 use App\Models\Admin\Dependencia;
 use App\Models\Admin\Os;
 use App\Models\Admin\Distribucion;
+use App\Models\Admin\Rdbms;
 
 class CatmanController extends Controller
 {
@@ -80,6 +81,21 @@ class CatmanController extends Controller
               // code...
               break;
           }
+          case 'rdbmsversion':
+            switch ($request->theadcombox[0]) {
+              case 'manejador':
+                  $theadcomboxr='manejador';
+                  $catmanr[$theadcomboxr]=Rdbms::select('id','rdbms as manejador')->get();
+                //break;
+            // case 'descripción':
+            //       $theadcomboxr='descripción';
+            //       $catmanr[$theadcomboxr]=Tipodc::all();
+            //   //break;
+
+              default:
+                // code...
+                break;
+            }
         break;
         default:
            // code...

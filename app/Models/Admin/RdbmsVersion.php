@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class RdbmsVersion extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'rdbmsversion',
+        'cve_rdbms',
+    ];
 }
