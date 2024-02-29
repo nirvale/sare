@@ -343,18 +343,223 @@ return [
             'icon'    => 'fas fa-compress-arrows-alt',
             'can' => ['adming','admin','ver_esquema','infraestructura'],
             'submenu' => [
+
                 [
-                    'text' => 'Programas',
+                    'text' => 'Ambientes',
                     //'url'  => '/admin/esquemahome',
-                    'route'  => 'programashome.index',
-                    'icon'    => 'fas fa-spinner',
+                    'route'  => 'ambientes.indexdt',
+                    'icon'    => 'fas fa-puzzle-piece',
                     'can' => ['adming','admin','ver_catalogos','editar_catalogos','crear_catalogos','imprimir_catalogos','eliminar_catalogos'],
                 ],
                 [
-                    'text' => 'Dependencias',
+                    'text' => 'Backups',
                     //'url'  => '/admin/esquemahome',
-                    'route'  => 'dependencias.indexdt',
-                    'icon'    => 'fas fa-boxes',
+                    //'route'  => 'datacenters.indexdt',
+                    'icon'    => 'fas fa-puzzle-piece',
+                    'can' => ['adming','admin','ver_catalogos','editar_catalogos','crear_catalogos','imprimir_catalogos','eliminar_catalogos'],
+                    'submenu' => [
+                          [
+                              'text' => 'Backups',
+                              //'url'  => '/admin/esquemahome',
+                              'route'  => 'backups.indexdt',
+                              //'icon'    => 'fas fa-puzzle-piece',
+                              'can' => ['adming','admin','ver_catalogos','editar_catalogos','crear_catalogos','imprimir_catalogos','eliminar_catalogos'],
+                          ],
+                          [
+                              'text' => 'Estado de Backup',
+                              //'url'  => '/admin/esquemahome',
+                              'route'  => 'estadobackups.indexdt',
+                              //'icon'    => 'fas fa-puzzle-piece',
+                              'can' => ['adming','admin','ver_catalogos','editar_catalogos','crear_catalogos','imprimir_catalogos','eliminar_catalogos'],
+                          ],
+                    ]
+                ],
+
+                [
+                    'text' => 'Datacenter',
+                    //'url'  => '/admin/esquemahome',
+                    //'route'  => 'datacenters.indexdt',
+                    'icon'    => 'fas fa-puzzle-piece',
+                    'can' => ['adming','admin','ver_catalogos','editar_catalogos','crear_catalogos','imprimir_catalogos','eliminar_catalogos'],
+                    'submenu' => [
+                          [
+                            'text' => 'Datacenters',
+                            //'url'  => '/admin/esquemahome',
+                            'route'  => 'datacenters.indexdt',
+                            //'icon'    => 'fas fa-puzzle-piece',
+                            'can' => ['adming','admin','ver_catalogos','editar_catalogos','crear_catalogos','imprimir_catalogos','eliminar_catalogos'],
+                          ],
+                          [
+                              'text' => 'Tipos de Datacenter',
+                              //'url'  => '/admin/esquemahome',
+                              'route'  => 'tipodcs.indexdt',
+                              //'icon'    => 'fas fa-puzzle-piece',
+                              'can' => ['adming','admin','ver_catalogos','editar_catalogos','crear_catalogos','imprimir_catalogos','eliminar_catalogos'],
+                          ],
+                    ]
+                ],
+                [
+                    'text' => 'Dominios',
+                    //'url'  => '/admin/esquemahome',
+                    'route'  => 'dominios.indexdt',
+                    'icon'    => 'fas fa-puzzle-piece',
+                    'can' => ['adming','admin','ver_catalogos','editar_catalogos','crear_catalogos','imprimir_catalogos','eliminar_catalogos'],
+                ],
+                [
+                    'text' => 'Hardware',
+                    //'url'  => '/admin/esquemahome',
+                    //'route'  => 'datacenters.indexdt',
+                    'icon'    => 'fas fa-puzzle-piece',
+                    'can' => ['adming','admin','ver_catalogos','editar_catalogos','crear_catalogos','imprimir_catalogos','eliminar_catalogos'],
+                    'submenu' => [
+                          [
+                              'text' => 'Marca de Hardware',
+                              //'url'  => '/admin/esquemahome',
+                              'route'  => 'mhardwares.indexdt',
+                              //'icon'    => 'fas fa-puzzle-piece',
+                              'can' => ['adming','admin','ver_catalogos','editar_catalogos','crear_catalogos','imprimir_catalogos','eliminar_catalogos'],
+                          ],
+                          [
+                              'text'    => 'NICS',
+                              'url'     => '#',
+                              'submenu' => [
+                                [
+                                    'text' => 'Tipo de NIC',
+                                    //'url'  => '/admin/esquemahome',
+                                    'route'  => 'tnics.indexdt',
+                                    'icon'    => 'fa fa-list-ol',
+                                    'can' => ['adming','admin','ver_catalogos','editar_catalogos','crear_catalogos','imprimir_catalogos','eliminar_catalogos'],
+                                ],
+                                  // [
+                                  //     'text' => 'level_three',
+                                  //     'url'  => '#',
+                                  // ],
+                              ],
+                          ],
+                          [
+                              'text' => 'Storage',
+                              //'url'  => '/admin/esquemahome',
+                              //'route'  => 'datacenters.indexdt',
+                              //'icon'    => 'fas fa-puzzle-piece',
+                              'can' => ['adming','admin','ver_catalogos','editar_catalogos','crear_catalogos','imprimir_catalogos','eliminar_catalogos'],
+                              'submenu' => [
+                                    [
+                                        'text' => 'Tecnologías Storage Remoto',
+                                        //'url'  => '/admin/esquemahome',
+                                        'route'  => 'tecremotadiscos.indexdt',
+                                        'icon'    => 'fa fa-list-ol',
+                                        'can' => ['adming','admin','ver_catalogos','editar_catalogos','crear_catalogos','imprimir_catalogos','eliminar_catalogos'],
+                                    ],
+                                    [
+                                        'text' => 'Tipos de Storage',
+                                        //'url'  => '/admin/esquemahome',
+                                        'route'  => 'tdiscos.indexdt',
+                                        'icon'    => 'fa fa-list-ol',
+                                        'can' => ['adming','admin','ver_catalogos','editar_catalogos','crear_catalogos','imprimir_catalogos','eliminar_catalogos'],
+                                    ],
+                              ]
+                          ],
+                    ]
+                ],
+
+                [
+                    'text' => 'Sistemas de BD',
+                    //'url'  => '/admin/esquemahome',
+                    //'route'  => 'datacenters.indexdt',
+                    'icon'    => 'fas fa-puzzle-piece',
+                    'can' => ['adming','admin','ver_catalogos','editar_catalogos','crear_catalogos','imprimir_catalogos','eliminar_catalogos'],
+                    'submenu' => [
+                          [
+                              'text' => 'Manejadores de BD',
+                              //'url'  => '/admin/esquemahome',
+                              'route'  => 'rdbmss.indexdt',
+                              //'icon'    => 'fas fa-puzzle-piece',
+                              'can' => ['adming','admin','ver_catalogos','editar_catalogos','crear_catalogos','imprimir_catalogos','eliminar_catalogos'],
+                          ],
+                          [
+                              'text' => 'Versiones de BD',
+                              //'url'  => '/admin/esquemahome',
+                              'route'  => 'rdbmsversions.indexdt',
+                              //'icon'    => 'fas fa-puzzle-piece',
+                              'can' => ['adming','admin','ver_catalogos','editar_catalogos','crear_catalogos','imprimir_catalogos','eliminar_catalogos'],
+                          ],
+                    ]
+                ],
+                [
+                    'text' => 'Operación',
+                    //'url'  => '/admin/esquemahome',
+                    //'route'  => 'datacenters.indexdt',
+                    'icon'    => 'fas fa-puzzle-piece',
+                    'can' => ['adming','admin','ver_catalogos','editar_catalogos','crear_catalogos','imprimir_catalogos','eliminar_catalogos'],
+                    'submenu' => [
+                          [
+                              'text' => 'Programas',
+                              //'url'  => '/admin/esquemahome',
+                              'route'  => 'programas.indexdt',
+                              //'icon'    => 'fas fa-puzzle-piece',
+                              'can' => ['adming','admin','ver_catalogos','editar_catalogos','crear_catalogos','imprimir_catalogos','eliminar_catalogos'],
+                          ],
+                          [
+                              'text' => 'Dependencias',
+                              //'url'  => '/admin/esquemahome',
+                              'route'  => 'dependencias.indexdt',
+                              //'icon'    => 'fas fa-puzzle-piece',
+                              'can' => ['adming','admin','ver_catalogos','editar_catalogos','crear_catalogos','imprimir_catalogos','eliminar_catalogos'],
+                          ],
+                          [
+                              'text' => 'Oficinas/Areas',
+                              //'url'  => '/admin/esquemahome',
+                              'route'  => 'oficinas.indexdt',
+                              //'icon'    => 'fas fa-puzzle-piece',
+                              'can' => ['adming','admin','ver_catalogos','editar_catalogos','crear_catalogos','imprimir_catalogos','eliminar_catalogos'],
+                          ],
+                    ]
+                ],
+
+
+                [
+                    'text' => 'Sistemas Operativos',
+                    //'url'  => '/admin/esquemahome',
+                    //'route'  => 'datacenters.indexdt',
+                    'icon'    => 'fas fa-puzzle-piece',
+                    'can' => ['adming','admin','ver_catalogos','editar_catalogos','crear_catalogos','imprimir_catalogos','eliminar_catalogos'],
+                    'submenu' => [
+                          [
+                              'text' => 'Sistemas Operativos',
+                              //'url'  => '/admin/esquemahome',
+                              'route'  => 'oss.indexdt',
+                              //'icon'    => 'fas fa-puzzle-piece',
+                              'can' => ['adming','admin','ver_catalogos','editar_catalogos','crear_catalogos','imprimir_catalogos','eliminar_catalogos'],
+                          ],
+                          [
+                              'text' => 'Distriuciones OS',
+                              //'url'  => '/admin/esquemahome',
+                              'route'  => 'distribucions.indexdt',
+                              //'icon'    => 'fas fa-puzzle-piece',
+                              'can' => ['adming','admin','ver_catalogos','editar_catalogos','crear_catalogos','imprimir_catalogos','eliminar_catalogos'],
+                          ],
+                          [
+                              'text' => 'Versiones OS',
+                              //'url'  => '/admin/esquemahome',
+                              'route'  => 'osversions.indexdt',
+                              //'icon'    => 'fas fa-puzzle-piece',
+                              'can' => ['adming','admin','ver_catalogos','editar_catalogos','crear_catalogos','imprimir_catalogos','eliminar_catalogos'],
+                          ],
+                    ]
+                ],
+
+                [
+                    'text' => 'Tipo de Objeto',
+                    //'url'  => '/admin/esquemahome',
+                    'route'  => 'tipos.indexdt',
+                    'icon'    => 'fas fa-puzzle-piece',
+                    'can' => ['adming','admin','ver_catalogos','editar_catalogos','crear_catalogos','imprimir_catalogos','eliminar_catalogos'],
+                ],
+                [
+                    'text' => 'Virtulizador',
+                    //'url'  => '/admin/esquemahome',
+                    'route'  => 'virtualizadors.indexdt',
+                    'icon'    => 'fas fa-puzzle-piece',
                     'can' => ['adming','admin','ver_catalogos','editar_catalogos','crear_catalogos','imprimir_catalogos','eliminar_catalogos'],
                 ],
 /*                [
