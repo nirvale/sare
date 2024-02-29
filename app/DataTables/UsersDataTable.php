@@ -31,7 +31,8 @@ class UsersDataTable extends DataTable
                     ->orderBy(1)
                     ->selectStyleSingle()
                     ->parameters([
-                        'dom'  => 'Bfrtip',
+                      //'dom'  => 'Bfrtip',
+                      'layout' => ['top2' => 'buttons','topStart' => 'pageLength' ,'topEnd' => 'search'],
                         'buttons'   => ['excel', 'csv','print','reload','colvis'],
                         'responsive' => true,
                         'language' => [ 'url' => '/sare/vendor/DataTables/lang/Spanish.json' ],

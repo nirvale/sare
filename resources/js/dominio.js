@@ -54,7 +54,7 @@ const theads = document.getElementById(IDT.slice(1)).getElementsByTagName("th");
   });
 
   $('html').click(function (clickp){
-    clickp.preventDefault();
+    //clickp.preventDefault();
     //console.log('se detecto click');
     let claseclick = clickp.target.className.trim().split(' ');
     //console.log(claseclick);
@@ -567,7 +567,7 @@ function catman(){  //console.log(modelo);
 }
 
 
-setTimeout(catman, 500);
+setTimeout(catman, 100);
 
 
 

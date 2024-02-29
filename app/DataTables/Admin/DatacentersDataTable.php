@@ -59,7 +59,8 @@ class DatacentersDataTable extends DataTable
                     ->orderBy(0,'asc')
                     ->selectStyleSingle()
                     ->parameters([
-                        'dom'  => 'Bfrtip',
+                          //'dom'  => 'Bfrtip',
+                          'layout' => ['top2' => 'buttons','topStart' => 'pageLength' ,'topEnd' => 'search'],
                         //'buttons'   => ['nuevodatacenter'],
                         'responsive' => true,
                         'language' => [ 'url' => '/sare/vendor/DataTables/lang/Spanish.json', ],

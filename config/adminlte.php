@@ -353,7 +353,7 @@ return [
                 [
                     'text' => 'Dependencias',
                     //'url'  => '/admin/esquemahome',
-                    'route'  => 'dependenciashome.index',
+                    'route'  => 'dependencias.indexdt',
                     'icon'    => 'fas fa-boxes',
                     'can' => ['adming','admin','ver_catalogos','editar_catalogos','crear_catalogos','imprimir_catalogos','eliminar_catalogos'],
                 ],
@@ -526,71 +526,136 @@ return [
     */
 
     'plugins' => [
-        'Datatables' => [
-            'active' => true,
-            'files' => [
-                [
-                    'type' => 'js',
-                    'asset' => true,
-                    'location' => 'vendor/DataTables/DataTables-1.13.10/js/jquery.dataTables.min.js',
-                ],
-                [
-                    'type' => 'js',
-                    'asset' => true,
-                    'location' => 'vendor/DataTables/DataTables-1.13.10/js/dataTables.bootstrap5.min.js',
-                ],
-                [
-                    'type' => 'css',
-                    'asset' => true,
-                    'location' => 'vendor/DataTables/DataTables-1.13.10/css/dataTables.bootstrap5.min.css',
-                ],
-            ],
-        ],
-        'DatatablesResponsive' => [
-            'active' => true,
-            'files' => [
-                [
-                    'type' => 'js',
-                    'asset' => true,
-                    'location' => 'vendor/DataTables/DataTables-1.13.10/plugins/Responsive-2.5.0/js/dataTables.responsive.min.js',
-                ],
-                [
-                    'type' => 'js',
-                    'asset' => true,
-                    'location' => 'vendor/DataTables/DataTables-1.13.10/plugins/Responsive-2.5.0/js/responsive.bootstrap5.min.js',
-                ],
-                [
-                    'type' => 'css',
-                    'asset' => true,
-                    'location' => 'vendor/DataTables/DataTables-1.13.10/plugins/Responsive-2.5.0/css/responsive.bootstrap5.min.css',
-                ],
-            ],
-        ],
-        'DatatablesButtons' => [
-            'active' => true,
-            'files' => [
-                [
-                    'type' => 'js',
-                    'asset' => true,
-                    'location' => 'vendor/DataTables/DataTables-1.13.10/plugins/Buttons-2.4.2/js/dataTables.buttons.min.js',
-                ],
-                [
-                    'type' => 'js',
-                    'asset' => true,
-                    'location' => 'vendor/DataTables/DataTables-1.13.10/plugins/Buttons-2.4.2/js/buttons.bootstrap5.min.js',
-                ],
-                // [
-                //     'type' => 'js',
-                //     'asset' => true,
-                //     'location' => 'vendor/datatables/buttons.server-side.js',
-                // ],
-                [
-                    'type' => 'css',
-                    'asset' => true,
-                    'location' => 'vendor/DataTables/DataTables-1.13.10/plugins/Buttons-2.4.2/css/buttons.bootstrap5.min.css',
-                ],
-            ],
-        ],
+      'Datatables' => [
+          'active' => true,
+          'files' => [
+              [
+                  'type' => 'js',
+                  'asset' => true,
+                  'location' => 'vendor/DataTables/DataTables-2.0.1/js/dataTables.min.js',
+              ],
+              [
+                  'type' => 'js',
+                  'asset' => true,
+                  'location' => 'vendor/DataTables/DataTables-2.0.1/js/dataTables.bootstrap5.min.js',
+              ],
+              [
+                  'type' => 'css',
+                  'asset' => true,
+                  'location' => 'vendor/DataTables/DataTables-2.0.1/css/dataTables.bootstrap5.min.css',
+              ],
+          ],
+      ],
+      'DatatablesResponsive' => [
+          'active' => true,
+          'files' => [
+              [
+                  'type' => 'js',
+                  'asset' => true,
+                  'location' => 'vendor/DataTables/plugins/Responsive-3.0.0/js/dataTables.responsive.min.js',
+              ],
+              [
+                  'type' => 'js',
+                  'asset' => true,
+                  'location' => 'vendor/DataTables/plugins/Responsive-3.0.0/js/responsive.bootstrap5.min.js',
+              ],
+              [
+                  'type' => 'css',
+                  'asset' => true,
+                  'location' => 'vendor/DataTables/plugins/Responsive-3.0.0/css/responsive.bootstrap5.min.css',
+              ],
+          ],
+      ],
+      'DatatablesButtons' => [
+          'active' => true,
+          'files' => [
+              [
+                  'type' => 'js',
+                  'asset' => true,
+                  'location' => 'vendor/DataTables/plugins/Buttons-3.0.0/js/dataTables.buttons.min.js',
+              ],
+              [
+                  'type' => 'js',
+                  'asset' => true,
+                  'location' => 'vendor/DataTables/plugins/Buttons-3.0.0/js/buttons.bootstrap5.min.js',
+              ],
+              // [
+              //     'type' => 'js',
+              //     'asset' => true,
+              //     'location' => 'vendor/datatables/buttons.server-side.js',
+              // ],
+              [
+                  'type' => 'css',
+                  'asset' => true,
+                  'location' => 'vendor/DataTables/plugins/Buttons-3.0.0/css/buttons.bootstrap5.min.css',
+              ],
+          ],
+      ],
+        // 'Datatables' => [
+        //     'active' => true,
+        //     'files' => [
+        //         [
+        //             'type' => 'js',
+        //             'asset' => true,
+        //             'location' => 'vendor/DataTables/DataTables-1.13.10/js/jquery.dataTables.min.js',
+        //         ],
+        //         [
+        //             'type' => 'js',
+        //             'asset' => true,
+        //             'location' => 'vendor/DataTables/DataTables-1.13.10/js/dataTables.bootstrap5.min.js',
+        //         ],
+        //         [
+        //             'type' => 'css',
+        //             'asset' => true,
+        //             'location' => 'vendor/DataTables/DataTables-1.13.10/css/dataTables.bootstrap5.min.css',
+        //         ],
+        //     ],
+        // ],
+        // 'DatatablesResponsive' => [
+        //     'active' => true,
+        //     'files' => [
+        //         [
+        //             'type' => 'js',
+        //             'asset' => true,
+        //             'location' => 'vendor/DataTables/DataTables-1.13.10/plugins/Responsive-2.5.0/js/dataTables.responsive.min.js',
+        //         ],
+        //         [
+        //             'type' => 'js',
+        //             'asset' => true,
+        //             'location' => 'vendor/DataTables/DataTables-1.13.10/plugins/Responsive-2.5.0/js/responsive.bootstrap5.min.js',
+        //         ],
+        //         [
+        //             'type' => 'css',
+        //             'asset' => true,
+        //             'location' => 'vendor/DataTables/DataTables-1.13.10/plugins/Responsive-2.5.0/css/responsive.bootstrap5.min.css',
+        //         ],
+        //     ],
+        // ],
+        // 'DatatablesButtons' => [
+        //     'active' => true,
+        //     'files' => [
+        //         [
+        //             'type' => 'js',
+        //             'asset' => true,
+        //             'location' => 'vendor/DataTables/DataTables-1.13.10/plugins/Buttons-2.4.2/js/dataTables.buttons.min.js',
+        //         ],
+        //         [
+        //             'type' => 'js',
+        //             'asset' => true,
+        //             'location' => 'vendor/DataTables/DataTables-1.13.10/plugins/Buttons-2.4.2/js/buttons.bootstrap5.min.js',
+        //         ],
+        //         // [
+        //         //     'type' => 'js',
+        //         //     'asset' => true,
+        //         //     'location' => 'vendor/datatables/buttons.server-side.js',
+        //         // ],
+        //         [
+        //             'type' => 'css',
+        //             'asset' => true,
+        //             'location' => 'vendor/DataTables/DataTables-1.13.10/plugins/Buttons-2.4.2/css/buttons.bootstrap5.min.css',
+        //         ],
+        //     ],
+        // ],
         // 'Select2' => [
         //     'active' => false,
         //     'files' => [

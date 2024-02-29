@@ -41,7 +41,7 @@ class RdbmsController extends Controller
   {
     $validated=\Validator::make($request->all(), [
          //'empr_nombre' => 'bail|required|',
-         'rdbms' => 'bail|required|unique:rdbmss|max:50',
+         'rdbms' => 'bail|required|unique:rdbms|max:50',
      ]);
      if ($validated->fails())
      {

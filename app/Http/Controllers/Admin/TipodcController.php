@@ -51,7 +51,7 @@ class TipodcController extends Controller
          //  $Tipodc = Tipodc::find($request->id);
            $tipodc=Tipodc::create([
 
-             'tipodc' => strtolower($request->tipodc),
+             'tipodc' => strToUpper($request->tipodc),
 
            ]);
 
