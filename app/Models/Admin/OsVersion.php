@@ -12,4 +12,11 @@ class OsVersion extends Model
         'osversion',
         'cve_distribucion',
     ];
+
+    public function distribucion()
+    {
+        return $this->hasOne(Distribucion::class,'id','cve_distribucion');
+        //return $this->hasMany(Comment::class, 'foreign_key', 'local_key');
+    }
+
 }

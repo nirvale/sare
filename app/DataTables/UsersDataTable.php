@@ -30,13 +30,14 @@ class UsersDataTable extends DataTable
                     ->minifiedAjax()
                     ->orderBy(1)
                     ->selectStyleSingle()
+                    //->responsive('true')
                     ->parameters([
-                      //'dom'  => 'Bfrtip',
-                      'layout' => ['top2' => 'buttons','topStart' => 'pageLength' ,'topEnd' => 'search'],
+                        //'dom'  => 'Bfrtip',
+                        'layout' => ['top2' => 'buttons','topStart' => 'pageLength' ,'topEnd' => 'search'],
                         'buttons'   => ['excel', 'csv','print','reload','colvis'],
                         'responsive' => true,
+                        
                         'language' => [ 'url' => '/sare/vendor/DataTables/lang/Spanish.json' ],
-                        'responsive'=> true,
                      ]);
 
     }

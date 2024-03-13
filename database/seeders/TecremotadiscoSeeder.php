@@ -13,8 +13,10 @@ class TecremotadiscoSeeder extends Seeder
      */
     public function run(): void
     {
-      $tecremotadisco = Tecremotadisco::create(['tecremotadisco' => 'NAS/NFS']);
+      $tecremotadisco = Tecremotadisco::create(['tecremotadisco' => 'NAS']);
       $tecremotadisco = Tecremotadisco::create(['tecremotadisco' => 'SAN']);
       $tecremotadisco = Tecremotadisco::create(['tecremotadisco' => 'CLOUD']);
+      $tecremotadisco = Tecremotadisco::create(['tecremotadisco' => 'ORACLE ZFS']);
+      $tecremotadisco = Tecremotadisco::create(['tecremotadisco' => 'ORACLE ODA STORAGE']);
     }
 }

@@ -20,6 +20,7 @@
     "dependencies": {
         "datatables.net-editor": "^2.2.2",
         "datatables.net-editor-bs5": "^2.2.0",
-        "datatables.net-editor-dt": "^2.2.0"
+        "datatables.net-editor-dt": "^2.2.0",
+        "datatables.net-plugins": "^2.0.2"
     }
 }

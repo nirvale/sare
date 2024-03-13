@@ -100,7 +100,7 @@ const theads = document.getElementById(IDT.slice(1)).getElementsByTagName("th");
 
                             estaCelda.empty().append(
                             //  "<input value='"+estaCeldaTexto+"'  name='nobjeto' type='text' id='nobjeto' class='form-control validate cambiarCatEditable' placeholder='Nombre del nuevo objeto'>"
-                              "<select class='form-control select2 cambiarCatComboEditable' id='nobjeto' name='nobjeto'></select>"
+                              "<select class='form-control select2 cambiarCatComboEditable' id='nobjeto' name='nobjeto' title='Selecciona uno...'><option value='' selected='selected'>Seleccionar...</option></select>"
                             );
 
                             for (let i = 0; i < cat[catChild].length; i++) {
@@ -119,7 +119,7 @@ const theads = document.getElementById(IDT.slice(1)).getElementsByTagName("th");
 
                             }
 
-                          }else  {
+                          }else {
                             estaCelda.empty().append(
                               "<input value='"+estaCeldaTexto+"'  name='nobjeto' type='text' id='nobjeto' class='form-control validate cambiarCatEditable' placeholder='Nombre del nuevo objeto'>"
                             );
@@ -298,6 +298,7 @@ const theads = document.getElementById(IDT.slice(1)).getElementsByTagName("th");
         //console.log('Programa cerrado, fin del modulo de edición');
       }).set('labels', {ok:'CONTINUAR', cancel:'CANCELAR'});
   });
+//  $.fn.dataTable.render.percentBar('round','#fff', '#FF9CAB', '#FF0033', '#FF9CAB', 0, 'solid')
 
   $.fn.dataTable.ext.buttons.nuevo = {
     //type: modelo,
@@ -312,43 +313,45 @@ const theads = document.getElementById(IDT.slice(1)).getElementsByTagName("th");
         if (theads[0].classList.contains('catEditable')) {
           edId=0;
         }
-        for (let i = edId; i < theads.length-1; i++) {
+        //for (let i = edId; i < theads.length-1; i++) {
           //console.log('index :'+i+', nombre del head:'+theads[i].innerText);
           if ($('th.catCombox').length > 0) {
             let thcombox =$('th.catCombox');
-            for (let j = 0; j < thcombox.length; j++) {
-
-              if (thcombox[j].innerText != theads[i].innerText ) {
-                let catNuevo =  "<div class='form-group col-md-12 ml-auto'><label data-error='error' data-success='ok' for='cmb_nombre'>NUEVO(A) "+theads[i].innerText+":</label> <input value='' name='"+removerAcentos(theads[i].innerText.toLowerCase())+"' type='text' id='"+removerAcentos(theads[i].innerText.toLowerCase())+"' class='form-control validate' placeholder='Nombre del nuevo objeto...'></div> ";
-                $("#modalc1").append(catNuevo);
-              }else if (thcombox[j].innerText == theads[i].innerText) {
-
-                let catChild= removerAcentos(thcombox[j].innerText.toLowerCase());
-                let catIndex=theads[0].title.toLowerCase();
-                $("#modalc1").append(
-                  "<div class='form-group col-md-12 ml-auto'><label data-error='error' data-success='ok' for='cmb_nombre'>NUEVO(A) "+theads[i].innerText+":</label><select class='form-control select2 cambiarCatComboEditable' id='"+removerAcentos(theads[i].innerText.toLowerCase())+"' name='"+removerAcentos(theads[i].innerText.toLowerCase())+"'></select></div>"
-                );
-
-                for (let i = 0; i < cat[catChild].length; i++) {
-                  // console.log(cat[catChild][i][catIndex]);
-                  // console.log(cat[catChild][i][catChild]);
-
-                    $('.cambiarCatComboEditable').append(
-                      "<option value="+cat[catChild][i][catIndex]+">" +cat[catChild][i][catChild]+"</option>"
-                  );
-
+            for (let i = edId; i < theads.length-1; i++) {
+                if(theads[i].innerText && !theads[i].classList.contains('catCombox')){
+                  let catNuevo =  "<div class='form-group col-md-12 ml-auto'><label data-error='error' data-success='ok' for='cmb_nombre'>NUEVO(A) "+theads[i].innerText+":</label> <input value='' name='"+removerAcentos(theads[i].innerText.toLowerCase())+"' type='text' id='"+removerAcentos(theads[i].innerText.toLowerCase())+"' class='form-control validate' title='Selecciona uno...'></div> ";
+                  $("#modalc1").append(catNuevo);
                 }
+                for (let j = 0; j < thcombox.length; j++) {    ////
+                  if (thcombox[j].innerText == theads[i].innerText ) {
+                    let catChild= removerAcentos(thcombox[j].innerText.toLowerCase());
+                    let catIndex=theads[0].title.toLowerCase();
+                    $("#modalc1").append(
+                      "<div class='form-group col-md-12 ml-auto'><label data-error='error' data-success='ok' for='cmb_nombre'>NUEVO(A) "+theads[i].innerText+":</label><select class='form-control select2 cambiarCatComboEditable"+j+"' id='"+removerAcentos(theads[i].innerText.toLowerCase())+"' name='"+removerAcentos(theads[i].innerText.toLowerCase())+"' title='Selecciona uno...'><option value='' selected='selected'>Seleccionar nuevo...</option></select></div>"
+                    );
+                    for (let k = 0; k < cat[catChild].length; k++) {
+                      // console.log(cat[catChild][i][catIndex]);
+                      // console.log(cat[catChild][i][catChild]);
+                        $('.cambiarCatComboEditable'+j).append(
+                          "<option value="+cat[catChild][k][catIndex]+">" +cat[catChild][k][catChild]+"</option>"
+                      );
+                    }
+                    // let catNuevo =  "<div class='form-group col-md-12 ml-auto'><label data-error='error' data-success='ok' for='cmb_nombre'>NUEVO(A) "+theads[i].innerText+":</label> <input value='' name='"+removerAcentos(theads[i].innerText.toLowerCase())+"' type='text' id='"+removerAcentos(theads[i].innerText.toLowerCase())+"' class='form-control validate' placeholder='Nombre del nuevo objeto...'></div> ";
+                    // $("#modalc1").append(catNuevo);
+                  }else {
 
+                  }
+    ///
+                }
               }
-            }
-
-
           }else {
-            let catNuevo =  "<div class='form-group col-md-12 ml-auto'><label data-error='error' data-success='ok' for='cmb_nombre'>NUEVO(A) "+theads[i].innerText+":</label> <input value='' name='"+removerAcentos(theads[i].innerText.toLowerCase())+"' type='text' id='"+removerAcentos(theads[i].innerText.toLowerCase())+"' class='form-control validate' placeholder='Nombre del nuevo objeto...'></div> ";
-            $("#modalc1").append(catNuevo);
+            for (let i = edId; i < theads.length-1; i++) {
+              let catNuevo =  "<div class='form-group col-md-12 ml-auto'><label data-error='error' data-success='ok' for='cmb_nombre'>NUEVO(A) "+theads[i].innerText+":</label> <input value='' name='"+removerAcentos(theads[i].innerText.toLowerCase())+"' type='text' id='"+removerAcentos(theads[i].innerText.toLowerCase())+"' class='form-control validate' placeholder='Nombre del nuevo objeto...'></div> ";
+              $("#modalc1").append(catNuevo);
+            }
           }
 
-        }
+        //}
 
       //  let catNuevo =  "<div class='form-group col-md-12 ml-auto'><label data-error='error' data-success='ok' for='cmb_nombre'>NUEVO(A) "+modelo.toUpperCase() +":</label> <input value='' name='"+modelo.toLowerCase()+"' type='text' id='"+modelo+"' class='form-control validate' placeholder='Nombre del nuevo objeto...'></div> "; //PARA UN SOLO CAMPO
         let footermodal = "<button class='btn btn-success' id='crear"+modelo+"' >Crear</button><button class='btn btn-secondary' data-dismiss='modal'>Cancelar</button>";
@@ -535,6 +538,7 @@ function catman(){  //console.log(modelo);
   // for (let i = 0; i < combos.length; i++) {
   //     theadcombox[i]=combos[i].innerText.toLowerCase();
   // }
+  //alert('llame al catalogo')
   if ($('th.catCombox').length > 0) {
     $('th.catCombox').each(function(i,vars) {
             theadcombox[i]=$(this).text().toLowerCase();
@@ -555,6 +559,7 @@ function catman(){  //console.log(modelo);
           success: function(response) {
             //alert('si encontre el controlador de catalogos');
             cat = response;
+            //console.log(cat);
 
           },
           error: function(response) {

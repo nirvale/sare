@@ -34,6 +34,13 @@ div.dataTables_processing>div:last-child>div {
 
 }
 
+table.dataTable td {
+  font-size: 0.8rem;
+}
+table.dataTable th {
+  font-size: 0.7rem;
+}
+
 /* .tabEditando{
 
   shadow-lg p-3 mb-5 bg-white rounded

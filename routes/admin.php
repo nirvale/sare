@@ -30,6 +30,11 @@ use App\Http\Controllers\Admin\MprocesadorController;
 use App\Http\Controllers\Admin\OsVersionController;
 use App\Http\Controllers\Admin\RdbmsVersionController;
 use App\Http\Controllers\Admin\EstadobackupController;
+use App\Http\Controllers\Admin\ServidorController;
+use App\Http\Controllers\Admin\ProcesadorController;
+use App\Http\Controllers\Admin\NicController;
+use App\Http\Controllers\Admin\DnsController;
+use App\Http\Controllers\Admin\StorageremotoController;
 
 //Route::get('/', [HomeController::class, 'index']);
 //manejo de usuarios
@@ -147,6 +152,29 @@ Route::resource('rdbmsversion', RdbmsVersionController::class)->only(['update','
 Route::get('estadobackup', [EstadobackupController::class, 'indexdt'])->name('estadobackups.indexdt');
 //RUTAS CRUD Estadobackups
 Route::resource('estadobackup', EstadobackupController::class)->only(['update','store','destroy']);
+//ruta para datatables Servidors
+Route::get('servidor', [ServidorController::class, 'indexdt'])->name('servidors.indexdt');
+//RUTAS CRUD Servidors
+Route::resource('servidor', ServidorController::class)->only(['update','store','destroy']);
+Route::get('servidorqtest', [ServidorController::class, 'qtest'])->name('servidors.qtest'); ///probar catalogo
+//ruta para datatables Procesadors
+Route::get('procesador', [ProcesadorController::class, 'indexdt'])->name('procesadors.indexdt');
+//RUTAS CRUD Procesadors
+Route::resource('procesador', ProcesadorController::class)->only(['update','store','destroy']);
+//ruta para datatables Dnss
+Route::get('dns', [DnsController::class, 'indexdt'])->name('dnss.indexdt');
+//RUTAS CRUD Dnss
+Route::resource('dns', DnsController::class)->only(['store']);
+Route::put('dns/{dns}', [DnsController::class,'update'])->name('dns.update');
+Route::delete('dns/{dns}', [DnsController::class,'destroy'])->name('dns.destroy');
+//ruta para datatables Nics
+Route::get('nic', [NicController::class, 'indexdt'])->name('nics.indexdt');
+//RUTAS CRUD Nics
+Route::resource('nic', NicController::class)->only(['update','store','destroy']);
+//ruta para datatables Storageremotos
+Route::get('storageremoto', [StorageremotoController::class, 'indexdt'])->name('storageremotos.indexdt');
+//RUTAS CRUD Storageremotos
+Route::resource('storageremoto', StorageremotoController::class)->only(['update','store','destroy']);
 
 
 //livewire assets

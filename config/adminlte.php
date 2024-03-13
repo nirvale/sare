@@ -430,11 +430,48 @@ return [
                                     'icon'    => 'fa fa-list-ol',
                                     'can' => ['adming','admin','ver_catalogos','editar_catalogos','crear_catalogos','imprimir_catalogos','eliminar_catalogos'],
                                 ],
+                                [
+                                    'text' => 'NICs',
+                                    //'url'  => '/admin/esquemahome',
+                                    'route'  => 'nics.indexdt',
+                                    'icon'    => 'fa fa-list-ol',
+                                    'can' => ['adming','admin','ver_catalogos','editar_catalogos','crear_catalogos','imprimir_catalogos','eliminar_catalogos'],
+                                ],
                                   // [
                                   //     'text' => 'level_three',
                                   //     'url'  => '#',
                                   // ],
                               ],
+                          ],
+                          [
+                              'text' => 'Procesadores',
+                              //'url'  => '/admin/esquemahome',
+                              //'route'  => 'datacenters.indexdt',
+                              //'icon'    => 'fas fa-puzzle-piece',
+                              'can' => ['adming','admin','ver_catalogos','editar_catalogos','crear_catalogos','imprimir_catalogos','eliminar_catalogos'],
+                              'submenu' => [
+                                    [
+                                        'text' => 'Fabricantes',
+                                        //'url'  => '/admin/esquemahome',
+                                        'route'  => 'mprocesadors.indexdt',
+                                        'icon'    => 'fa fa-list-ol',
+                                        'can' => ['adming','admin','ver_catalogos','editar_catalogos','crear_catalogos','imprimir_catalogos','eliminar_catalogos'],
+                                    ],
+                                    [
+                                        'text' => 'Arquitecturas',
+                                        //'url'  => '/admin/esquemahome',
+                                        'route'  => 'aprocesadors.indexdt',
+                                        'icon'    => 'fa fa-list-ol',
+                                        'can' => ['adming','admin','ver_catalogos','editar_catalogos','crear_catalogos','imprimir_catalogos','eliminar_catalogos'],
+                                    ],
+                                    [
+                                        'text' => 'Procesadores',
+                                        //'url'  => '/admin/esquemahome',
+                                        'route'  => 'procesadors.indexdt',
+                                        'icon'    => 'fa fa-list-ol',
+                                        'can' => ['adming','admin','ver_catalogos','editar_catalogos','crear_catalogos','imprimir_catalogos','eliminar_catalogos'],
+                                    ],
+                              ]
                           ],
                           [
                               'text' => 'Storage',
@@ -460,6 +497,29 @@ return [
                               ]
                           ],
                     ]
+                ],
+                [
+                    'text' => 'DNS',
+                    //'url'  => '/admin/esquemahome',
+                    'route'  => 'dnss.indexdt',
+                    'icon'    => 'fas fa-puzzle-piece',
+                    'can' => ['adming','admin','ver_catalogos','editar_catalogos','crear_catalogos','imprimir_catalogos','eliminar_catalogos'],
+                    // 'submenu' => [
+                    //       [
+                    //           'text' => 'Manejadores de BD',
+                    //           //'url'  => '/admin/esquemahome',
+                    //           'route'  => 'rdbmss.indexdt',
+                    //           //'icon'    => 'fas fa-puzzle-piece',
+                    //           'can' => ['adming','admin','ver_catalogos','editar_catalogos','crear_catalogos','imprimir_catalogos','eliminar_catalogos'],
+                    //       ],
+                    //       [
+                    //           'text' => 'Versiones de BD',
+                    //           //'url'  => '/admin/esquemahome',
+                    //           'route'  => 'rdbmsversions.indexdt',
+                    //           //'icon'    => 'fas fa-puzzle-piece',
+                    //           'can' => ['adming','admin','ver_catalogos','editar_catalogos','crear_catalogos','imprimir_catalogos','eliminar_catalogos'],
+                    //       ],
+                    // ]
                 ],
 
                 [
@@ -562,6 +622,7 @@ return [
                     'icon'    => 'fas fa-puzzle-piece',
                     'can' => ['adming','admin','ver_catalogos','editar_catalogos','crear_catalogos','imprimir_catalogos','eliminar_catalogos'],
                 ],
+
 /*                [
                     'text'    => 'level_one',
                     'url'     => '#',
@@ -793,6 +854,16 @@ return [
                   'type' => 'css',
                   'asset' => true,
                   'location' => 'vendor/DataTables/plugins/Buttons-3.0.0/css/buttons.bootstrap5.min.css',
+              ],
+          ],
+      ],
+      'DatatablesPorcentageBar' => [
+          'active' => true,
+          'files' => [
+              [
+                  'type' => 'js',
+                  'asset' => true,
+                  'location' => 'vendor/DataTables/plugins/dataRender/porcentageBars.js',
               ],
           ],
       ],

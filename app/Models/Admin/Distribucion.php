@@ -13,11 +13,13 @@ class Distribucion extends Model
         'distribucion',
         'cve_os',
     ];
-    protected $alias = [
-    'distribucion' => 'distribución',
-    ];
-    public function oss(): BelongsTo
+    // protected $alias = [
+    // 'distribucion' => 'distribución',
+    // ];
+    public function os()
     {
-        return $this->belongsToMany(Os::class);
+        return $this->hasOne(Os::class,'id','cve_os');
+        //return $this->hasMany(Comment::class, 'foreign_key', 'local_key');
     }
+
 }

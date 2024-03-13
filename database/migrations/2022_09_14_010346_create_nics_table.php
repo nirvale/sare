@@ -16,17 +16,20 @@ return new class extends Migration
           $table->integer('cve_servidor');
           $table->string('nic');
           $table->integer('cve_tnic');
-          $table->string('ip');
-          $table->string('dns1');
-          $table->string('dns2');
-          $table->string('dns3');
-          $table->string('gateway');
-          $table->string('mac');
-          $table->string('netmask');
-          $table->text('descripcion');
+          $table->string('ip')->nullable();
+          $table->integer('cve_dns1')->nullable();
+          $table->integer('cve_dns2')->nullable();
+          $table->integer('cve_dns3')->nullable();
+          $table->string('gateway')->nullable();
+          $table->string('mac')->unique();
+          $table->string('netmask')->nullable();
+          $table->text('descripcion')->nullable();
           $table->timestamps();
           $table->foreign('cve_servidor')->references('id')->on('servidores')->onDelete('cascade')->onUpdate('cascade');
           $table->foreign('cve_tnic')->references('id')->on('tnics')->onUpdate('cascade');
+          $table->foreign('cve_dns1')->references('id')->on('dns')->onUpdate('cascade');
+          $table->foreign('cve_dns2')->references('id')->on('dns')->onUpdate('cascade');
+          $table->foreign('cve_dns3')->references('id')->on('dns')->onUpdate('cascade');
       });
     }
 

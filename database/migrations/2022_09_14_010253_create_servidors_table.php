@@ -17,13 +17,14 @@ return new class extends Migration
           $table->string('memoria');
           //$table->text('almacenamiento');
           $table->integer('procesadores');
-          $table->integer('nucleos');
-          $table->string('modelo_procesador');
-          $table->string('velocidad_procesador');
-          $table->integer('cve_mprocesador');
-          $table->integer('cve_aprocesador');
-          $table->integer('cve_os');
-          $table->integer('cve_distribucion');
+          //$table->integer('nucleos');
+          $table->integer('cve_procesador');
+          //$table->string('velocidad_procesador');
+          //$table->integer('cve_mprocesador');
+          //$table->integer('cve_aprocesador');
+          //$table->integer('cve_os');
+          //$table->integer('cve_distribucion');
+          $table->integer('cve_osversion');
           $table->integer('cve_ambiente');
           $table->integer('cve_datacenter');
           $table->integer('cve_tipo');
@@ -39,15 +40,17 @@ return new class extends Migration
           // $table->text('u3pwd')->nullable();
           $table->text('descripcion');
           $table->timestamps();
-          $table->foreign('cve_os')->references('id')->on('os')->onUpdate('cascade');
+          $table->foreign('cve_dominio')->references('id')->on('dominios')->onUpdate('cascade');
           $table->foreign('cve_ambiente')->references('id')->on('ambientes')->onUpdate('cascade');
           $table->foreign('cve_datacenter')->references('id')->on('datacenters')->onUpdate('cascade');
           $table->foreign('cve_tipo')->references('id')->on('tipos')->onUpdate('cascade');
-          $table->foreign('cve_mprocesador')->references('id')->on('mprocesadores')->onUpdate('cascade');
+          //$table->foreign('cve_mprocesador')->references('id')->on('mprocesadores')->onUpdate('cascade');
           $table->foreign('cve_virtualizador')->references('id')->on('virtualizadores')->onUpdate('cascade');
           $table->foreign('cve_mhardware')->references('id')->on('mhardwares')->onUpdate('cascade');
-          $table->foreign('cve_aprocesador')->references('id')->on('aprocesadores')->onUpdate('cascade');
-          $table->foreign('cve_distribucion')->references('id')->on('distribuciones')->onUpdate('cascade');
+          //$table->foreign('cve_aprocesador')->references('id')->on('aprocesadores')->onUpdate('cascade');
+          //$table->foreign('cve_distribucion')->references('id')->on('distribuciones')->onUpdate('cascade');
+          $table->foreign('cve_osversion')->references('id')->on('os_versions')->onUpdate('cascade');
+          $table->foreign('cve_procesador')->references('id')->on('procesadores')->onUpdate('cascade');
       });
     }
 
