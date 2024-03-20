@@ -71,9 +71,9 @@ class CatmanController extends Controller
         case 'distribucion':
           foreach ($request->theadcombox as $key => $head) {
             switch ($head) {
-              case 'sistema operativo':
-                  $theadcomboxr='sistema operativo';
-                  $catmanr[$theadcomboxr]=Os::select('id','os as sistema operativo')->orderBy('sistema operativo')->get();
+              case 'sistema_operativo':
+                  $theadcomboxr='sistema_operativo';
+                  $catmanr[$theadcomboxr]=Os::select('id','os as sistema_operativo')->orderBy('sistema_operativo')->get();
                 break;
             // case 'descripción':
             //       $theadcomboxr='descripción';
@@ -89,7 +89,7 @@ class CatmanController extends Controller
         case 'osversion':
           foreach ($request->theadcombox as $key => $head) {
             switch ($head) {
-              case 'distribución':
+              case 'distribucion':
                   $theadcomboxr='distribucion';
                   $catmanr[$theadcomboxr]=Distribucion::select('id','distribucion')->orderBy('distribucion')->get();
                 break;
@@ -158,7 +158,7 @@ class CatmanController extends Controller
         case 'storageremoto':
           foreach ($request->theadcombox as $key => $head) {
             switch ($head) {
-              case 'tecnología':
+              case 'tecnologia':
                   $theadcomboxr='tecnologia';
                   $catmanr[$theadcomboxr]=Tecremotadisco::select('id','tecremotadisco as tecnologia')->orderBy('tecnologia')->get();
               break;
@@ -166,9 +166,9 @@ class CatmanController extends Controller
                   $theadcomboxr='fabricante';
                   $catmanr[$theadcomboxr]=Mhardware::select('id','mhardware as fabricante')->orderBy('fabricante')->get();
               break;
-              case 'utilidades soportadas':
-                  $theadcomboxr='utilidades soportadas';
-                  $catmanr[$theadcomboxr]=Udremota::select('id','udremota as utilidades soportadas')->orderBy('utilidades soportadas')->get();
+              case 'utilidades_soportadas':
+                  $theadcomboxr='utilidades_soportadas';
+                  $catmanr[$theadcomboxr]=Udremota::select('id','udremota as utilidades_soportadas')->orderBy('utilidades_soportadas')->get();
               break;
               case 'datacenter':
                   $theadcomboxr='datacenter';
@@ -188,13 +188,13 @@ class CatmanController extends Controller
         case 'servidor':
           foreach ($request->theadcombox as $key => $head) {
             switch ($head) {
-              case 'modelo de procesador':
-                  $theadcomboxr='modelo de procesador';
+              case 'modelo_de_procesador':
+                  $theadcomboxr='modelo_de_procesador';
                   $procesadores = Procesador::with('mprocesador','aprocesador')
                                                         ->select()
                                                         ->get()->sortBy('mprocesador');
                   foreach ($procesadores as $id => $procesador) {
-                    $temp[]= (['id' => $id, 'modelo de procesador' => $procesador->mprocesador->mprocesador.' | '.$procesador->procesador.' | '. $procesador->velocidad.' | '.$procesador->nucleos.' cores | '.$procesador->aprocesador->aprocesador]);
+                    $temp[]= (['id' => $id, 'modelo_de_procesador' => $procesador->mprocesador->mprocesador.' | '.$procesador->procesador.' | '. $procesador->velocidad.' | '.$procesador->nucleos.' cores | '.$procesador->aprocesador->aprocesador]);
                   }
                   $catmanr[$theadcomboxr]=$temp;
                   unset($temp);
@@ -223,13 +223,13 @@ class CatmanController extends Controller
                   $theadcomboxr='dominio';
                   $catmanr[$theadcomboxr]=Dominio::select('id','dominio')->orderBy('dominio')->get();
                 break;
-              case 'sistema operativo':
-                  $theadcomboxr='sistema operativo';
+              case 'sistema_operativo':
+                  $theadcomboxr='sistema_operativo';
                   $osversions = Osversion::with('distribucion','distribucion.os')
                                                         ->select()
                                                         ->get()->sortBy('distribucion.os.os');
                   foreach ($osversions as $id => $osversion) {
-                    $temp[]= (['id' => $id, 'sistema operativo' => $osversion->distribucion->os->os.' | '.$osversion->distribucion->distribucion.' | '. $osversion->osversion]);
+                    $temp[]= (['id' => $id, 'sistema_operativo' => $osversion->distribucion->os->os.' | '.$osversion->distribucion->distribucion.' | '. $osversion->osversion]);
                   }
                   $catmanr[$theadcomboxr]=$temp;
                   unset($temp);
