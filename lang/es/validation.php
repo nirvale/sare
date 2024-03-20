@@ -196,6 +196,12 @@ return [
         'ndominio' => 'DOMINIO (RENOMBRADO)',
         'ndominio' => 'DOMINIO (RENOMBRADO)',
         'utilidades_soportadas.*' => 'UTILIDADES SOPORTADAS',
+        'datacenter' => 'DATACENTER',
+        'sistema' => 'SISTEMA',
+        'fabricante' => 'FABRICANTE',
+        'tecnologia' => 'TECNOLOGÍA',
+        'capacidad_(gb)' => 'CAPACIDAD (GB)',
+        'usado_(gb)' => 'USADO (GB)',
     ],
 
 ];

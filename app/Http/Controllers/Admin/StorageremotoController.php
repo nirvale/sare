@@ -44,6 +44,8 @@ class StorageremotoController extends Controller
           'fabricante' => 'bail|required|exists:mhardwares,id|max:2',
           'utilidades_soportadas.*' => 'bail|required|exists:udremotas,id|max:2',
           'datacenter' => 'bail|required|exists:datacenters,id|max:2',
+          'capacidad_gb' => 'bail|required|numeric|between:0,999000',
+          'usado_gb' => 'bail|required|numeric|lt:capacidad_gb',
       ]);
       if ($validated->fails())
       {
@@ -53,10 +55,18 @@ class StorageremotoController extends Controller
         DB::beginTransaction();
         try {
        //  $Storageremoto = Storageremoto::find($request->id);
-         $storageremoto=Storageremoto::create([
-           'storageremoto' => strToUpper($request->version),
-           'cve_rdbms' => strToUpper($request->manejador),
+         $storageremoto=Storageremoto::Create([
+           'storageremoto' => strToUpper($request->sistema),
+           //'sistema' => strToUpper($request->version),
+           'cve_tecremotadisco' => $request->tecnologia,
+           'cve_mhardware' => $request->fabricante,
+           //'utilidades_soportadas.*' => strToUpper($request->version),
+           'cve_datacenter' => $request->datacenter,
+           'capacidad' => $request->capacidad_gb,
+           'usado' => $request->usado_gb,
+           'usadop' => ($request->usado_gb / $request->capacidad_gb) *100,
          ]);
+         $storageremoto->udremotas()->sync($request->utilidades_soportadas);
 
          DB::commit();
         } catch (\Exception $e) {
@@ -110,13 +120,13 @@ class StorageremotoController extends Controller
           case 'sistema':
             $datacToUpdate = 'storageremoto';
           break;
-          case 'tecnología':
+          case 'tecnologia':
             $datacToUpdate = 'cve_tecremotadisco';
           break;
           case 'fabricante':
             $datacToUpdate = 'cve_mhardware';
           break;
-          case 'utilidades soportadas':
+          case 'utilidades_soportadas':
             $multi=1;
              $datacToUpdate = 'id';
              $storageremoto->udremotas()->sync(json_decode($request->catActual));
@@ -124,7 +134,7 @@ class StorageremotoController extends Controller
           case 'datacenter':
             $datacToUpdate = 'cve_datacenter';
           break;
-          case 'capacidad (gb)':
+          case 'capacidad_gb':
             $datacToUpdate = 'capacidad';
             $nup=($storageremoto->usado/$request->catActual)*100;
             //dd($nup);
@@ -138,7 +148,7 @@ class StorageremotoController extends Controller
               return $e;
             }
           break;
-          case 'usado (gb)':
+          case 'usado_gb':
             $datacToUpdate = 'usado';
             $nup=($request->catActual/$storageremoto->capacidad)*100;
             //dd($nup);

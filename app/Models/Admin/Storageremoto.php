@@ -9,8 +9,11 @@ class Storageremoto extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'starageremoto',
+        'storageremoto',
         'cve_tecremotadisco',
+        'cve_servidor',
+        'cve_mhardware',
+        'cve_datacenter',
         'capacidad',
         'usado',
         'usadop',

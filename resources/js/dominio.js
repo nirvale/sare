@@ -15,7 +15,7 @@ let workid; // clave de registro donde se hace click
 let cat; //catalogos
 let edId=1; //bandera para editar id
 const remAceEsp = str =>
-  str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').split(' ').join('_');//remover acentos y espacios de strings
+  str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/["'()]/g,"").replace(/\s/g, '_').toLowerCase();//remover acentos, parentesis,comillas y espacios de strings
 const IDT='#'+$('table.dataTable').attr('id'); // ID DE LA TABLA GENERAL
 const modelos= IDT.toLowerCase().slice(4);
 const modelo = modelos.slice(0,-1);
@@ -92,7 +92,7 @@ const theads = document.getElementById(IDT.slice(1)).getElementsByTagName("th");
                           if (claseclick.includes('catCombox')&& !claseclick.includes('catComboxMulti')) {
                             //alert('debo traer un combo');
                             //catman();
-                            let catChild=remAceEsp(thead.toLowerCase());
+                            let catChild=remAceEsp(thead);
                             let catIndex=theads[0].title.toLowerCase();
                             // console.log(cat[catChild].length);
                             // console.log(cat[catChild][0][catIndex]);
@@ -123,7 +123,7 @@ const theads = document.getElementById(IDT.slice(1)).getElementsByTagName("th");
                             //alert('debo traer un combo multiple');
                             //catman();
 
-                            let catChild=remAceEsp(thead.toLowerCase());
+                            let catChild=remAceEsp(thead);
                             let catIndex=theads[0].title.toLowerCase();
                             // console.log(cat[catChild].length);
                             // console.log(cat[catChild][0][catIndex]);
@@ -298,7 +298,7 @@ const theads = document.getElementById(IDT.slice(1)).getElementsByTagName("th");
       $(IDT).removeClass("tabEditando");
      //agregamos al request el nuevo valor des js
     data.append('_method', 'PUT');//inyectamos el metodo  en request para serializar
-    data.append('thead', thead.toLowerCase());//inyectamos el nombre de la columna  en request para serializar
+    data.append('thead', remAceEsp(thead));//inyectamos el nombre de la columna  en request para serializar
       //data['_method'] = 'PUT';
       ////console.log(modelo.toLowerCase());
       $.ajax({
@@ -395,21 +395,21 @@ const theads = document.getElementById(IDT.slice(1)).getElementsByTagName("th");
           if ($('th.catCombox').length > 0) {
             let thcombox =$('th.catCombox');
             for (let i = edId; i < theads.length-1; i++) {
-                if(theads[i].innerText && !theads[i].classList.contains('catCombox')){
-                  let catNuevo =  "<div class='form-group col-md-12 ml-auto'><label data-error='error' data-success='ok' for='cmb_nombre'>NUEVO(A) "+theads[i].innerText+":</label> <input value='' name='"+remAceEsp(theads[i].innerText.toLowerCase())+"' type='text' id='"+remAceEsp(theads[i].innerText.toLowerCase())+"' class='form-control validate' placeholder='Nuevo Objeto...'></div> ";
+                if(theads[i].innerText && !theads[i].classList.contains('catCombox') && theads[i].classList.contains('catEditable')){
+                  let catNuevo =  "<div class='form-group col-md-12 ml-auto'><label data-error='error' data-success='ok' for='cmb_nombre'>NUEVO(A) "+theads[i].innerText+":</label> <input value='' name='"+remAceEsp(theads[i].innerText)+"' type='text' id='"+remAceEsp(theads[i].innerText)+"' class='form-control validate' placeholder='Nuevo Objeto...'></div> ";
                   $("#modalc1").append(catNuevo);
                 }
                 for (let j = 0; j < thcombox.length; j++) {    ////
                   if (thcombox[j].innerText == theads[i].innerText ) {
-                    let catChild= remAceEsp(thcombox[j].innerText.toLowerCase());
+                    let catChild= remAceEsp(thcombox[j].innerText);
                     let catIndex=theads[0].title.toLowerCase();
                     $("#modalc1").append(
                       "<div class='form-group col-md-12 ml-auto'><label data-error='error' data-success='ok' for='cmb_nombre'>NUEVO(A) "+theads[i].innerText+":</label><select class='form-control select2 cambiarCatComboEditable"+j+"' id='"+remAceEsp(theads[i].innerText.toLowerCase())+"' name='"+remAceEsp(theads[i].innerText.toLowerCase())+"' title='Selecciona uno...'><option value='' selected='selected'>Seleccionar nuevo...</option></select></div>"
                     );
                     if (theads[i].classList.contains('catComboxMulti')) {
-                      //alert('es un combo multiple para crear'+remAceEsp(theads[i].innerText.toLowerCase()));
-                      $('#'+remAceEsp(theads[i].innerText.toLowerCase())).attr('multiple','multiple');
-                      $('#'+remAceEsp(theads[i].innerText.toLowerCase())).attr('name',remAceEsp(theads[i].innerText.toLowerCase())+'[]');
+                      //alert('es un combo multiple para crear'+remAceEsp(theads[i].innerText));
+                      $('#'+remAceEsp(theads[i].innerText)).attr('multiple','multiple');
+                      $('#'+remAceEsp(theads[i].innerText)).attr('name',remAceEsp(theads[i].innerText)+'[]');
                     }
                     for (let k = 0; k < cat[catChild].length; k++) {
                       // console.log(cat[catChild][i][catIndex]);
@@ -418,7 +418,7 @@ const theads = document.getElementById(IDT.slice(1)).getElementsByTagName("th");
                           "<option value="+cat[catChild][k][catIndex]+">" +cat[catChild][k][catChild]+"</option>"
                       );
                     }
-                    // let catNuevo =  "<div class='form-group col-md-12 ml-auto'><label data-error='error' data-success='ok' for='cmb_nombre'>NUEVO(A) "+theads[i].innerText+":</label> <input value='' name='"+remAceEsp(theads[i].innerText.toLowerCase())+"' type='text' id='"+remAceEsp(theads[i].innerText.toLowerCase())+"' class='form-control validate' placeholder='Nombre del nuevo objeto...'></div> ";
+                    // let catNuevo =  "<div class='form-group col-md-12 ml-auto'><label data-error='error' data-success='ok' for='cmb_nombre'>NUEVO(A) "+theads[i].innerText+":</label> <input value='' name='"+remAceEsp(theads[i].innerText )+"' type='text' id='"+remAceEsp(theads[i].innerText )+"' class='form-control validate' placeholder='Nombre del nuevo objeto...'></div> ";
                     // $("#modalc1").append(catNuevo);
                   }else {
 
@@ -428,8 +428,11 @@ const theads = document.getElementById(IDT.slice(1)).getElementsByTagName("th");
               }
           }else {
             for (let i = edId; i < theads.length-1; i++) {
-              let catNuevo =  "<div class='form-group col-md-12 ml-auto'><label data-error='error' data-success='ok' for='cmb_nombre'>NUEVO(A) "+theads[i].innerText+":</label> <input value='' name='"+remAceEsp(theads[i].innerText.toLowerCase())+"' type='text' id='"+remAceEsp(theads[i].innerText.toLowerCase())+"' class='form-control validate' placeholder='Nombre del nuevo objeto...'></div> ";
-              $("#modalc1").append(catNuevo);
+              if (theads[i].classList.contains('catEditable')) {
+                let catNuevo =  "<div class='form-group col-md-12 ml-auto'><label data-error='error' data-success='ok' for='cmb_nombre'>NUEVO(A) "+theads[i].innerText+":</label> <input value='' name='"+remAceEsp(theads[i].innerText)+"' type='text' id='"+remAceEsp(theads[i].innerText)+"' class='form-control validate' placeholder='Nombre del nuevo objeto...'></div> ";
+                $("#modalc1").append(catNuevo);
+              }
+
             }
           }
 
@@ -454,7 +457,7 @@ const theads = document.getElementById(IDT.slice(1)).getElementsByTagName("th");
     //console.log(data)
 
     if (data.get(modelo)==null) {
-      data.append(modelo, data.get(remAceEsp(theads[1].innerText.toLowerCase())));
+      data.append(modelo, data.get(remAceEsp(theads[1].innerText)));
     }
     //
     alertify.confirm('GUARDAR NOMBRE DE '+modelo.toUpperCase()+' ','Crear: '+data.get(modelo), function(){
@@ -623,7 +626,7 @@ function catman(){  //console.log(modelo);
   //alert('llame al catalogo')
   if ($('th.catCombox').length > 0) {
     $('th.catCombox').each(function(i,vars) {
-            theadcombox[i]=remAceEsp($(this).text().toLowerCase());
+            theadcombox[i]=remAceEsp($(this).text());
     });
     //console.log(theadcombox);
         $.ajax({
