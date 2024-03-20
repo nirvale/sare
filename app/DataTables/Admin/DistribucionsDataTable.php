@@ -84,15 +84,15 @@ class DistribucionsDataTable extends DataTable
       return [
         Column::make('id')->width(30)->title('ID'),
         // Column::make('add your columns'),
+        Column::make('distribucion')
+              ->addClass('catEditable')
+              ->title('DISTRIBUCIÓN'),
         Column::make('os')
               ->addClass('catEditable')
               ->addClass('catCombox')
               //->searchable(false)
               ->name('os.os') //para habilitar la búsqueda en los joins
               ->title('SISTEMA OPERATIVO'),
-        Column::make('distribucion')
-              ->addClass('catEditable')
-              ->title('DISTRIBUCIÓN'),
 
               // ->orderable(false),
 

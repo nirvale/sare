@@ -105,7 +105,7 @@ class EstadobackupController extends Controller
      }
      if ($validated) {
        switch ($request->thead) {
-         case 'estado backup':
+         case 'estado_backup':
            $datacToUpdate = 'estadobackup';
          break;
          default:

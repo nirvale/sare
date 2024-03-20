@@ -161,7 +161,7 @@ class NicController extends Controller
             $datacToUpdate = 'mac';
             $request->catActual=strToUpper($request->catActual);
           break;
-          case 'descripción':
+          case 'descripcion':
             $datacToUpdate = 'descripcion';
           break;
           case 'servidor':

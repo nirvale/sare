@@ -107,7 +107,7 @@ class BackupController extends Controller
             case 'backup':
               $datacToUpdate = 'backup';
             break;
-            case 'descripción':
+            case 'descripcion':
               $datacToUpdate = 'descripcion';
             break;
             default:

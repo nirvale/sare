@@ -107,7 +107,7 @@ class DatacenterController extends Controller
             case 'datacenter':
               $datacToUpdate = 'datacenter';
             break;
-            case 'descripción':
+            case 'descripcion':
               $datacToUpdate = 'descripcion';
             break;
             case 'tipodc':

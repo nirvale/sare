@@ -104,10 +104,10 @@ class DistribucionController extends Controller
       }
       if ($validated) {
         switch ($request->thead) {
-          case 'distribución':
+          case 'distribucion':
             $datacToUpdate = 'distribucion';
           break;
-          case 'sistema operativo':
+          case 'sistema_operativo':
             $datacToUpdate = 'cve_os';
           break;
 

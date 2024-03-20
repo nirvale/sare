@@ -115,7 +115,7 @@ class ProcesadorController extends Controller
           case 'procesador':
             $datacToUpdate = 'procesador';
           break;
-          case 'núcleos':
+          case 'nucleos':
             $datacToUpdate = 'nucleos';
           break;
           case 'velocidad':

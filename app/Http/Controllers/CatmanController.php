@@ -38,7 +38,7 @@ class CatmanController extends Controller
               case 'tipodc':
                   $theadcomboxr='tipodc';
                   $catmanr[$theadcomboxr]=Tipodc::all();
-                break;
+              break;
             // case 'descripción':
             //       $theadcomboxr='descripción';
             //       $catmanr[$theadcomboxr]=Tipodc::all();

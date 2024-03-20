@@ -103,10 +103,10 @@ class OsVersionController extends Controller
       }
       if ($validated) {
         switch ($request->thead) {
-          case 'distribución':
+          case 'distribucion':
             $datacToUpdate = 'cve_distribucion';
           break;
-          case 'versión':
+          case 'version':
             $datacToUpdate = 'osversion';
           break;
           default:

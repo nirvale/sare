@@ -106,7 +106,7 @@ class RdbmsVersionController extends Controller
           case 'manejador':
             $datacToUpdate = 'cve_rdbms';
           break;
-          case 'versión':
+          case 'version':
             $datacToUpdate = 'rdbmsversion';
           break;
           default:
