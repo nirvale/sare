@@ -16,12 +16,14 @@ return new class extends Migration
             $table->string('storageremoto')->unique();
             $table->integer('cve_tecremotadisco');
             $table->integer('cve_mhardware');
+            $table->integer('cve_datacenter');
             $table->integer('capacidad');
             $table->integer('usado');
-            $table->float('disponible',4,2);
+            $table->float('usadop',4,2);
             $table->timestamps();
             $table->foreign('cve_tecremotadisco')->references('id')->on('tecremotadiscos')->onUpdate('cascade');
             $table->foreign('cve_mhardware')->references('id')->on('mhardwares')->onUpdate('cascade');
+            $table->foreign('cve_datacenter')->references('id')->on('datacenters')->onUpdate('cascade');
         });
     }
 

@@ -194,6 +194,8 @@ return [
         'programa' => 'NOMBRE DEL PROGRAMA',
         'dependencia' => 'NOMBRE DE LA DEPENDENCIA',
         'ndominio' => 'DOMINIO (RENOMBRADO)',
+        'ndominio' => 'DOMINIO (RENOMBRADO)',
+        'utilidades_soportadas.*' => 'UTILIDADES SOPORTADAS',
     ],
 
 ];

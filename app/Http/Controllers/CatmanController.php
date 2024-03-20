@@ -21,7 +21,8 @@ use App\Models\Admin\OsVersion;
 use App\Models\Admin\Tnic;
 use App\Models\Admin\Servidor;
 use App\Models\Admin\Dns;
-
+use App\Models\Admin\Tecremotadisco;
+use App\Models\Admin\Udremota;
 
 class CatmanController extends Controller
 {
@@ -154,6 +155,36 @@ class CatmanController extends Controller
               }
             }
         break;
+        case 'storageremoto':
+          foreach ($request->theadcombox as $key => $head) {
+            switch ($head) {
+              case 'tecnología':
+                  $theadcomboxr='tecnologia';
+                  $catmanr[$theadcomboxr]=Tecremotadisco::select('id','tecremotadisco as tecnologia')->orderBy('tecnologia')->get();
+              break;
+              case 'fabricante':
+                  $theadcomboxr='fabricante';
+                  $catmanr[$theadcomboxr]=Mhardware::select('id','mhardware as fabricante')->orderBy('fabricante')->get();
+              break;
+              case 'utilidades soportadas':
+                  $theadcomboxr='utilidades soportadas';
+                  $catmanr[$theadcomboxr]=Udremota::select('id','udremota as utilidades soportadas')->orderBy('utilidades soportadas')->get();
+              break;
+              case 'datacenter':
+                  $theadcomboxr='datacenter';
+                  $catmanr[$theadcomboxr]=Datacenter::select('id','datacenter')->orderBy('datacenter')->get();
+              break;
+            // case 'descripción':
+            //       $theadcomboxr='descripción';
+            //       $catmanr[$theadcomboxr]=Tipodc::all();
+            //   //break;
+
+              default:
+                // code...
+                break;
+            }
+          }
+      break;
         case 'servidor':
           foreach ($request->theadcombox as $key => $head) {
             switch ($head) {

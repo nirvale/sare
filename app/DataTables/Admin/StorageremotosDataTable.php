@@ -28,7 +28,13 @@ class StorageremotosDataTable extends DataTable
               ;
             return $actionBtn;
             })
-          ->setRowId('id'); //para habilitar ordenar en clobs de oracle
+          ->addColumn('utilidades', function (Storageremoto $storageremoto) {
+              return $storageremoto->udremotas->map(function($udremotas) {
+                    return $udremotas->udremota;
+              })->implode(', ');
+           })
+          ->rawColumns(['utilidades','action'])
+          ->setRowId('id');
   }
 
   /**
@@ -38,12 +44,25 @@ class StorageremotosDataTable extends DataTable
   {
   // return $model->newQuery()->where('id',1);
 
-return  $model = Storageremoto::select('storageremotos.id','storageremotos.storageremoto','storageremotos.capacidad','storageremotos.usado','storageremotos.disponible','storageremotos.cve_tecremotadisco','storageremotos.cve_mhardware','tecremotadiscos.tecremotadisco','mhardwares.mhardware')
-      ->join('tecremotadiscos','tecremotadiscos.id','=','storageremotos.cve_tecremotadisco')
-      ->join('mhardwares','mhardwares.id','=','storageremotos.cve_mhardware')
-      ;
-      // ->withCasts(['fecha' => 'date:Y-m-d'])
-      // ->get();
+return  $model = Storageremoto::select(
+        'storageremotos.id',
+        'storageremotos.storageremoto',
+        'storageremotos.capacidad',
+        'storageremotos.usado',
+        'storageremotos.usadop',
+        'storageremotos.cve_tecremotadisco',
+        'storageremotos.cve_mhardware',
+          'tecremotadiscos.tecremotadisco',
+          'mhardwares.mhardware',
+          'datacenters.datacenter',
+        )
+            ->join('tecremotadiscos','tecremotadiscos.id','=','storageremotos.cve_tecremotadisco')
+            ->join('mhardwares','mhardwares.id','=','storageremotos.cve_mhardware')
+            ->join('datacenters','datacenters.id','=','storageremotos.cve_datacenter')
+            ->with('udremotas')
+            ;
+            // ->withCasts(['fecha' => 'date:Y-m-d'])
+            // ->get();
 
 }
 
@@ -66,7 +85,7 @@ public function html(): HtmlBuilder
                   'responsive' => true,
                   'language' => [ 'url' => '/sare/vendor/DataTables/lang/Spanish.json', ],
                   'columnDefs' => [
-                      ['targets' => [6],'render' => '$.fn.dataTable.render.percentBar("square","#fff", "#c1efcb", "#FF0033", "#28a745", 0, "groove")' ],
+                      ['targets' => [8],'render' => '$.fn.dataTable.render.percentBar("square","#fff", "#c1efcb", "#FF0033", "#28a745", 0, "groove")' ],
                       //['targets' => [3], 'visible' => false],
                     ]
 
@@ -106,13 +125,26 @@ public function getColumns(): array
           //->searchable(false)
           ->name('mhardwares.mhardware') //para habilitar la búsqueda en los joins
           ->title('FABRICANTE'),
+    Column::make('utilidades')
+          ->addClass('catEditable')
+          ->addClass('catComboxMulti')
+          ->addClass('catCombox')
+          //->searchable(false)
+          //->name('mhardwares.mhardware') //para habilitar la búsqueda en los joins
+          ->title('UTILIDADES SOPORTADAS'),
+    Column::make('datacenter')
+          ->addClass('catEditable')
+          ->addClass('catCombox')
+          //->searchable(false)
+          ->name('datacenters.datacenter') //para habilitar la búsqueda en los joins
+          ->title('DATACENTER'),
     Column::make('capacidad')
           ->addClass('catEditable')
-          ->title('CAPACIDAD'),
+          ->title('CAPACIDAD (GB)'),
     Column::make('usado')
           ->addClass('catEditable')
           ->title('USADO (GB)'),
-    Column::make('disponible')
+    Column::make('usadop')
           //->addClass('catEditable')
           ->title('USADO (%)'),
 

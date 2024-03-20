@@ -58,7 +58,7 @@ const theads = document.getElementById(IDT.slice(1)).getElementsByTagName("th");
     //console.log('se detecto click');
     let claseclick = clickp.target.className.trim().split(' ');
     //console.log(claseclick);
-    if (claseclick.includes('catEditable','catCombox')) {
+    if (claseclick.includes('catEditable','catCombox','catComboxMulti')) {
       //console.log('sí es la clase que busco - catEditable');
       if (clickp.target.offsetParent.id != null && clickp.target.offsetParent.id == IDT.slice(1) && clickp.target.tagName !='TH') {
 
@@ -73,7 +73,7 @@ const theads = document.getElementById(IDT.slice(1)).getElementsByTagName("th");
                           row = $(clickp.target.parentElement);
                           // estaCelda = row.find("td:nth-child(2)");  //original
                           estaCelda = $(clickp.target);
-                          estaCeldaTexto = clickp.target.outerText;
+                          estaCeldaTexto = clickp.target.innerHTML;
                           mainid = clickp.target.parentElement.firstChild.innerText;
                           thead = $("thead th:eq(" + $(clickp.target).index() + ")").text().trim();                       ;
                           ////console.log(clickp.target);
@@ -89,7 +89,7 @@ const theads = document.getElementById(IDT.slice(1)).getElementsByTagName("th");
                           data.append('id',mainid);
                           data.append('catOriginal',estaCeldaTexto);
                           //inyectamos forma
-                          if (claseclick.includes('catCombox')) {
+                          if (claseclick.includes('catCombox')&& !claseclick.includes('catComboxMulti')) {
                             //alert('debo traer un combo');
                             //catman();
                             let catChild=removerAcentos(thead.toLowerCase());
@@ -119,6 +119,36 @@ const theads = document.getElementById(IDT.slice(1)).getElementsByTagName("th");
 
                             }
 
+                          }else if (claseclick.includes('catComboxMulti')) {
+                            //alert('debo traer un combo multiple');
+                            //catman();
+
+                            let catChild=removerAcentos(thead.toLowerCase());
+                            let catIndex=theads[0].title.toLowerCase();
+                            // console.log(cat[catChild].length);
+                            // console.log(cat[catChild][0][catIndex]);
+                            // console.log(cat[catChild][0][catChild]);
+
+                            estaCelda.empty().append(
+                            //  "<input value='"+estaCeldaTexto+"'  name='nobjeto' type='text' id='nobjeto' class='form-control validate cambiarCatEditable' placeholder='Nombre del nuevo objeto'>"
+                              "<select class='form-control select2 cambiarCatComboEditable' id='nobjeto' name='nobjeto' title='Selecciona uno...'multiple ><option value='' selected='selected'>Seleccionar...</option></select>"
+                            );
+
+                            for (let i = 0; i < cat[catChild].length; i++) {
+                              //console.log(cat[catChild][i][catIndex]);
+                              //console.log(cat[catChild][i][catChild]);
+                              let setSelection='';
+                              if (cat[catChild][i][catChild]==estaCeldaTexto) {
+                                  setSelection='disabled selected';
+                              }else{
+                                setSelection='class=comboselecting';
+                              }
+
+                                $('.cambiarCatComboEditable').append(
+                                  "<option value="+cat[catChild][i][catIndex]+" "+setSelection+" >" +cat[catChild][i][catChild]+"</option>"
+                              );
+
+                            }
                           }else {
                             estaCelda.empty().append(
                               "<input value='"+estaCeldaTexto+"'  name='nobjeto' type='text' id='nobjeto' class='form-control validate cambiarCatEditable' placeholder='Nombre del nuevo objeto'>"
@@ -193,6 +223,48 @@ const theads = document.getElementById(IDT.slice(1)).getElementsByTagName("th");
     }
 
   });
+  
+  $(IDT).on('keydown', 'td.catComboxMulti', function () {
+    event.preventDefault();
+    console.log( event.type + ": " +  event.which );
+    if (event.which==17) {
+      $( 'td.catComboxMulti' ).one( "keyup", function( event ) {
+        event.preventDefault();
+          //console.log( event.type + ": " +  event.which );
+          let catActual0 = [];
+          let dsplyCatActual= [];
+          $.each($('.catComboxMulti option:selected'),function() {
+            dsplyCatActual.push($(this).text());
+          });
+          $.each($('.catComboxMulti option:selected'), function(){
+              catActual0.push($(this).val());
+          });
+          let catActual = new Object(); //we inicia porque no existe, el atributo "value" necesario para enviar la data
+          catActual.value = catActual0;
+          data.append('catActual',JSON.stringify(catActual.value));
+          // data.append('catActual',catActual.value);
+          //console.log(catActual.value);
+          // alert("You have selected - " + dsplyCatActual0.join(", "));
+          // data.delete('catActual'); //eliminamos para no tener la misma variable muchas veces, en ejecucion no debe existir este problema
+          sChanges(dsplyCatActual);
+        });
+    }else if (event.which==27) {
+      cancelEdit();
+    }
+
+  });
+
+  function cancelEdit(){
+    //console.log('click act cancelada con cambios pendientes');
+    estaCelda.removeClass('catEditando');
+    estaCelda.addClass('catEditable');
+    $(IDT).removeClass("tabEditando");
+     estaCelda.empty().append(estaCeldaTexto);
+    // $(IDT).DataTable().ajax.reload ();
+    alertify.error('Actualización Cancelada');
+    cleanvars()
+    //console.log('Programa cerrado, fin del modulo de edición');
+  };
 
 
   $(IDT).on('change', 'td.catEditando', function (checkcambios) {
@@ -202,102 +274,107 @@ const theads = document.getElementById(IDT.slice(1)).getElementsByTagName("th");
       clicken=1;
       catActual = document.getElementById('nobjeto');
       let dsplyCatActual= null;
+    //  console.log(catActual.attributes);
+    if (catActual.classList.contains('cambiarCatComboEditable') && catActual.attributes.multiple) {
+      //abortamos actualización para iniciar multiple select
+    }else { // eliminamos el else
+
       if($('.comboselecting').text()) {
         dsplyCatActual = $('select[name=nobjeto] option').filter(':selected').text();
         //alert($('select[name=nobjeto] option').filter(':selected').text())
       }else {
         dsplyCatActual = catActual.value;
       }
-      alertify.confirm('ACTUALIZAR NOMBRE DE '+thead+' ','Actuaizar: '+estaCeldaTexto+' <br>Al nuevo valor: '+dsplyCatActual+'', function(){
-        dsplyCatActual=null;
-        $(IDT).removeClass("tabEditando");
-      data.append('catActual',catActual.value); //agregamos al request el nuevo valor des js
-      data.append('_method', 'PUT');//inyectamos el metodo  en request para serializar
-      data.append('thead', thead.toLowerCase());//inyectamos el nombre de la columna  en request para serializar
-        //data['_method'] = 'PUT';
-        ////console.log(modelo.toLowerCase());
-        $.ajax({
-          url: modelo.toLowerCase()+'/'+data.get('id'),
-          method: 'POST',
-          headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-          },
-          processData: false,
-          contentType: false,
-          dataType: 'json',
-          cache:false,
-          data:data,
-
-          success: function(response) {
-            //validando formulario
-            if(response.errors)
-            {
+      data.append('catActual',catActual.value);
+      sChanges(dsplyCatActual);
+    }
 
 
-              $.each(response.errors, function(key, value){
-                let msg = alertify.error(value+"<br><button class='btn btn-danger'>Cerrar</button>",10000);
-                msg.callback = function (isClicked) {
-                        if(isClicked){
-                          ////console.log('notification dismissed by user');
-                        }
-                        else{
-                          ////console.log('notification auto-dismissed');
-                          estaCelda.removeClass('catEditando');
-                          estaCelda.addClass('catEditable');
-                          $(IDT).removeClass("tabEditando"); //recargamos la tabla si hay errores
-                        }
+  });
+
+  function sChanges(dsplyCatActual){
+    alertify.confirm('ACTUALIZAR NOMBRE DE '+thead+' ','Actuaizar: '+estaCeldaTexto+' <br>Al nuevo valor: '+dsplyCatActual+'', function(){
+      //dsplyCatActual=null;
+      $(IDT).removeClass("tabEditando");
+     //agregamos al request el nuevo valor des js
+    data.append('_method', 'PUT');//inyectamos el metodo  en request para serializar
+    data.append('thead', thead.toLowerCase());//inyectamos el nombre de la columna  en request para serializar
+      //data['_method'] = 'PUT';
+      ////console.log(modelo.toLowerCase());
+      $.ajax({
+        url: modelo.toLowerCase()+'/'+data.get('id'),
+        method: 'POST',
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+        },
+        processData: false,
+        contentType: false,
+        dataType: 'json',
+        cache:false,
+        data:data,
+
+        success: function(response) {
+          //validando formulario
+          if(response.errors)
+          {
 
 
-                };
-              });
-              $(response.errors).empty();
-            }
-            else
-            {
-              //$('#modalusuario').modal('hide');
-              alertify.success ("Actualizado con éxito: <br>"+data.get('catActual'));
-              //apagamos edicion
-              estaCelda.removeClass('catEditando');
-              estaCelda.addClass('catEditable');
-              $(IDT).removeClass("tabEditando");
-              estaCelda.empty().append(catActual);
-              $(IDT).DataTable().ajax.reload();
-              cleanvars()
-              //console.log('Programa cerrado, fin del modulo de edición');
-              ////console.log(response);
+            $.each(response.errors, function(key, value){
+              let msg = alertify.error(value+"<br><button class='btn btn-danger'>Cerrar</button>",10000);
+              msg.callback = function (isClicked) {
+                      if(isClicked){
+                        ////console.log('notification dismissed by user');
+                      }
+                      else{
+                        ////console.log('notification auto-dismissed');
+                        estaCelda.removeClass('catEditando');
+                        estaCelda.addClass('catEditable');
+                        $(IDT).removeClass("tabEditando"); //recargamos la tabla si hay errores
+                      }
 
-              if ($('.sorting_1').length)
-              {
-                $(IDT).DataTable().ajax.reload();
-              }
-            }
-          },
-          error: function(response) {
-            alertify.error("Error actualizando "+modelo+": <br>"+data.get('catOriginal'));
-              for (let value of data.values()) {
-                ////console.log(value);
-                }
+
+              };
+            });
+            $(response.errors).empty();
+          }
+          else
+          {
+            //$('#modalusuario').modal('hide');
+            alertify.success ("Actualizado con éxito: <br>"+dsplyCatActual);
+            //apagamos edicion
             estaCelda.removeClass('catEditando');
             estaCelda.addClass('catEditable');
             $(IDT).removeClass("tabEditando");
+            //estaCelda.empty().append(catActual);
             $(IDT).DataTable().ajax.reload();
             cleanvars()
             //console.log('Programa cerrado, fin del modulo de edición');
-          },
-        });
+            ////console.log(response);
 
-      },function(){
-        //console.log('click act cancelada con cambios pendientes');
-        estaCelda.removeClass('catEditando');
-        estaCelda.addClass('catEditable');
-        $(IDT).removeClass("tabEditando");
-         estaCelda.empty().append(estaCeldaTexto);
-        // $(IDT).DataTable().ajax.reload ();
-        alertify.error('Actualización Cancelada');
-        cleanvars()
-        //console.log('Programa cerrado, fin del modulo de edición');
-      }).set('labels', {ok:'CONTINUAR', cancel:'CANCELAR'});
-  });
+            if ($('.sorting_1').length)
+            {
+              $(IDT).DataTable().ajax.reload();
+            }
+          }
+        },
+        error: function(response) {
+          alertify.error("Error actualizando "+modelo+": <br>"+data.get('catOriginal'));
+            for (let value of data.values()) {
+              ////console.log(value);
+              }
+          estaCelda.removeClass('catEditando');
+          estaCelda.addClass('catEditable');
+          $(IDT).removeClass("tabEditando");
+          $(IDT).DataTable().ajax.reload();
+          cleanvars()
+          //console.log('Programa cerrado, fin del modulo de edición');
+        },
+      });
+
+    },function(){
+      cancelEdit();
+    }).set('labels', {ok:'CONTINUAR', cancel:'CANCELAR'});
+  };
 //  $.fn.dataTable.render.percentBar('round','#fff', '#FF9CAB', '#FF0033', '#FF9CAB', 0, 'solid')
 
   $.fn.dataTable.ext.buttons.nuevo = {
@@ -329,6 +406,11 @@ const theads = document.getElementById(IDT.slice(1)).getElementsByTagName("th");
                     $("#modalc1").append(
                       "<div class='form-group col-md-12 ml-auto'><label data-error='error' data-success='ok' for='cmb_nombre'>NUEVO(A) "+theads[i].innerText+":</label><select class='form-control select2 cambiarCatComboEditable"+j+"' id='"+removerAcentos(theads[i].innerText.toLowerCase())+"' name='"+removerAcentos(theads[i].innerText.toLowerCase())+"' title='Selecciona uno...'><option value='' selected='selected'>Seleccionar nuevo...</option></select></div>"
                     );
+                    if (theads[i].classList.contains('catComboxMulti')) {
+                      //alert('es un combo multiple para crear'+removerAcentos(theads[i].innerText.toLowerCase()));
+                      $("[id='"+removerAcentos(theads[i].innerText.toLowerCase())+"']").attr('multiple','multiple');
+                      $("[id='"+removerAcentos(theads[i].innerText.toLowerCase())+"']").attr('name',removerAcentos(theads[i].innerText.toLowerCase())+'[]');
+                    }
                     for (let k = 0; k < cat[catChild].length; k++) {
                       // console.log(cat[catChild][i][catIndex]);
                       // console.log(cat[catChild][i][catChild]);

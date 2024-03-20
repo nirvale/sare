@@ -13,6 +13,10 @@ class Storageremoto extends Model
         'cve_tecremotadisco',
         'capacidad',
         'usado',
-        'disponible',
+        'usadop',
     ];
+    //relaciones muchos-muchos
+    public function udremotas(){
+      return $this->belongsToMany(Udremota::class);
+    }
 }

@@ -39,8 +39,11 @@ class StorageremotoController extends Controller
    {
      $validated=\Validator::make($request->all(), [
           //'empr_nombre' => 'bail|required|',
-          'version' => 'bail|required|unique:rdbms_versions,storageremoto|max:50',
-          'manejador' => 'bail|required|exists:rdbms,id|max:2',
+          'sistema' => 'bail|required|unique:storageremotos,storageremoto|max:50',
+          'tecnologia' => 'bail|required|exists:tecremotadiscos,id|max:2',
+          'fabricante' => 'bail|required|exists:mhardwares,id|max:2',
+          'utilidades_soportadas.*' => 'bail|required|exists:udremotas,id|max:2',
+          'datacenter' => 'bail|required|exists:datacenters,id|max:2',
       ]);
       if ($validated->fails())
       {
@@ -102,27 +105,69 @@ class StorageremotoController extends Controller
         return response()->json(['errors'=>$validated->errors()->all()]);
       }
       if ($validated) {
+        $multi=0; //variable para definir syncronizacion select multiple
         switch ($request->thead) {
-          case 'manejador':
-            $datacToUpdate = 'cve_rdbms';
-          break;
-          case 'versión':
+          case 'sistema':
             $datacToUpdate = 'storageremoto';
+          break;
+          case 'tecnología':
+            $datacToUpdate = 'cve_tecremotadisco';
+          break;
+          case 'fabricante':
+            $datacToUpdate = 'cve_mhardware';
+          break;
+          case 'utilidades soportadas':
+            $multi=1;
+             $datacToUpdate = 'id';
+             $storageremoto->udremotas()->sync(json_decode($request->catActual));
+          break;
+          case 'datacenter':
+            $datacToUpdate = 'cve_datacenter';
+          break;
+          case 'capacidad (gb)':
+            $datacToUpdate = 'capacidad';
+            $nup=($storageremoto->usado/$request->catActual)*100;
+            //dd($nup);
+            DB::beginTransaction();
+            try {
+             $storageremoto->usadop = $nup;
+             $storageremoto->push();
+             DB::commit();
+            } catch (\Exception $e) {
+              DB::rollBack();
+              return $e;
+            }
+          break;
+          case 'usado (gb)':
+            $datacToUpdate = 'usado';
+            $nup=($request->catActual/$storageremoto->capacidad)*100;
+            //dd($nup);
+            DB::beginTransaction();
+            try {
+             $storageremoto->usadop = $nup;
+             $storageremoto->push();
+             DB::commit();
+            } catch (\Exception $e) {
+              DB::rollBack();
+              return $e;
+            }
           break;
           default:
             // code...
           break;
         }
-        DB::beginTransaction();
-        try {
-       //  $Storageremoto = Storageremoto::find($request->id);
-         $storageremoto->$datacToUpdate = strToUpper($request->catActual);
+        if ($multi==0) {
+          DB::beginTransaction();
+          try {
+         //  $Storageremoto = Storageremoto::find($request->id);
+           $storageremoto->$datacToUpdate = strToUpper($request->catActual);
 
-         $storageremoto->push();
-         DB::commit();
-        } catch (\Exception $e) {
-          DB::rollBack();
-          return $e;
+           $storageremoto->push();
+           DB::commit();
+          } catch (\Exception $e) {
+            DB::rollBack();
+            return $e;
+          }
         }
 
       }

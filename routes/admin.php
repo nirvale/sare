@@ -35,6 +35,7 @@ use App\Http\Controllers\Admin\ProcesadorController;
 use App\Http\Controllers\Admin\NicController;
 use App\Http\Controllers\Admin\DnsController;
 use App\Http\Controllers\Admin\StorageremotoController;
+use App\Http\Controllers\Admin\UdremotaController;
 
 //Route::get('/', [HomeController::class, 'index']);
 //manejo de usuarios
@@ -175,6 +176,10 @@ Route::resource('nic', NicController::class)->only(['update','store','destroy'])
 Route::get('storageremoto', [StorageremotoController::class, 'indexdt'])->name('storageremotos.indexdt');
 //RUTAS CRUD Storageremotos
 Route::resource('storageremoto', StorageremotoController::class)->only(['update','store','destroy']);
+//ruta para datatables Udremotas
+Route::get('udremota', [UdremotaController::class, 'indexdt'])->name('udremotas.indexdt');
+//RUTAS CRUD Udremotas
+Route::resource('udremota', UdremotaController::class)->only(['update','store','destroy'])->parameters(['udremota'=>'udremota']);
 
 
 //livewire assets
