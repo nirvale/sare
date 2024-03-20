@@ -223,7 +223,7 @@ const theads = document.getElementById(IDT.slice(1)).getElementsByTagName("th");
     }
 
   });
-  
+
   $(IDT).on('keydown', 'td.catComboxMulti', function () {
     event.preventDefault();
     console.log( event.type + ": " +  event.which );
@@ -396,7 +396,7 @@ const theads = document.getElementById(IDT.slice(1)).getElementsByTagName("th");
             let thcombox =$('th.catCombox');
             for (let i = edId; i < theads.length-1; i++) {
                 if(theads[i].innerText && !theads[i].classList.contains('catCombox')){
-                  let catNuevo =  "<div class='form-group col-md-12 ml-auto'><label data-error='error' data-success='ok' for='cmb_nombre'>NUEVO(A) "+theads[i].innerText+":</label> <input value='' name='"+removerAcentos(theads[i].innerText.toLowerCase())+"' type='text' id='"+removerAcentos(theads[i].innerText.toLowerCase())+"' class='form-control validate' title='Selecciona uno...'></div> ";
+                  let catNuevo =  "<div class='form-group col-md-12 ml-auto'><label data-error='error' data-success='ok' for='cmb_nombre'>NUEVO(A) "+theads[i].innerText+":</label> <input value='' name='"+removerAcentos(theads[i].innerText.toLowerCase())+"' type='text' id='"+removerAcentos(theads[i].innerText.toLowerCase())+"' class='form-control validate' placeholder='Nuevo Objeto...'></div> ";
                   $("#modalc1").append(catNuevo);
                 }
                 for (let j = 0; j < thcombox.length; j++) {    ////
