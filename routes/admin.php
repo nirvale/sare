@@ -36,6 +36,7 @@ use App\Http\Controllers\Admin\NicController;
 use App\Http\Controllers\Admin\DnsController;
 use App\Http\Controllers\Admin\StorageremotoController;
 use App\Http\Controllers\Admin\UdremotaController;
+use App\Http\Controllers\Admin\DformatoController;
 
 //Route::get('/', [HomeController::class, 'index']);
 //manejo de usuarios
@@ -117,6 +118,10 @@ Route::delete('rdbms/{rdbms}', [RdbmsController::class,'destroy'])->name('rdbms.
 Route::get('tecremotadisco', [TecremotadiscoController::class, 'indexdt'])->name('tecremotadiscos.indexdt');
 //RUTAS CRUD Tecremotadiscos
 Route::resource('tecremotadisco', TecremotadiscoController::class)->only(['update','store','destroy']);
+//ruta para datatables Dformatos
+Route::get('dformato', [DformatoController::class, 'indexdt'])->name('dformatos.indexdt');
+//RUTAS CRUD Dformatos
+Route::resource('dformato', DformatoController::class)->only(['update','store','destroy']);
 //ruta para datatables Tdiscos
 Route::get('tdisco', [TdiscoController::class, 'indexdt'])->name('tdiscos.indexdt');
 //RUTAS CRUD Tdiscos

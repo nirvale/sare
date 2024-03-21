@@ -481,6 +481,20 @@ return [
                               'can' => ['adming','admin','ver_catalogos','editar_catalogos','crear_catalogos','imprimir_catalogos','eliminar_catalogos'],
                               'submenu' => [
                                     [
+                                        'text' => 'Cajas de Storage',
+                                        //'url'  => '/admin/esquemahome',
+                                        'route'  => 'storageremotos.indexdt',
+                                        'icon'    => 'fa fa-list-ol',
+                                        'can' => ['adming','admin','ver_catalogos','editar_catalogos','crear_catalogos','imprimir_catalogos','eliminar_catalogos'],
+                                    ],
+                                    [
+                                        'text' => 'Formatos',
+                                        //'url'  => '/admin/esquemahome',
+                                        'route'  => 'dformatos.indexdt',
+                                        'icon'    => 'fa fa-list-ol',
+                                        'can' => ['adming','admin','ver_catalogos','editar_catalogos','crear_catalogos','imprimir_catalogos','eliminar_catalogos'],
+                                    ],
+                                    [
                                         'text' => 'Tecnologías Storage Remoto',
                                         //'url'  => '/admin/esquemahome',
                                         'route'  => 'tecremotadiscos.indexdt',
@@ -498,13 +512,6 @@ return [
                                         'text' => 'Utilidades Storage Remoto',
                                         //'url'  => '/admin/esquemahome',
                                         'route'  => 'udremotas.indexdt',
-                                        'icon'    => 'fa fa-list-ol',
-                                        'can' => ['adming','admin','ver_catalogos','editar_catalogos','crear_catalogos','imprimir_catalogos','eliminar_catalogos'],
-                                    ],
-                                    [
-                                        'text' => 'Cajas de Storage',
-                                        //'url'  => '/admin/esquemahome',
-                                        'route'  => 'storageremotos.indexdt',
                                         'icon'    => 'fa fa-list-ol',
                                         'can' => ['adming','admin','ver_catalogos','editar_catalogos','crear_catalogos','imprimir_catalogos','eliminar_catalogos'],
                                     ],
