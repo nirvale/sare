@@ -488,6 +488,13 @@ return [
                                         'can' => ['adming','admin','ver_catalogos','editar_catalogos','crear_catalogos','imprimir_catalogos','eliminar_catalogos'],
                                     ],
                                     [
+                                        'text' => 'Discos Locales',
+                                        //'url'  => '/admin/esquemahome',
+                                        'route'  => 'localdiscos.indexdt',
+                                        'icon'    => 'fa fa-list-ol',
+                                        'can' => ['adming','admin','ver_catalogos','editar_catalogos','crear_catalogos','imprimir_catalogos','eliminar_catalogos'],
+                                    ],
+                                    [
                                         'text' => 'Formatos',
                                         //'url'  => '/admin/esquemahome',
                                         'route'  => 'dformatos.indexdt',
