@@ -23,6 +23,7 @@ use App\Models\Admin\Servidor;
 use App\Models\Admin\Dns;
 use App\Models\Admin\Tecremotadisco;
 use App\Models\Admin\Udremota;
+use App\Models\Admin\Dformato;
 
 class CatmanController extends Controller
 {
@@ -273,7 +274,24 @@ class CatmanController extends Controller
               case 'servidor':
                   $theadcomboxr='servidor';
                   $catmanr[$theadcomboxr]=Servidor::select('id','hostname as servidor')->orderBy('servidor')->get();
-                break;
+              break;
+              default:
+                // code...
+              break;
+            }
+          }
+        break;
+        case 'localdisco':
+          foreach ($request->theadcombox as $key => $head) {
+            switch ($head) {
+              case 'servidor':
+                  $theadcomboxr='servidor';
+                  $catmanr[$theadcomboxr]=Servidor::select('id','hostname as servidor')->orderBy('servidor')->get();
+              break;
+              case 'formato':
+                  $theadcomboxr='formato';
+                  $catmanr[$theadcomboxr]=Dformato::select('id','dformato as formato')->orderBy('formato')->get();
+              break;
               default:
                 // code...
                 break;

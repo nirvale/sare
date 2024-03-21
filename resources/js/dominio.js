@@ -58,7 +58,7 @@ const theads = document.getElementById(IDT.slice(1)).getElementsByTagName("th");
     //console.log('se detecto click');
     let claseclick = clickp.target.className.trim().split(' ');
     //console.log(claseclick);
-    if (claseclick.includes('catEditable','catCombox','catComboxMulti')) {
+    if (claseclick.includes('catEditable','catCombox','catComboxMulti','catEditableTA')) {
       //console.log('sí es la clase que busco - catEditable');
       if (clickp.target.offsetParent.id != null && clickp.target.offsetParent.id == IDT.slice(1) && clickp.target.tagName !='TH') {
 
@@ -149,6 +149,10 @@ const theads = document.getElementById(IDT.slice(1)).getElementsByTagName("th");
                               );
 
                             }
+                          }else if(claseclick.includes('catEditableTA')) {
+                            estaCelda.empty().append(
+                              "<textarea name='nobjeto' type='text' id='nobjeto'  class='form-control validate cambiarCatEditable' placeholder='Nuevo texto'>"+estaCeldaTexto.replace(/<br\s*[\/]?>/gi, "\r")+"</textarea>"
+                            );
                           }else {
                             estaCelda.empty().append(
                               "<input value='"+estaCeldaTexto+"'  name='nobjeto' type='text' id='nobjeto' class='form-control validate cambiarCatEditable' placeholder='Nombre del nuevo objeto'>"
@@ -293,7 +297,7 @@ const theads = document.getElementById(IDT.slice(1)).getElementsByTagName("th");
   });
 
   function sChanges(dsplyCatActual){
-    alertify.confirm('ACTUALIZAR NOMBRE DE '+thead+' ','Actuaizar: '+estaCeldaTexto+' <br>Al nuevo valor: '+dsplyCatActual+'', function(){
+    alertify.confirm('ACTUALIZAR NOMBRE DE '+thead+' ','Actualizar: <br>'+estaCeldaTexto+' <br>Al nuevo valor: <br>'+dsplyCatActual.replace(/\n/gi, "<br>")+'', function(){
       //dsplyCatActual=null;
       $(IDT).removeClass("tabEditando");
      //agregamos al request el nuevo valor des js
@@ -395,8 +399,11 @@ const theads = document.getElementById(IDT.slice(1)).getElementsByTagName("th");
           if ($('th.catCombox').length > 0) {
             let thcombox =$('th.catCombox');
             for (let i = edId; i < theads.length-1; i++) {
-                if(theads[i].innerText && !theads[i].classList.contains('catCombox') && theads[i].classList.contains('catEditable')){
+                if(theads[i].innerText && !theads[i].classList.contains('catCombox') && !theads[i].classList.contains('catEditableTA') && theads[i].classList.contains('catEditable')){
                   let catNuevo =  "<div class='form-group col-md-12 ml-auto'><label data-error='error' data-success='ok' for='cmb_nombre'>NUEVO(A) "+theads[i].innerText+":</label> <input value='' name='"+remAceEsp(theads[i].innerText)+"' type='text' id='"+remAceEsp(theads[i].innerText)+"' class='form-control validate' placeholder='Nuevo Objeto...'></div> ";
+                  $("#modalc1").append(catNuevo);
+                }else if (theads[i].innerText && !theads[i].classList.contains('catCombox') && theads[i].classList.contains('catEditableTA') && theads[i].classList.contains('catEditable')) {
+                  let catNuevo =  "<div class='form-group col-md-12 ml-auto'><label data-error='error' data-success='ok' for='cmb_nombre'>NUEVO(A) "+theads[i].innerText+":</label> <textarea value='' type='text' name='"+remAceEsp(theads[i].innerText)+"' id='"+remAceEsp(theads[i].innerText)+"' class='form-control validate' placeholder='Inserte Texto...'></textarea></div> ";
                   $("#modalc1").append(catNuevo);
                 }
                 for (let j = 0; j < thcombox.length; j++) {    ////
@@ -428,8 +435,11 @@ const theads = document.getElementById(IDT.slice(1)).getElementsByTagName("th");
               }
           }else {
             for (let i = edId; i < theads.length-1; i++) {
-              if (theads[i].classList.contains('catEditable')) {
+              if (theads[i].classList.contains('catEditable') && !theads[i].classList.contains('catEditableTA')) {
                 let catNuevo =  "<div class='form-group col-md-12 ml-auto'><label data-error='error' data-success='ok' for='cmb_nombre'>NUEVO(A) "+theads[i].innerText+":</label> <input value='' name='"+remAceEsp(theads[i].innerText)+"' type='text' id='"+remAceEsp(theads[i].innerText)+"' class='form-control validate' placeholder='Nombre del nuevo objeto...'></div> ";
+                $("#modalc1").append(catNuevo);
+              }else if (theads[i].classList.contains('catEditable') && theads[i].classList.contains('catEditableTA')) {
+                let catNuevo =  "<div class='form-group col-md-12 ml-auto'><label data-error='error' data-success='ok' for='cmb_nombre'>NUEVO(A) "+theads[i].innerText+":</label> <textarea value='' type='text' name='"+remAceEsp(theads[i].innerText)+"' id='"+remAceEsp(theads[i].innerText)+"' class='form-control validate' placeholder='Inserte Texto...'></textarea></div> ";
                 $("#modalc1").append(catNuevo);
               }
 

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('localdiscos', function (Blueprint $table) {
           $table->id();
           $table->integer('cve_servidor');
-          $table->string('disco');
+          $table->string('localdisco');
           $table->string('pmontaje');
           $table->integer('cve_dformato');
           $table->string('capacidad');

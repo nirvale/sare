@@ -15,12 +15,12 @@ class LocaldiscoSeeder extends Seeder
     {
         $localdisco = Localdisco::create([
           'cve_servidor' => '1',
-          'disco' => 'sda1',
+          'localdisco' => 'sda1',
           'pmontaje' => '/home',
           'cve_dformato' => '1',
           'capacidad' => '500',
           'usado' => '100',
-          'usadop' => '.2',
+          'usadop' => '20',
           'comontaje' => 'comando montaje',
           'descripcion' => 'descripcion',
         ]);

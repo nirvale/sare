@@ -37,6 +37,7 @@ use App\Http\Controllers\Admin\DnsController;
 use App\Http\Controllers\Admin\StorageremotoController;
 use App\Http\Controllers\Admin\UdremotaController;
 use App\Http\Controllers\Admin\DformatoController;
+use App\Http\Controllers\Admin\LocaldiscoController;
 
 //Route::get('/', [HomeController::class, 'index']);
 //manejo de usuarios
@@ -163,6 +164,10 @@ Route::get('servidor', [ServidorController::class, 'indexdt'])->name('servidors.
 //RUTAS CRUD Servidors
 Route::resource('servidor', ServidorController::class)->only(['update','store','destroy']);
 Route::get('servidorqtest', [ServidorController::class, 'qtest'])->name('servidors.qtest'); ///probar catalogo
+//ruta para datatables Localdiscos
+Route::get('localdisco', [LocaldiscoController::class, 'indexdt'])->name('localdiscos.indexdt');
+//RUTAS CRUD Localdiscos
+Route::resource('localdisco', LocaldiscoController::class)->only(['update','store','destroy']);
 //ruta para datatables Procesadors
 Route::get('procesador', [ProcesadorController::class, 'indexdt'])->name('procesadors.indexdt');
 //RUTAS CRUD Procesadors

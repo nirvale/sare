@@ -10,7 +10,7 @@ class Localdisco extends Model
     use HasFactory;
     protected $fillable = [
       'cve_servidor',
-      'disco',
+      'localdisco',
       'pmontaje',
       'cve_dformato',
       'capacidad',
