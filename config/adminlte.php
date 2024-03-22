@@ -495,6 +495,13 @@ return [
                                         'can' => ['adming','admin','ver_catalogos','editar_catalogos','crear_catalogos','imprimir_catalogos','eliminar_catalogos'],
                                     ],
                                     [
+                                        'text' => 'Discos Remotos',
+                                        //'url'  => '/admin/esquemahome',
+                                        'route'  => 'remotodiscos.indexdt',
+                                        'icon'    => 'fa fa-list-ol',
+                                        'can' => ['adming','admin','ver_catalogos','editar_catalogos','crear_catalogos','imprimir_catalogos','eliminar_catalogos'],
+                                    ],
+                                    [
                                         'text' => 'Formatos',
                                         //'url'  => '/admin/esquemahome',
                                         'route'  => 'dformatos.indexdt',

@@ -24,6 +24,7 @@ use App\Models\Admin\Dns;
 use App\Models\Admin\Tecremotadisco;
 use App\Models\Admin\Udremota;
 use App\Models\Admin\Dformato;
+use App\Models\Admin\Storageremoto;
 
 class CatmanController extends Controller
 {
@@ -291,6 +292,33 @@ class CatmanController extends Controller
               case 'formato':
                   $theadcomboxr='formato';
                   $catmanr[$theadcomboxr]=Dformato::select('id','dformato as formato')->orderBy('formato')->get();
+              break;
+              default:
+                // code...
+                break;
+            }
+          }
+        break;
+        case 'remotodisco':
+          foreach ($request->theadcombox as $key => $head) {
+            switch ($head) {
+              case 'tipo':
+                  $theadcomboxr='tipo';
+                  //seleccionar tipos permitidos
+                  $catmanr[$theadcomboxr]=Udremota::select('id','udremota as tipo')->orderBy('tipo')->get();
+                  $catmanr['testingmanytomany']=Storageremoto::with('udremotas')->select('id','storageremoto as storage')->orderBy('storage')->get();
+              break;
+              case 'servidor':
+                  $theadcomboxr='servidor';
+                  $catmanr[$theadcomboxr]=Servidor::select('id','hostname as servidor')->orderBy('servidor')->get();
+              break;
+              case 'formato':
+                  $theadcomboxr='formato';
+                  $catmanr[$theadcomboxr]=Dformato::select('id','dformato as formato')->orderBy('formato')->get();
+              break;
+              case 'storage':
+                  $theadcomboxr='storage';
+                  $catmanr[$theadcomboxr]=Storageremoto::select('id','storageremoto as storage')->orderBy('storage')->get();
               break;
               default:
                 // code...

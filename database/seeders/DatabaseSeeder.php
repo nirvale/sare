@@ -53,6 +53,7 @@ class DatabaseSeeder extends Seeder
             RdbmsVersionSeeder::class,
             ServidorSeeder::class,
             LocaldiscoSeeder::class,
+            RemotodiscoSeeder::class,
             DnsSeeder::class,
             NicSeeder::class,
             BaseSeeder::class,

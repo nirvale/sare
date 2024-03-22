@@ -12,9 +12,24 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('remotodiscos', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
+          $table->id();
+          $table->integer('cve_storageremoto');
+          $table->integer('cve_servidor')->nullable();
+          $table->integer('cve_udremota');
+          $table->string('remotodisco');
+          $table->string('pmontaje')->nullable();
+          $table->integer('cve_dformato')->nullable();
+          $table->string('capacidad');
+          $table->string('usado');
+          $table->string('usadop');
+          $table->text('comontaje')->nullable();
+          $table->text('descripcion')->nullable();
+          $table->timestamps();
+          $table->foreign('cve_servidor')->references('id')->on('servidores')->onDelete('cascade')->onUpdate('cascade');
+          $table->foreign('cve_dformato')->references('id')->on('dformatos')->onUpdate('cascade');
+          $table->foreign('cve_storageremoto')->references('id')->on('storageremotos')->onUpdate('cascade');
+
+      });
     }
 
     /**

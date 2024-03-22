@@ -130,11 +130,11 @@ class LocaldiscoController extends Controller
           break;
           case 'capacidad_gb':
             $datacToUpdate = 'capacidad';
-            $nup=($localdisco->usado/$request->catActual)*100;
+
             //dd($nup);
             DB::beginTransaction();
             try {
-             $localdisco->usadop = $nup;
+             $localdisco->usadop = ($localdisco->usado/$request->catActual)*100;
              $localdisco->push();
              DB::commit();
             } catch (\Exception $e) {
@@ -144,11 +144,11 @@ class LocaldiscoController extends Controller
           break;
           case 'usado_gb':
             $datacToUpdate = 'usado';
-            $nup=($request->catActual/$localdisco->capacidad)*100;
+            
             //dd($nup);
             DB::beginTransaction();
             try {
-             $localdisco->usadop = $nup;
+             $localdisco->usadop = ($request->catActual/$localdisco->capacidad)*100;
              $localdisco->push();
              DB::commit();
             } catch (\Exception $e) {
