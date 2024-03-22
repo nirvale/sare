@@ -126,6 +126,8 @@ public function getColumns(): array
     Column::make('storageremoto')
           ->addClass('catCombox')
           ->addClass('catEditable')
+          ->addClass('catComboxNest')
+          ->addClass('nest_storage_tipo')
           ->name('storageremotos.storageremoto')
           ->title('STORAGE')->width(20),
     Column::make('hostname')

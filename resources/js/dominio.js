@@ -258,6 +258,19 @@ const theads = document.getElementById(IDT.slice(1)).getElementsByTagName("th");
 
   });
 
+  function lnbr(dsplyCatActual){
+    //console.log(dsplyCatActual);
+    if (Array.isArray(dsplyCatActual)) {
+      $.each( dsplyCatActual, function( i, valt ){
+        dsplyCatActual[i]=valt.replace(/\n/gi, "<br>");
+      });
+    }else if (!Array.isArray(dsplyCatActual)) {
+      dsplyCatActual=dsplyCatActual.replace(/\n/gi, "<br>");
+    }
+    //console.log(dsplyCatActual);
+    return dsplyCatActual;
+  };
+
   function cancelEdit(){
     //console.log('click act cancelada con cambios pendientes');
     estaCelda.removeClass('catEditando');
@@ -297,7 +310,7 @@ const theads = document.getElementById(IDT.slice(1)).getElementsByTagName("th");
   });
 
   function sChanges(dsplyCatActual){
-    alertify.confirm('ACTUALIZAR NOMBRE DE '+thead+' ','Actualizar: <br>'+estaCeldaTexto+' <br>Al nuevo valor: <br>'+dsplyCatActual.replace(/\n/gi, "<br>")+'', function(){
+    alertify.confirm('ACTUALIZAR NOMBRE DE '+thead+' ','<b>Actualizar: </b><br>'+estaCeldaTexto+' <br><b>Al nuevo valor: </b><br>'+lnbr(dsplyCatActual)+'', function(){
       //dsplyCatActual=null;
       $(IDT).removeClass("tabEditando");
      //agregamos al request el nuevo valor des js
