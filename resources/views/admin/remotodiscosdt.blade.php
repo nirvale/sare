@@ -28,7 +28,7 @@
         <h1 class="card-title"><i class="fas fa-hat-wizard"></i> Sistema de Administración para Recursos Estratégicos - DGTG</h1>
     </div>
     <div class="card-body">
-      <h4 class="card-subtitle"> <i class="fas fa-puzzle-piece"></i> Módulo de Catálogos - Discos Locales </h4>
+      <h4 class="card-subtitle"> <i class="fas fa-puzzle-piece"></i> Módulo de Catálogos - Discos Remotos </h4>
     </div>
   </div>
 @stop

@@ -306,7 +306,15 @@ class CatmanController extends Controller
                   $theadcomboxr='tipo';
                   //seleccionar tipos permitidos
                   $catmanr[$theadcomboxr]=Udremota::select('id','udremota as tipo')->orderBy('tipo')->get();
-                  $catmanr['testingmanytomany']=Storageremoto::with('udremotas')->select('id','storageremoto as storage')->orderBy('storage')->get();
+                  // $catmanr[$theadcomboxr]=Storageremoto::with('udremotas')->select('id','storageremoto as storage')->orderBy('storage')->get();
+                  // for ($i = 0; $i < $catmanr[$theadcomboxr]->count(); $i++) {
+                  //   $catmanr[$theadcomboxr][$i]->tipos=$catmanr[$theadcomboxr][$i]->udremotas;
+                  //   unset($catmanr[$theadcomboxr][$i]->udremotas);
+                  //   for ($j = 0; $j < $catmanr[$theadcomboxr][$i]->tipos->count(); $j++) {
+                  //     $catmanr[$theadcomboxr][$i]->tipos[$j]->tipo=$catmanr[$theadcomboxr][$i]->tipos[$j]->udremota;
+                  //     unset($catmanr[$theadcomboxr][$i]->tipos[$j]->udremota);
+                  //   }
+                  // }
               break;
               case 'servidor':
                   $theadcomboxr='servidor';
@@ -318,7 +326,15 @@ class CatmanController extends Controller
               break;
               case 'storage':
                   $theadcomboxr='storage';
-                  $catmanr[$theadcomboxr]=Storageremoto::select('id','storageremoto as storage')->orderBy('storage')->get();
+                  $catmanr[$theadcomboxr]=Storageremoto::with('udremotas')->select('id','storageremoto as storage')->orderBy('storage')->get();
+                  for ($i = 0; $i < $catmanr[$theadcomboxr]->count(); $i++) {
+                    $catmanr[$theadcomboxr][$i]->tipos=$catmanr[$theadcomboxr][$i]->udremotas;
+                    unset($catmanr[$theadcomboxr][$i]->udremotas);
+                    for ($j = 0; $j < $catmanr[$theadcomboxr][$i]->tipos->count(); $j++) {
+                      $catmanr[$theadcomboxr][$i]->tipos[$j]->tipo=$catmanr[$theadcomboxr][$i]->tipos[$j]->udremota;
+                      unset($catmanr[$theadcomboxr][$i]->tipos[$j]->udremota);
+                    }
+                  }
               break;
               default:
                 // code...

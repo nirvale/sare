@@ -118,18 +118,20 @@ public function getColumns(): array
     Column::make('remotodisco')
           ->addClass('catEditable')
           ->title('DISCO')->width(20),
-    Column::make('udremota')
-          ->addClass('catCombox')
-          ->addClass('catEditable')
-          ->name('udremotas.udremota')
-          ->title('TIPO')->width(20),
+
     Column::make('storageremoto')
           ->addClass('catCombox')
           ->addClass('catEditable')
-          ->addClass('catComboxNest')
-          ->addClass('nest_storage_tipo')
+          ->addClass('catComboxNestF')
           ->name('storageremotos.storageremoto')
           ->title('STORAGE')->width(20),
+    Column::make('udremota')
+          ->addClass('catCombox')
+          ->addClass('catEditable')
+          ->addClass('catComboxNest')
+          ->addClass('nest-storage-tipo')
+          ->name('udremotas.udremota')
+          ->title('TIPO')->width(20),
     Column::make('hostname')
           ->addClass('catCombox')
           ->addClass('catEditable')
