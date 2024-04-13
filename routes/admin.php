@@ -39,6 +39,7 @@ use App\Http\Controllers\Admin\UdremotaController;
 use App\Http\Controllers\Admin\DformatoController;
 use App\Http\Controllers\Admin\LocaldiscoController;
 use App\Http\Controllers\Admin\RemotodiscoController;
+use App\Http\Controllers\Admin\CompartidodiscoController;
 
 //Route::get('/', [HomeController::class, 'index']);
 //manejo de usuarios
@@ -195,6 +196,10 @@ Route::resource('storageremoto', StorageremotoController::class)->only(['update'
 Route::get('udremota', [UdremotaController::class, 'indexdt'])->name('udremotas.indexdt');
 //RUTAS CRUD Udremotas
 Route::resource('udremota', UdremotaController::class)->only(['update','store','destroy'])->parameters(['udremota'=>'udremota']);
+//ruta para datatables Compartidodiscos
+Route::get('compartidodisco', [CompartidodiscoController::class, 'indexdt'])->name('compartidodiscos.indexdt');
+//RUTAS CRUD Compartidodiscos
+Route::resource('compartidodisco', CompartidodiscoController::class)->only(['update','store','destroy'])->parameters(['compartidodisco'=>'compartidodisco']);
 
 
 //livewire assets

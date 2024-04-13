@@ -526,6 +526,7 @@ const theads = document.getElementById(IDT.slice(1)).getElementsByTagName("th");
   };
 
   $('body').on('change',  '.catComboxNestF',function(){
+    alert('hola');
       let catIndex=theads[0].title.toLowerCase();
       let nestChangeId=$(this).attr('id');
       let nestChangeText=$( ".catComboxNestF option:selected:first" ).text()
@@ -534,7 +535,7 @@ const theads = document.getElementById(IDT.slice(1)).getElementsByTagName("th");
       $(theads).each(function(i,value){
 
         if (value.classList.contains('catComboxNest')) {
-          console.log('encontre: '+i+' :'+value.innerText);
+          //console.log('encontre: '+i+' :'+value.innerText);
           arrHeaders.push(remAceEsp(value.innerText));
           arrHeadersNest.push(value.className.split(' ').find((element) => element.startsWith('nest-')).split('-'));
         }
@@ -547,8 +548,8 @@ const theads = document.getElementById(IDT.slice(1)).getElementsByTagName("th");
               for (let j = 0; j < cat[arrHeadersNest[i][1]].length; j++) {
                 if (cat[arrHeadersNest[i][1]][j][arrHeadersNest[i][1]]==nestChangeText) {
                   for (let k = 0; k < cat[arrHeadersNest[i][1]][j][arrHeadersNest[i][2]+'s'].length; k++) {
-                    alert(cat[arrHeadersNest[i][1]][j][arrHeadersNest[i][2]+'s'][k][arrHeadersNest[i][2]]);
-                    console.log(  $('#'+arrHeadersNest[i][2]));
+                    //alert(cat[arrHeadersNest[i][1]][j][arrHeadersNest[i][2]+'s'][k][arrHeadersNest[i][2]]);
+                    //console.log(  $('#'+arrHeadersNest[i][2]));
                       $('#'+arrHeadersNest[i][2]).append(
                         "<option value="+cat[arrHeadersNest[i][1]][j][arrHeadersNest[i][2]+'s'][k][catIndex]+"  >" +cat[arrHeadersNest[i][1]][j][arrHeadersNest[i][2]+'s'][k][arrHeadersNest[i][2]]+"</option>"
                       );
