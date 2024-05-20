@@ -20,6 +20,33 @@ const IDT='#'+$('table.dataTable').attr('id'); // ID DE LA TABLA GENERAL
 const modelos= IDT.toLowerCase().slice(4);
 const modelo = modelos.slice(0,-1);
 const theads = document.getElementById(IDT.slice(1)).getElementsByTagName("th");
+let theadsnests;
+
+function setnests(){
+  if (theads.length > 0) {
+    $(theads).each(function(i,value){
+      //value.classList.add('catComboxNest');
+      //console.log(value.classList);
+        if (value.classList.contains('catComboxNest')) {
+          //console.log('encontre: '+i+' :'+value.innerText);
+                    let father=value.className.split(' ').find((element) => element.startsWith('nest-')).split('-').at(1);
+                    let son=value.className.split(' ').find((element) => element.startsWith('nest-')).split('-').at(2);
+                   theadsnests={
+                    [father]:{
+                        father:father,
+                        son:son,
+                    }
+                  };
+                  //console.log(Object.keys(theadsnests).length);
+                  //console.log(theadsnests.storage.son);
+        }
+    });
+  }
+};
+
+
+
+
 ////console.log('este es el modelo : '+modelo);
   function cleanvars(){
     switche = undefined; //switch a edición
@@ -481,7 +508,7 @@ const theads = document.getElementById(IDT.slice(1)).getElementsByTagName("th");
                     if (theads[i].classList.contains('catComboxNest')) {
                       //llamas funcion on change
                       let theadNestPatch=theads[i].className.split(' ').find((element) => element.startsWith('nest-')).split('-');
-                      $('#'+theadNestPatch[1]).addClass('catComboxNestF');
+                      $('#'+theadNestPatch[1]).addClass('catComboxNestFN');
                     }else {
                       for (let k = 0; k < cat[catChild].length; k++) {
                         // console.log(cat[catChild][i][catIndex]);
@@ -525,40 +552,20 @@ const theads = document.getElementById(IDT.slice(1)).getElementsByTagName("th");
     }
   };
 
-  $('body').on('change',  '.catComboxNestF',function(){
-    alert('hola');
+  $('body').on('change',  '.catComboxNestFN',function(){
       let catIndex=theads[0].title.toLowerCase();
       let nestChangeId=$(this).attr('id');
-      let nestChangeText=$( ".catComboxNestF option:selected:first" ).text()
-      let arrHeaders=[];
-      let arrHeadersNest=[];
-      $(theads).each(function(i,value){
-
-        if (value.classList.contains('catComboxNest')) {
-          //console.log('encontre: '+i+' :'+value.innerText);
-          arrHeaders.push(remAceEsp(value.innerText));
-          arrHeadersNest.push(value.className.split(' ').find((element) => element.startsWith('nest-')).split('-'));
-        }
-
-        }
-      );
-      for (let i = 0; i < arrHeaders.length; i++) {
-        $('#'+arrHeadersNest[i][2]).find('option').not(':first').remove();
-          if (arrHeadersNest[i][1]==nestChangeId) {
-              for (let j = 0; j < cat[arrHeadersNest[i][1]].length; j++) {
-                if (cat[arrHeadersNest[i][1]][j][arrHeadersNest[i][1]]==nestChangeText) {
-                  for (let k = 0; k < cat[arrHeadersNest[i][1]][j][arrHeadersNest[i][2]+'s'].length; k++) {
-                    //alert(cat[arrHeadersNest[i][1]][j][arrHeadersNest[i][2]+'s'][k][arrHeadersNest[i][2]]);
-                    //console.log(  $('#'+arrHeadersNest[i][2]));
-                      $('#'+arrHeadersNest[i][2]).append(
-                        "<option value="+cat[arrHeadersNest[i][1]][j][arrHeadersNest[i][2]+'s'][k][catIndex]+"  >" +cat[arrHeadersNest[i][1]][j][arrHeadersNest[i][2]+'s'][k][arrHeadersNest[i][2]]+"</option>"
-                      );
-                  }
-                }
-              }
+      let nestChangeText=$( ".catComboxNestFN option:selected:first" ).text()
+        $('#'+theadsnests[nestChangeId].son).find('option').not(':first').remove();
+        for (let i = 0; i < cat[nestChangeId].length; i++) {
+          if (cat[nestChangeId][i][nestChangeId]==nestChangeText) {
+            for (let j = 0; j < cat[nestChangeId][i][theadsnests[nestChangeId].son].length; j++) {
+              $('#'+theadsnests[nestChangeId].son).append(
+                "<option value="+cat[nestChangeId][i][theadsnests[nestChangeId].son][j][catIndex]+"  >" +cat[nestChangeId][i][theadsnests[nestChangeId].son][j][theadsnests[nestChangeId].son]+"</option>"
+              );
+            }
           }
-      }
-
+        }
   });
 
   $(document).on("click", "#crear"+modelo+"", function(){
@@ -771,8 +778,7 @@ function catman(){  //console.log(modelo);
 
 
 setTimeout(catman, 100);
-
-
+setTimeout(setnests, 101);
 
   // $.fn.dataTable.ext.buttons.reload = {
   //   name: 'reload',

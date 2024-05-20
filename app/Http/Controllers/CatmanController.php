@@ -328,11 +328,11 @@ class CatmanController extends Controller
                   $theadcomboxr='storage';
                   $catmanr[$theadcomboxr]=Storageremoto::with('udremotas')->select('id','storageremoto as storage')->orderBy('storage')->get();
                   for ($i = 0; $i < $catmanr[$theadcomboxr]->count(); $i++) {
-                    $catmanr[$theadcomboxr][$i]->tipos=$catmanr[$theadcomboxr][$i]->udremotas;
+                    $catmanr[$theadcomboxr][$i]->tipo=$catmanr[$theadcomboxr][$i]->udremotas;
                     unset($catmanr[$theadcomboxr][$i]->udremotas);
-                    for ($j = 0; $j < $catmanr[$theadcomboxr][$i]->tipos->count(); $j++) {
-                      $catmanr[$theadcomboxr][$i]->tipos[$j]->tipo=$catmanr[$theadcomboxr][$i]->tipos[$j]->udremota;
-                      unset($catmanr[$theadcomboxr][$i]->tipos[$j]->udremota);
+                    for ($j = 0; $j < $catmanr[$theadcomboxr][$i]->tipo->count(); $j++) {
+                      $catmanr[$theadcomboxr][$i]->tipo[$j]->tipo=$catmanr[$theadcomboxr][$i]->tipo[$j]->udremota;
+                      unset($catmanr[$theadcomboxr][$i]->tipo[$j]->udremota);
                     }
                   }
               break;

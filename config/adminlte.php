@@ -516,7 +516,7 @@ return [
                                         'can' => ['adming','admin','ver_catalogos','editar_catalogos','crear_catalogos','imprimir_catalogos','eliminar_catalogos'],
                                     ],
                                     [
-                                        'text' => 'Tipos de Storage',
+                                        'text' => 'Tipos de Disco Compartido*',
                                         //'url'  => '/admin/esquemahome',
                                         'route'  => 'tdiscos.indexdt',
                                         'icon'    => 'fa fa-list-ol',
