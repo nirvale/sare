@@ -126,7 +126,7 @@ function setnests(){
 
                             estaCelda.empty().append(
                             //  "<input value='"+estaCeldaTexto+"'  name='nobjeto' type='text' id='nobjeto' class='form-control validate cambiarCatEditable' placeholder='Nombre del nuevo objeto'>"
-                              "<select class='form-control select2 cambiarCatComboEditable' id='nobjeto' name='nobjeto' title='Selecciona uno...'><option value='' selected='selected'>Seleccionar...</option></select>"
+                              "<select class='form-control select2 cambiarCatComboEditable' id='nobjeto' name='nobjeto' title='Selecciona uno...'><option value='' selected='selected' disabled='disabled'>Seleccionar...</option></select>"
                             );
                             if (!claseclick.includes('catComboxNest')) {
                               for (let i = 0; i < cat[catChild].length; i++) {
@@ -156,33 +156,33 @@ function setnests(){
                                 }
                               );
                               //console.log(arrHeaders);
-                              nph = claseclick.find((element) => element.startsWith('nest-')).split('-');
+                              nph = claseclick.find((element) => element.startsWith('nest-')).split('-').at(1);
                               //console.log(theads,arrHeaders);
-                              npih=$.inArray(nph[1],arrHeaders);
+                              npih=$.inArray(nph,arrHeaders);
                               nptn=row.find('td:eq('+npih+')').text();
                               // console.log(npih);
                               // console.log(nptn);
                                //console.log(catChild);
-                              // console.log(nph[1]);
-                              // console.log(cat[nph[1]][0][nph[1]]);
-                              // console.log(cat[catChild][0][nph[1]]);
+                              // console.log(nph);
+                              // console.log(cat[nph][0][nph]);
+                              // console.log(cat[catChild][0][nph]);
 
-                              for (let i = 0; i < cat[nph[1]].length; i++) {
+                              for (let i = 0; i < cat[nph].length; i++) {
                                 // console.log(i);
-                                if (cat[nph[1]][i][nph[1]] == nptn) {
-                                  // console.log(cat[nph[1]][i][catChild+'s'] );
-                                  for (let j = 0; j < cat[nph[1]][i][catChild+'s'].length; j++) {
-                                   // console.log(cat[nph[1]][i][catChild+'s'][j][catChild]);
+                                if (cat[nph][i][nph] == nptn) {
+                                  // console.log(cat[nph][i][catChild+'s'] );
+                                  for (let j = 0; j < cat[nph][i][catChild].length; j++) {
+                                   // console.log(cat[nph][i][catChild+'s'][j][catChild]);
                                     //console.log(cat[catChild][i][catChild]);
                                     let setSelection='';
-                                    if (cat[nph[1]][i][catChild+'s'][j][catChild]==estaCeldaTexto) {
+                                    if (cat[nph][i][catChild][j][catChild]==estaCeldaTexto) {
                                         setSelection='disabled selected';
                                     }else{
                                       setSelection='class=comboselecting';
                                     }
 
                                       $('.cambiarCatComboEditable').append(
-                                        "<option value="+cat[nph[1]][i][catChild+'s'][j][catIndex]+" "+setSelection+" >" +cat[nph[1]][i][catChild+'s'][j][catChild]+"</option>"
+                                        "<option value="+cat[nph][i][catChild][j][catIndex]+" "+setSelection+" >" +cat[nph][i][catChild][j][catChild]+"</option>"
                                     );
 
                                   }
@@ -316,7 +316,7 @@ function setnests(){
           $.each($('.catComboxMulti option:selected'), function(){
               catActual0.push($(this).val());
           });
-          let catActual = new Object(); //we inicia porque no existe, el atributo "value" necesario para enviar la data
+          let catActual = new Object(); //se inicia porque no existe, el atributo "value" necesario para enviar la data
           catActual.value = catActual0;
           data.append('catActual',JSON.stringify(catActual.value));
           // data.append('catActual',catActual.value);
@@ -367,7 +367,13 @@ function setnests(){
     //  console.log(catActual.attributes);
     if (catActual.classList.contains('cambiarCatComboEditable') && catActual.attributes.multiple) {
       //abortamos actualización para iniciar multiple select
-    }else { // eliminamos el else
+    }else if (catActual.offsetParent.classList.contains('catComboxNestF')) {
+      dsplyCatActual = $('select[name=nobjeto] option').filter(':selected').text();
+      data.append('catActual',catActual.value);
+      //abortamos actualización normal para iniciar atualización anidada
+    }
+
+    else { // eliminamos el else
 
       if($('.comboselecting').text()) {
         dsplyCatActual = $('select[name=nobjeto] option').filter(':selected').text();
@@ -552,20 +558,59 @@ function setnests(){
     }
   };
 
-  $('body').on('change',  '.catComboxNestFN',function(){
+  $("#modal"+modelos).on('change',  '.catComboxNestFN',function(){
       let catIndex=theads[0].title.toLowerCase();
       let nestChangeId=$(this).attr('id');
-      let nestChangeText=$( ".catComboxNestFN option:selected:first" ).text()
+      let nestChangeText=$( ".catComboxNestFN option:selected:first" ).text()//
         $('#'+theadsnests[nestChangeId].son).find('option').not(':first').remove();
         for (let i = 0; i < cat[nestChangeId].length; i++) {
           if (cat[nestChangeId][i][nestChangeId]==nestChangeText) {
             for (let j = 0; j < cat[nestChangeId][i][theadsnests[nestChangeId].son].length; j++) {
+
               $('#'+theadsnests[nestChangeId].son).append(
                 "<option value="+cat[nestChangeId][i][theadsnests[nestChangeId].son][j][catIndex]+"  >" +cat[nestChangeId][i][theadsnests[nestChangeId].son][j][theadsnests[nestChangeId].son]+"</option>"
               );
             }
           }
         }
+  });
+
+  $(IDT).on('change',  '.catComboxNestF',function(){
+      let catIndex=theads[0].title.toLowerCase();
+      let nestChangeId=remAceEsp(thead);
+      let nestChangeText=$( ".catComboxNestF option:selected:first" ).text()
+
+      window.showAlert = function(){
+
+          alertify.alert('Selección de nuevo '+(theadsnests[nestChangeId].son)+' soportado(a) para: '+nestChangeText+'</br></br> <select class="form-control select2 cambiarCatComboEditable" id="catComboxNestU" name="catComboxNestU" title="Selecciona uno..."><option value="" selected="selected" disabled="disabled">Seleccionar...</option></select>');
+          $('#catComboxNestU').find('option').not(':first').remove();
+          for (let i = 0; i < cat[nestChangeId].length; i++) {
+            if (cat[nestChangeId][i][nestChangeId]==nestChangeText) {
+              for (let j = 0; j < cat[nestChangeId][i][theadsnests[nestChangeId].son].length; j++) {
+              //console.log(cat[nestChangeId][i][theadsnests[nestChangeId].son][j][theadsnests[nestChangeId].son]);
+              $('#catComboxNestU').append(
+                "<option value="+cat[nestChangeId][i][theadsnests[nestChangeId].son][j][catIndex]+"  >" +cat[nestChangeId][i][theadsnests[nestChangeId].son][j][theadsnests[nestChangeId].son]+"</option>"
+              );
+              }
+            }
+          }
+      }
+      alertify.alert().setting({'frameless':true,'modal':false,'pinnable':false,'closable':false,'title': 'ACTUALIZAR '+(theadsnests[nestChangeId].son).toUpperCase()+' PARA '+nestChangeText});
+
+      window.showAlert();
+
+
+  });
+
+  $('body').on('change','#catComboxNestU',function(){
+    let catIndex=theads[0].title.toLowerCase();
+    let nestChangeId=remAceEsp(thead);
+    let dsplyCatActualS=$( "#catComboxNestU option:selected:first" ).text();
+    let dsplyCatActual = $('select[name=nobjeto] option').filter(':selected').text();
+    let catActualS = document.getElementById('catComboxNestU');//$( "#catComboxNestU option:selected:first" ).val();
+    data.append('catActualS',catActualS.value);
+    alertify.alert().close();
+    sChanges(dsplyCatActual);
   });
 
   $(document).on("click", "#crear"+modelo+"", function(){
