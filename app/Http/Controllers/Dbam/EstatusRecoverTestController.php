@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Dbam;
 
 use App\Http\Requests\StoreEstatusRecoverTestRequest;
 use App\Http\Requests\UpdateEstatusRecoverTestRequest;
