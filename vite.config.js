@@ -1,8 +1,10 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
+import mkcert from 'vite-plugin-mkcert';  //para ssl dev
 
 export default defineConfig({
     plugins: [
+        mkcert(), //para ssl dev
         laravel({
             input: [
                 'resources/css/app.css',
@@ -17,4 +19,10 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+    //para ssl dev
+    server: {
+      https: true,
+      host: 'appsi.cggedomex.gob.mx',
+    },
+    //fin ssl dev
 });
