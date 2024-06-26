@@ -580,8 +580,6 @@ function setnests(){
       let nestChangeId=remAceEsp(thead);
       let nestChangeText=$( ".catComboxNestF option:selected:first" ).text()
 
-      window.showAlert = function(){
-
           alertify.alert('Selección de nuevo '+(theadsnests[nestChangeId].son)+' soportado(a) para: '+nestChangeText+'</br></br> <select class="form-control select2 cambiarCatComboEditable" id="catComboxNestU" name="catComboxNestU" title="Selecciona uno..."><option value="" selected="selected" disabled="disabled">Seleccionar...</option></select>');
           $('#catComboxNestU').find('option').not(':first').remove();
           for (let i = 0; i < cat[nestChangeId].length; i++) {
@@ -594,12 +592,8 @@ function setnests(){
               }
             }
           }
-      }
-      alertify.alert().setting({'frameless':true,'modal':false,'pinnable':false,'closable':false,'title': 'ACTUALIZAR '+(theadsnests[nestChangeId].son).toUpperCase()+' PARA '+nestChangeText});
 
-      window.showAlert();
-
-
+          alertify.alert().setting({'frameless':true,'modal':false,'pinnable':false,'closable':false,'title': 'ACTUALIZAR '+(theadsnests[nestChangeId].son).toUpperCase()+' PARA '+nestChangeText});
   });
 
   $('body').on('change','#catComboxNestU',function(){

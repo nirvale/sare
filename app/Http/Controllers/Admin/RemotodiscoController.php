@@ -146,6 +146,8 @@ class RemotodiscoController extends Controller
              $storageremoton->usado = $storageremoton->usado + $remotodisco->capacidad;
              $storageremoton->usadop = ($storageremoton->usado/$storageremoton->capacidad)*100;
              $storageremoton->push();
+             $remotodisco->cve_udremota = $request->catActualS;
+             $remotodisco->push();
 
              DB::commit();
             } catch (\Exception $e) {
@@ -171,6 +173,7 @@ class RemotodiscoController extends Controller
              $storageremoto->usado = $storageremoto->usado-$request->catOriginal+$request->catActual;
              $storageremoto->usadop = ($storageremoto->usado/$storageremoto->capacidad)*100;
              $storageremoto->push();
+
              DB::commit();
             } catch (\Exception $e) {
               DB::rollBack();
